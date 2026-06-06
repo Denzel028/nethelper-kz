@@ -4,99 +4,86 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v3.6 Fixed</title>
+<title>NetHelper KZ v3.8</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),linear-gradient(180deg,#071426,#050b13)}
-#splash{position:fixed;inset:0;background:
-radial-gradient(circle at 20% 20%,rgba(102,214,255,.45),transparent 24%),
-radial-gradient(circle at 80% 30%,rgba(112,227,154,.38),transparent 25%),
-radial-gradient(circle at 50% 70%,rgba(255,198,109,.22),transparent 30%),
-linear-gradient(160deg,#04101f,#071b33 48%,#06111f);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .85s ease 2.45s forwards;overflow:hidden}
-#splash:before{content:"";position:absolute;width:280px;height:280px;border:2px solid rgba(102,214,255,.32);border-radius:50%;box-shadow:0 0 40px rgba(102,214,255,.22);animation:ringBright 1.55s ease-in-out infinite}
+#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,rgba(102,214,255,.34),transparent 28%),linear-gradient(160deg,#04101f,#071b33 48%,#06111f);z-index:100;display:flex;align-items:center;justify-content:center;animation:hide .75s ease 1.6s forwards;overflow:hidden}
+#splash:before{content:"";position:absolute;width:280px;height:280px;border:2px solid rgba(102,214,255,.32);border-radius:50%;box-shadow:0 0 40px rgba(102,214,255,.22);animation:ring 1.55s ease-in-out infinite}
 #splash:after{content:"";position:absolute;width:360px;height:360px;border:2px dashed rgba(112,227,154,.32);border-radius:50%;animation:spin 4.5s linear infinite}
-.sLogo{width:124px;height:124px;border-radius:36px;background:linear-gradient(135deg,#66d6ff 0%,#70e39a 55%,#ffc66d 100%);display:flex;align-items:center;justify-content:center;color:#06111f;font-size:44px;font-weight:1000;box-shadow:0 0 38px rgba(102,214,255,.65),0 0 90px rgba(112,227,154,.35);animation:logoFlash 1.45s ease-in-out infinite;z-index:2}
-.sTitle{font-size:30px;font-weight:1000;color:#9cecff;margin-top:20px;z-index:2;text-shadow:0 0 18px rgba(102,214,255,.55)}
-.sName{color:#d7f5ff;letter-spacing:1px;margin-top:8px;z-index:2;font-weight:800}
-.sRole{margin-top:6px;color:#70e39a;font-size:13px;font-weight:900;letter-spacing:2px;z-index:2;text-transform:uppercase}
-@keyframes logoFlash{0%,100%{transform:scale(1) rotate(0deg);filter:brightness(1)}50%{transform:scale(1.1) rotate(3deg);filter:brightness(1.2)}}
-@keyframes ringBright{0%,100%{transform:scale(.88);opacity:.85}50%{transform:scale(1.2);opacity:.35}}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes hide{to{opacity:0;visibility:hidden}}
+.sLogo{width:124px;height:124px;border-radius:36px;background:linear-gradient(135deg,#66d6ff 0%,#70e39a 55%,#ffc66d 100%);display:flex;align-items:center;justify-content:center;color:#06111f;font-size:44px;font-weight:1000;box-shadow:0 0 38px rgba(102,214,255,.65),0 0 90px rgba(112,227,154,.35);animation:logo 1.45s ease-in-out infinite;z-index:2}
+@keyframes logo{50%{transform:scale(1.1) rotate(3deg);filter:brightness(1.2)}}@keyframes ring{50%{transform:scale(1.2);opacity:.35}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes hide{to{opacity:0;visibility:hidden}}
 header{position:sticky;top:0;z-index:20;padding:14px;background:rgba(6,17,31,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:12px}
 .logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px}
 h1{font-size:27px;color:var(--blue);margin:0}.sub{font-size:12px;color:var(--muted);margin-top:5px}
 .lang button{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:9px 11px;font-weight:900}.lang .active{background:var(--blue);color:#06111f}
-input,select,textarea{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px;outline:none}
-.search{margin-top:12px}textarea{min-height:105px}
-main{padding:14px 14px 104px}.screen{display:none}.screen.active{display:block}
+.search{margin-top:12px}input,select,textarea{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px;outline:none}textarea{min-height:105px}
+main{padding:14px 14px 110px}.screen{display:none}.screen.active{display:block}
 .hero{border:1px solid var(--line);border-radius:28px;padding:18px;background:linear-gradient(135deg,rgba(102,214,255,.18),rgba(112,227,154,.08));box-shadow:var(--shadow);margin-bottom:13px}
 .hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:var(--muted);line-height:1.45}
-.mainGrid{display:grid;grid-template-columns:1fr;gap:12px}.big{display:flex;gap:14px;align-items:center;background:linear-gradient(180deg,#10233e,#0b182c);border:1px solid var(--line);border-radius:24px;padding:17px;box-shadow:var(--shadow);text-align:left;color:var(--text);font-weight:900}
+.status{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{background:rgba(7,16,30,.65);border:1px solid var(--line);border-radius:16px;padding:10px;text-align:center}.stat b{display:block;color:var(--green);font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mainGrid{display:grid;grid-template-columns:1fr;gap:12px}.big,.card{background:linear-gradient(180deg,#10233e,#0b182c);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text);text-align:left}
+.big{display:flex;gap:14px;align-items:center;border-radius:24px;padding:17px;font-weight:900}.card{border-radius:22px;padding:16px;min-height:108px}.card:active,.big:active{transform:scale(.99)}
 .ico{width:52px;height:52px;border-radius:17px;background:#07101e;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:25px;flex:0 0 auto}
-.big h3{font-size:23px;margin:0 0 5px}.big p{font-size:14px;color:var(--muted);margin:0;line-height:1.35;font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:linear-gradient(180deg,#10233e,#0b182c);border:1px solid var(--line);border-radius:22px;padding:16px;min-height:108px;box-shadow:var(--shadow);color:var(--text);text-align:left}
-.card h3{font-size:21px;margin:0 0 8px}.card p{font-size:13px;color:var(--muted);line-height:1.35;margin:0}.full{grid-column:1/-1}
+.big h3,.card h3{font-size:21px;margin:0 0 8px}.big p,.card p{font-size:13px;color:var(--muted);line-height:1.35;margin:0;font-weight:500}.full{grid-column:1/-1}
 .badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;background:#0a3145;color:#91e8ff;font-size:12px;font-weight:900}
-.back{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:16px;padding:12px 14px;font-weight:900;margin-bottom:12px}
-.titlebox{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#102846,#0c1729);padding:16px;margin-bottom:12px}
-.titlebox h2{margin:0 0 6px;font-size:25px}.titlebox p{color:var(--muted);margin:0;line-height:1.45}
-.item{background:rgba(15,32,57,.96);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}
-.item h3{font-size:20px;margin:0 0 8px}.item p{color:var(--muted);line-height:1.55}
+.back{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:16px;padding:12px 14px;font-weight:900;margin-bottom:12px}.titlebox{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#102846,#0c1729);padding:16px;margin-bottom:12px}.titlebox h2{margin:0 0 6px;font-size:25px}.titlebox p{color:var(--muted);margin:0;line-height:1.45}
+.item{background:rgba(15,32,57,.96);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}.item h3{font-size:20px;margin:0 0 8px}.item p{color:var(--muted);line-height:1.55}
 pre{white-space:pre-wrap;background:#030913;border:1px solid #233d63;border-radius:16px;padding:13px;overflow:auto;color:#dff6ff;font-size:13px;line-height:1.45}
-.copy,.btn{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}
-.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mock{border:1px solid #3b5a86;border-radius:18px;overflow:hidden;background:#07101f;margin:10px 0}.mockTop{display:flex;gap:6px;align-items:center;background:#0d1b31;border-bottom:1px solid #3b5a86;padding:10px}.dot{width:9px;height:9px;border-radius:50%;background:var(--red)}.dot:nth-child(2){background:var(--orange)}.dot:nth-child(3){background:var(--green)}.mockTitle{margin-left:8px;color:var(--muted);font-size:12px;font-weight:900}.mockBody{display:grid;grid-template-columns:98px 1fr;min-height:132px}.side{border-right:1px solid #3b5a86;padding:9px;background:#0a1424}.side div{font-size:11px;padding:7px;border-radius:9px;color:var(--muted)}.side .sel{background:#123456;color:#91e6ff}.screenMock{padding:10px}.field{height:24px;border:1px solid #355076;border-radius:8px;margin:7px 0;background:#0b1728}.portrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.port{width:22px;height:22px;border-radius:6px;border:1px solid #4b6896;background:#101f36}.port.t{background:#0a4960}.port.u{background:#315326}.save{display:inline-block;margin-top:10px;background:var(--green);color:#06111f;border-radius:10px;padding:7px 10px;font-weight:900;font-size:12px}
-.result{display:none}.result.active{display:block}.note{border-left:4px solid var(--blue);padding-left:10px;color:var(--muted)}
-.bottomName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#9db1d0;font-size:13px;font-weight:900;z-index:25;pointer-events:none;text-shadow:0 3px 14px #000}
-nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
-nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
-@media(max-width:390px){.grid{grid-template-columns:1fr}.row,.kv{grid-template-columns:1fr}h1{font-size:25px}}
+.copy,.btn{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}.btn.orange{background:var(--orange)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}.out{background:#07101f;border:1px solid var(--line);border-radius:16px;padding:12px;color:var(--muted);line-height:1.65;margin-top:10px}.note{border-left:4px solid var(--blue);padding-left:10px;color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow:auto;margin:10px 0 12px}.tabs button{white-space:nowrap;border:1px solid var(--line);background:#07101f;color:var(--text);border-radius:999px;padding:10px 13px;font-weight:900}.tabs button.active{background:var(--blue);color:#06111f}
+.result{display:none}.result.active{display:block}.bottomName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#9db1d0;font-size:13px;font-weight:900;z-index:25;pointer-events:none;text-shadow:0 3px 14px #000}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.row,.kv,.status{grid-template-columns:1fr 1fr}h1{font-size:25px}}
 </style>
 </head>
 <body>
-<div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div><div class="sRole">Инженер сети</div></div>
+<div id="splash"><div class="sLogo">NH</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.6 Fixed — Инженер сети • PRO</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
-<div class="search"><input id="search" placeholder="Поиск: SNR, VLAN, ARP, /30, D-Link"></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.8 — Инженер сети • связанная база</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
 </header>
 <main>
 <section id="home" class="screen active">
-<div class="hero"><h2>Главное меню</h2><p>Упрощённый интерфейс: все разделы открываются отдельными рабочими экранами.</p></div>
+<div class="hero"><h2>Главное меню</h2><p>Разделы связаны между собой: объект → отчёты → история → оборудование → диагностика → backup.</p><div class="status"><div class="stat"><b id="stObj">0</b><span>объектов</span></div><div class="stat"><b id="stRep">0</b><span>отчётов</span></div><div class="stat"><b id="stInv">0</b><span>склад</span></div><div class="stat"><b>OFF</b><span>offline</span></div></div></div>
 <div class="mainGrid">
-<button class="big" onclick="showSwitches()"><div class="ico">🔧</div><div><h3>Коммутаторы</h3><p>SNR, Huawei, D-Link, Zyxel, Eltex, MikroTik, Iskratel, BDCOM</p></div></button>
-<button class="big" onclick="showAlarms()"><div class="ico">⚡</div><div><h3>Аварии и мастер</h3><p>Нет ARP, VLAN не проходит, нет MAC, управление, ONU Offline</p></div></button>
-<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, генератор, консоль, маски</p></div></button>
-<button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, BiDi, GPON, DSL, шлюзы /30</p></div></button>
-<button class="big" onclick="showObjects()"><div class="ico">🗂</div><div><h3>Мои объекты</h3><p>VLAN, IP, шлюзы, заметки по объектам</p></div></button>
-
-<button class="big" onclick="showReport()"><div class="ico">📄</div><div><h3>Отчёт после выезда</h3><p>Готовый текст отчёта для отправки</p></div></button>
-<button class="big" onclick="showHistory()"><div class="ico">📋</div><div><h3>История отчётов</h3><p>Все сохранённые отчёты</p></div></button>
-<button class="big" onclick="showFav()"><div class="ico">⭐</div><div><h3>Избранные команды</h3><p>Свои команды под рукой</p></div></button>
-<button class="big" onclick="showBackup()"><div class="ico">💾</div><div><h3>Backup / Restore</h3><p>Сохранить и восстановить базу</p></div></button>
-</div>
-<div id="searchResult" class="result"></div>
+<button class="big" onclick="showWorkCenter()"><div class="ico">🧭</div><div><h3>Рабочий центр</h3><p>Объекты, отчёты, история и статистика в одном месте</p></div></button>
+<button class="big" onclick="showSwitches()"><div class="ico">🔧</div><div><h3>Настройка оборудования</h3><p>SNR, Huawei, D-Link, Zyxel, Eltex, MikroTik, Iskratel, BDCOM</p></div></button>
+<button class="big" onclick="showAlarms()"><div class="ico">⚡</div><div><h3>Аварии и диагностика</h3><p>Нет ARP, VLAN не проходит, ONU Offline, помощник</p></div></button>
+<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, VLAN PRO, MikroTik Signal, консоль</p></div></button>
+<button class="big" onclick="showInventory()"><div class="ico">📦</div><div><h3>Склад и оборудование</h3><p>SFP, ONU, кабели, патчкорды и учёт остатков</p></div></button>
+<button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, GPON, DSL, маски и /30</p></div></button>
+</div><div id="searchResult" class="result"></div>
 </section>
-<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Коммутаторы</h2><p>Выбери оборудование, потом нужную настройку.</p></div><div class="grid" id="switchGrid"></div></section>
-<section id="vendor" class="screen"><button class="back" onclick="showSwitches()">← Коммутаторы</button><div id="vendorBody"></div></section>
-<section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии и мастер</h2><p>Выбери проблему — откроется подробный алгоритм проверки.</p></div><div class="grid" id="alarmGrid"></div></section>
-<section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы для работы в поле.</p></div><div class="grid" id="toolGrid"></div></section>
-<section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки для объекта.</p></div><div class="grid" id="refGrid"></div></section>
-<section id="objects" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🗂 Мои объекты</h2><p>Данные сохраняются в телефоне.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
 
-<section id="report" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Заполни поля и скопируй отчёт. Имя сотрудника сохраняется в телефоне.</p></div><div class="item"><input id="repWorker" placeholder="Сотрудник / исполнитель" oninput="saveWorkerName()"><input id="repObj" placeholder="Объект" style="margin-top:8px"><input id="repEquip" placeholder="Оборудование" style="margin-top:8px"><input id="repWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="repResult" placeholder="Результат / проверка / что осталось"></textarea><button class="btn blue" onclick="makeReport()">Сформировать отчёт</button><pre id="reportOut"></pre><button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button></div></section>
+<section id="workCenter" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧭 Рабочий центр</h2><p>Всё, что связано с объектами и выездами.</p></div><div class="grid"><button class="card full" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Карточки объектов, IP, VLAN, схема сети</p></button><button class="card full" onclick="showReport()"><h3>📄 Создать отчёт</h3><p>Отчёт можно привязать к объекту</p></button><button class="card" onclick="showHistory()"><h3>📋 История</h3><p>Все отчёты</p></button><button class="card" onclick="showStats()"><h3>📊 Статистика</h3><p>Сводка по базе</p></button><button class="card" onclick="showFav()"><h3>⭐ Избранное</h3><p>Команды</p></button><button class="card" onclick="showBackup()"><h3>💾 Backup</h3><p>Экспорт/импорт</p></button></div></section>
+
+<section id="objects" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>🗂 Объекты</h2><p>Карточка объекта связана с отчётами и историей работ.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objAddr" placeholder="Адрес / населённый пункт" style="margin-top:8px"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objMap" placeholder="Схема сети: Huawei → SNR → MikroTik → Клиенты"></textarea><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
+
+<section id="report" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Отчёт сохраняется в историю и привязывается к объекту по названию.</p></div><div class="item"><input id="repWorker" placeholder="Сотрудник / исполнитель" oninput="saveWorkerName()"><select id="repObjSelect" style="margin-top:8px" onchange="fillReportObject()"></select><input id="repObj" placeholder="Объект" style="margin-top:8px"><input id="repEquip" placeholder="Оборудование" style="margin-top:8px"><input id="repWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="repResult" placeholder="Результат / проверка / что осталось"></textarea><button class="btn blue" onclick="makeReport()">Сформировать и сохранить отчёт</button><pre id="reportOut"></pre><button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button></div></section>
+
+<section id="history" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📋 История отчётов</h2><p>Отчёты можно открыть, скопировать или удалить.</p></div><div id="historyList"></div></section>
+<section id="stats" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📊 Статистика</h2><p>Сводка по объектам, отчётам, складу и командам.</p></div><div id="statsBox"></div></section>
+<section id="fav" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Сохраняй свои команды для быстрого копирования.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда или набор команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
+<section id="backup" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Экспортирует объекты, отчёты, склад, избранное и имя сотрудника.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Тут появится backup. Для восстановления вставь backup сюда."></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
+
+<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Настройка оборудования</h2><p>Выбери производителя, затем нужную настройку.</p></div><div class="grid" id="switchGrid"></div></section>
+<section id="vendor" class="screen"><button class="back" onclick="showSwitches()">← Оборудование</button><div id="vendorBody"></div></section>
+
+<section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии и диагностика</h2><p>Готовые сценарии и помощник диагностики в одном разделе.</p></div><div class="grid"><button class="card full" onclick="showDiagHelper()"><h3>🤖 Помощник диагностики</h3><p>Напиши проблему и получи алгоритм</p></button></div><div class="grid" id="alarmGrid" style="margin-top:12px"></div></section>
+<section id="diagHelper" class="screen"><button class="back" onclick="showAlarms()">← Аварии</button><div class="titlebox"><h2>🤖 Помощник диагностики</h2><p>Например: нет ARP, нет MAC, ONU offline, нет линка.</p></div><div class="item"><input id="diagInput" placeholder="Введите проблему" oninput="diagAnswer()"><button class="btn blue" onclick="diagAnswer()">Показать алгоритм</button><div id="diagOut" class="out"></div></div></section>
+
+<section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы.</p></div><div class="grid" id="toolGrid"></div></section>
+<section id="inventory" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📦 Склад и оборудование</h2><p>Учёт оборудования связан с backup и статистикой.</p></div><div class="item"><input id="invName" placeholder="Оборудование: SFP 1G / ONU / патчкорд"><input id="invCount" placeholder="Количество" style="margin-top:8px"><textarea id="invNote" placeholder="Примечание / где лежит / объект"></textarea><button class="btn blue" onclick="saveInv()">Сохранить</button></div><div id="invList"></div></section>
+<section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки.</p></div><div class="grid" id="refGrid"></div></section>
 <section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
-
-<section id="history" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📋 История отчётов</h2><p>Каждый сформированный отчёт сохраняется в телефоне.</p></div><div id="historyList"></div></section>
-
-<section id="fav" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Добавь свои команды и копируй их одной кнопкой.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда или несколько команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
-
-<section id="backup" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Экспортирует объекты, отчёты, избранные команды и имя сотрудника.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Тут появится backup. Для восстановления вставь backup сюда."></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
-
 </main>
-<div class="bottomName">Orynbekov © NetHelper KZ</div>
-<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showSwitches()">Коммутаторы</button><button onclick="showAlarms()">Аварии</button><button onclick="showTools()">Инструменты</button></nav>
+<div class="bottomName">© 2026 Orynbekov Product • Network Engineer Toolkit</div>
+<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showWorkCenter()">Работа</button><button onclick="showSwitches()">Оборуд.</button><button onclick="showAlarms()">Аварии</button><button onclick="showTools()">Инструм.</button></nav>
+
 <script>
 const vendors={
 snr:{name:'SNR',desc:'S2995G / S2982G',tasks:[['Создать VLAN',`configure terminal
@@ -192,10 +179,7 @@ interface gigabitethernet 1/0/25
 switchport mode trunk
 switchport trunk allowed vlan add 3573
 exit
-copy running-config startup-config`],['Проверка',`show vlan
-show interfaces status
-show mac address-table
-show arp`]]},
+copy running-config startup-config`]]},
 mikrotik:{name:'MikroTik',desc:'Bridge / VLAN / Wireless',tasks:[['Bridge hub',`/interface bridge add name=bridge1
 /interface bridge port add bridge=bridge1 interface=ether1
 /interface bridge port add bridge=bridge1 interface=ether2`],['IP управления',`/ip address add address=10.151.200.50/30 interface=bridge1
@@ -275,118 +259,66 @@ const alarms=[
 3. shutdown/no shutdown.
 4. Speed/duplex.
 5. Питание второго устройства.
-6. Ошибки CRC/FCS.`],
-['Неизвестная сеть Windows',`1. Link есть?
-2. DHCP или static IP?
-3. VLAN/PVID.
-4. ARP до шлюза.
-5. MAC клиента.
-6. Кабель/патч-панель.`],
-['Скорость режется',`1. Кабель 8 жил.
-2. Auto-negotiation.
-3. Force 100 отключить.
-4. SFP/медиаконвертер.
-5. CRC/FCS.
-6. Проверить профиль ONU/DSL.`]
-]
+6. Ошибки CRC/FCS.`]
+];
 const refs=[['SFP / BiDi','BiDi работает парой: один TX1310/RX1550, второй TX1550/RX1310.'],['Оптика','Проверить чистоту коннектора, патчкорд, TX/RX, уровень сигнала, тип SFP.'],['GPON','ONU offline: проверить PON порт, уровень, серийник, профиль, VLAN сервиса.'],['DSL','DSL down: проверить пару, порт DSLAM, профиль скорости, SNR, CRC/FEC.'],['Консоль','9600, 19200, 38400, 57600, 115200. Параметры: 8N1, Flow None.'],['Маски',`/30 = 255.255.255.252
 /29 = 255.255.255.248
 /28 = 255.255.255.240
 /24 = 255.255.255.0`]];
 function setNav(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0);updateStats()}
 function goHome(){show('home');setNav(navHome)}
+function showWorkCenter(){show('workCenter');setNav(null)}
 function showSwitches(){show('switches');renderSwitches();setNav(null)}
 function showAlarms(){show('alarms');renderCards(alarmGrid,alarms,'⚡','showAlarms()');setNav(null)}
 function showTools(){show('tools');renderTools();setNav(null)}
 function showReference(){show('reference');renderCards(refGrid,refs,'📚','showReference()');setNav(null)}
 function showObjects(){show('objects');renderObjects()}
-function showReport(){show('report');loadWorkerName()}
+function showReport(){show('report');loadWorkerName();fillObjectSelect()}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function getObjs(){try{return JSON.parse(localStorage.getItem('nh_objs_v38')||'[]')}catch(e){return[]}}
+function getReports(){try{return JSON.parse(localStorage.getItem('nh_reports_v38')||'[]')}catch(e){return[]}}
+function getFavs(){try{return JSON.parse(localStorage.getItem('nh_favs_v38')||'[]')}catch(e){return[]}}
+function getInv(){try{return JSON.parse(localStorage.getItem('nh_inv_v38')||'[]')}catch(e){return[]}}
+function updateStats(){let o=getObjs(),r=getReports(),i=getInv();if(document.getElementById('stObj')){stObj.textContent=o.length;stRep.textContent=r.length;stInv.textContent=i.length}}
 function renderSwitches(){switchGrid.innerHTML='';Object.keys(vendors).forEach(k=>{let v=vendors[k],b=document.createElement('button');b.className='card';b.onclick=()=>openVendor(k);b.innerHTML=`<h3>${v.name}</h3><p>${v.desc}</p><span class="badge">Открыть</span>`;switchGrid.appendChild(b)})}
 function openVendor(k){let v=vendors[k];show('vendor');let h=`<div class="titlebox"><h2>${v.name}</h2><p>${v.desc}</p></div>`;v.tasks.forEach((t,i)=>{h+=`<div class="item"><h3>${t[0]}</h3><pre id="cmd_${i}">${escapeHtml(t[1])}</pre><button class="copy" onclick="copyBlock('cmd_${i}')">Копировать</button></div>`});vendorBody.innerHTML=h}
 function renderCards(container,data,icon,back){container.innerHTML='';data.forEach((a,i)=>{let b=document.createElement('button');b.className='card full';b.onclick=()=>openArticle(`${icon} ${a[0]}`,a[1],back);b.innerHTML=`<h3>${a[0]}</h3><p>Открыть</p>`;container.appendChild(b)})}
 function openArticle(title,body,back){show('article');articleBack.setAttribute('onclick',back);articleBody.innerHTML=`<div class="titlebox"><h2>${title}</h2></div><div class="item"><pre>${escapeHtml(body)}</pre></div>`}
-function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openVlanPro()"><h3>Генератор VLAN PRO</h3><p>SNR / Huawei / Eltex</p></button><button class="card full" onclick="openMikroTikSignal()"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button><button class="card" onclick="openArticle('Консоль','9600\n19200\n38400\n57600\n115200\n\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\n/29 = 255.255.255.248\n/28 = 255.255.255.240\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
-function openIP(){
-show('article');articleBack.setAttribute('onclick','showTools()');
-articleBody.innerHTML=`<div class="titlebox"><h2>🧮 IP калькулятор</h2><p>Введи IP в формате 178.22.174.28/30 или 178.22.174.29/30.</p></div><div class="item"><input id="ipcalcIn" value="178.22.174.28/30" oninput="calcProIP()"><button class="copy" onclick="calcProIP()">Посчитать</button><div id="ipcalcOut" class="out"></div></div>`;
-calcProIP();
-}
-function openGen(){openArticle('Генератор команд', 'Используй раздел Коммутаторы → выбери SNR/Huawei/MikroTik → копируй готовые шаблоны.', 'showTools()')}
-function getObjs(){try{return JSON.parse(localStorage.getItem('nh_objs_v32')||'[]')}catch(e){return[]}}
-function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',e:objEquip.value||'',v:objVlan.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v32',JSON.stringify(arr));objName.value='';objEquip.value='';objVlan.value='';objNote.value='';renderObjects()}
-function delObj(i){let arr=getObjs();arr.splice(i,1);localStorage.setItem('nh_objs_v32',JSON.stringify(arr));renderObjects()}
-function renderObjects(){let arr=getObjs();objList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'\\n'+o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет объектов</p></div>'}
-function loadWorkerName(){let w=localStorage.getItem('nh_worker_name')||'';if(document.getElementById('repWorker'))repWorker.value=w}
-function saveWorkerName(){localStorage.setItem('nh_worker_name',repWorker.value||'')}
-function makeReport(){
-let dt=new Date().toLocaleString();
-let worker=(repWorker.value||localStorage.getItem('nh_worker_name')||'').trim();
-if(worker)localStorage.setItem('nh_worker_name',worker);
-let text=`Отчёт по выезду
+function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',a:objAddr.value||'',e:objEquip.value||'',v:objVlan.value||'',m:objMap.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v38',JSON.stringify(arr));objName.value='';objAddr.value='';objEquip.value='';objVlan.value='';objMap.value='';objNote.value='';renderObjects()}
+function delObj(i){let arr=getObjs();arr.splice(i,1);localStorage.setItem('nh_objs_v38',JSON.stringify(arr));renderObjects()}
+function renderObjects(){let arr=getObjs(), reps=getReports();objList.innerHTML=arr.map((o,i)=>{let count=reps.filter(r=>(r.obj||'').toLowerCase()===(o.n||'').toLowerCase()).length;return `<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.a)} • ${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'\nСхема: '+o.m+'\n'+o.d)}</pre><p class="note">Отчётов по объекту: ${count} • ${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`}).join('')||'<div class="item"><p>Пока нет объектов</p></div>';updateStats()}
+function fillObjectSelect(){let arr=getObjs();repObjSelect.innerHTML='<option value="">Выбрать объект из базы</option>'+arr.map(o=>`<option value="${escapeHtml(o.n)}">${escapeHtml(o.n)}</option>`).join('')}
+function fillReportObject(){let n=repObjSelect.value;if(!n)return;let o=getObjs().find(x=>x.n===n);repObj.value=n;if(o){repEquip.value=o.e||''}}
+function loadWorkerName(){let w=localStorage.getItem('nh_worker_v38')||'';if(document.getElementById('repWorker'))repWorker.value=w}
+function saveWorkerName(){localStorage.setItem('nh_worker_v38',repWorker.value||'')}
+function makeReport(){let dt=new Date().toLocaleString(),worker=(repWorker.value||'').trim();if(worker)localStorage.setItem('nh_worker_v38',worker);let text=`Отчёт по выезду
 Дата: ${dt}
 Сотрудник: ${worker||'Не указано'}
 Объект: ${repObj.value||''}
 Оборудование: ${repEquip.value||''}
 Выполнено: ${repWork.value||''}
-Результат: ${repResult.value||''}`;
-reportOut.textContent=text;
-let arr=getReports();
-arr.unshift({time:dt,obj:repObj.value||'Объект',text:text});
-localStorage.setItem('nh_reports_fixed',JSON.stringify(arr));
-}
-
-function prefixMask(c){let mask=(0xffffffff<<(32-c))>>>0;return intToIp(mask)}
-function ipToLong(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
-function longToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
-function calcSmartIP(){
-let el=document.getElementById('ipcalcIn'), out=document.getElementById('ipcalcOut'); if(!el||!out)return;
-let v=el.value.trim(),m=v.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);
-if(!m){out.innerHTML='Введите так: <b>178.22.174.28/30</b>';return}
-let parts=m[1].split('.').map(Number), c=+m[2];
-if(parts.some(x=>x<0||x>255)||c<1||c>32){out.innerHTML='Ошибка IP или маски';return}
-let ip=ipToLong(m[1]), mask=(0xffffffff<<(32-c))>>>0, net=ip&mask, broad=(net|(~mask))>>>0;
-let first=c>=31?net:net+1, last=c>=31?broad:broad-1, hosts=c>=31?Math.pow(2,32-c):Math.max(0,Math.pow(2,32-c)-2);
-let device=ip===net?first:ip, gateway=(c===30?(device===first?last:first):last);
-out.innerHTML=`<div class="kv">
-<div>IP устройства<br><b>${longToIp(device)}/${c}</b></div>
-<div>Маска<br><b>${longToIp(mask)}</b></div>
-<div>Шлюз обычно<br><b>${longToIp(gateway)}</b></div>
-<div>Сеть<br><b>${longToIp(net)}</b></div>
-<div>Broadcast<br><b>${longToIp(broad)}</b></div>
-<div>Host count<br><b>${hosts}</b></div>
-</div>
-<p><b>Как вводить на устройство:</b></p>
-<pre>IP address: ${longToIp(device)}
-Mask: ${longToIp(mask)}
-Gateway: ${longToIp(gateway)}</pre>
-<p class="note">Для /30: если сеть ${longToIp(net)}/30, рабочие IP обычно ${longToIp(first)} и ${longToIp(last)}. Один ставишь на устройство, второй — шлюз.</p>`;
-}
-
-
+Результат: ${repResult.value||''}`;reportOut.textContent=text;let arr=getReports();arr.unshift({time:dt,obj:repObj.value||'Объект',equip:repEquip.value||'',text});localStorage.setItem('nh_reports_v38',JSON.stringify(arr));updateStats()}
+function showHistory(){show('history');renderHistory()}
+function renderHistory(){let arr=getReports();historyList.innerHTML=arr.map((r,i)=>`<div class="item"><h3>${escapeHtml(r.obj||'Отчёт')}</h3><pre id="hist_${i}">${escapeHtml(r.text)}</pre><p class="note">${escapeHtml(r.time)}</p><button class="copy" onclick="copyBlock('hist_${i}')">Копировать</button><button class="btn red" onclick="delHistory(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет отчётов</p></div>'}
+function delHistory(i){let arr=getReports();arr.splice(i,1);localStorage.setItem('nh_reports_v38',JSON.stringify(arr));renderHistory();updateStats()}
+function showStats(){show('stats');let objs=getObjs(),reps=getReports(),inv=getInv(),favs=getFavs();statsBox.innerHTML=`<div class="grid"><div class="card"><h3>${objs.length}</h3><p>Объектов</p></div><div class="card"><h3>${reps.length}</h3><p>Отчётов</p></div><div class="card"><h3>${inv.length}</h3><p>На складе</p></div><div class="card"><h3>${favs.length}</h3><p>Команд</p></div></div><div class="item"><h3>Последние объекты</h3><pre>${escapeHtml(objs.slice(0,5).map(o=>o.n+' — '+o.v).join('\n')||'Нет данных')}</pre></div>`}
+function showFav(){show('fav');renderFav()}
+function saveFav(){let arr=getFavs();arr.unshift({n:favName.value||'Команда',c:favCmd.value||''});localStorage.setItem('nh_favs_v38',JSON.stringify(arr));favName.value='';favCmd.value='';renderFav()}
+function delFav(i){let arr=getFavs();arr.splice(i,1);localStorage.setItem('nh_favs_v38',JSON.stringify(arr));renderFav()}
+function renderFav(){let arr=getFavs();if(!arr.length)arr=[{n:'SNR базовые',c:'show vlan\nshow interface status\nshow mac address-table\nshow arp'},{n:'Huawei базовые',c:'display vlan\ndisplay interface brief\ndisplay mac-address\ndisplay arp'}];favList.innerHTML=arr.map((f,i)=>`<div class="item"><h3>${escapeHtml(f.n)}</h3><pre id="fav_${i}">${escapeHtml(f.c)}</pre><button class="copy" onclick="copyBlock('fav_${i}')">Копировать</button><button class="btn red" onclick="delFav(${i})">Удалить</button></div>`).join('')}
+function showBackup(){show('backup')}
+function makeBackup(){let data={objects:getObjs(),reports:getReports(),favs:getFavs(),inventory:getInv(),worker:localStorage.getItem('nh_worker_v38')||''};backupText.value=JSON.stringify(data,null,2)}
+function restoreBackup(){try{let d=JSON.parse(backupText.value);if(d.objects)localStorage.setItem('nh_objs_v38',JSON.stringify(d.objects));if(d.reports)localStorage.setItem('nh_reports_v38',JSON.stringify(d.reports));if(d.favs)localStorage.setItem('nh_favs_v38',JSON.stringify(d.favs));if(d.inventory)localStorage.setItem('nh_inv_v38',JSON.stringify(d.inventory));if(d.worker)localStorage.setItem('nh_worker_v38',d.worker);alert('Backup восстановлен');updateStats()}catch(e){alert('Ошибка backup')}}
+function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openVlanPro()"><h3>Генератор VLAN PRO</h3><p>SNR / Huawei / Eltex</p></button><button class="card full" onclick="openMikroTikSignal()"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button><button class="card" onclick="openArticle('Консоль','9600\\n19200\\n38400\\n57600\\n115200\\n\\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\\n/29 = 255.255.255.248\\n/28 = 255.255.255.240\\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
 function ipNum(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
 function numIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
-function calcProIP(){
-let el=document.getElementById('ipcalcIn'),out=document.getElementById('ipcalcOut'); if(!el||!out)return;
-let m=el.value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);
-if(!m){out.innerHTML='Формат: <b>178.22.174.28/30</b>';return}
-let parts=m[1].split('.').map(Number),c=+m[2];
-if(parts.some(x=>x<0||x>255)||c<1||c>32){out.innerHTML='Ошибка IP или маски';return}
-let ip=ipNum(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0;
-let first=c>=31?net:net+1,last=c>=31?b:b-1,device=ip===net?first:ip,gateway=(c===30?(device===first?last:first):last);
-out.innerHTML=`<div class="kv"><div>IP устройства<br><b>${numIp(device)}/${c}</b></div><div>Маска<br><b>${numIp(mask)}</b></div><div>Шлюз<br><b>${numIp(gateway)}</b></div><div>Сеть<br><b>${numIp(net)}</b></div><div>Broadcast<br><b>${numIp(b)}</b></div><div>Рабочие IP<br><b>${numIp(first)} - ${numIp(last)}</b></div></div><pre>IP address: ${numIp(device)}
+function openIP(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>IP калькулятор</h2><p>Введи 178.22.174.28/30 или 178.22.174.29/30.</p></div><div class="item"><input id="ipcalcIn" value="178.22.174.28/30" oninput="calcIP()"><button class="copy" onclick="calcIP()">Посчитать</button><div id="ipcalcOut" class="out"></div></div>`;calcIP()}
+function calcIP(){let el=document.getElementById('ipcalcIn'),out=document.getElementById('ipcalcOut');if(!el||!out)return;let m=el.value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m){out.innerHTML='Формат: 178.22.174.28/30';return}let parts=m[1].split('.').map(Number),c=+m[2];if(parts.some(x=>x<0||x>255)||c<1||c>32){out.innerHTML='Ошибка IP';return}let ip=ipNum(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0,first=c>=31?net:net+1,last=c>=31?b:b-1,device=ip===net?first:ip,gateway=(c===30?(device===first?last:first):last);out.innerHTML=`<div class="kv"><div>IP устройства<br><b>${numIp(device)}/${c}</b></div><div>Маска<br><b>${numIp(mask)}</b></div><div>Шлюз<br><b>${numIp(gateway)}</b></div><div>Сеть<br><b>${numIp(net)}</b></div><div>Broadcast<br><b>${numIp(b)}</b></div><div>Рабочие IP<br><b>${numIp(first)} - ${numIp(last)}</b></div></div><pre>IP address: ${numIp(device)}
 Mask: ${numIp(mask)}
-Gateway: ${numIp(gateway)}</pre>`;
-}
-function openVlanPro(){
-show('article');articleBack.setAttribute('onclick','showTools()');
-articleBody.innerHTML=`<div class="titlebox"><h2>Генератор VLAN PRO</h2><p>Введи VLAN, порт клиента и uplink.</p></div><div class="item"><div class="row"><input id="vpVlan" value="3573" oninput="vlanPro()"><input id="vpPort" value="1/0/2" oninput="vlanPro()"><input id="vpUp" value="1/0/25" oninput="vlanPro()"></div><button class="copy" onclick="vlanPro()">Сгенерировать</button><pre id="vlanProOut"></pre><button class="copy" onclick="copyBlock('vlanProOut')">Копировать</button></div>`;
-vlanPro();
-}
-function vlanPro(){
-let v=vpVlan.value||'3573',p=vpPort.value||'1/0/2',u=vpUp.value||'1/0/25';
-vlanProOut.textContent=`SNR:
+Gateway: ${numIp(gateway)}</pre>`}
+function openVlanPro(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>Генератор VLAN PRO</h2><p>Введи VLAN, порт клиента и uplink.</p></div><div class="item"><div class="row"><input id="vpVlan" value="3573" oninput="vlanPro()"><input id="vpPort" value="1/0/2" oninput="vlanPro()"><input id="vpUp" value="1/0/25" oninput="vlanPro()"></div><button class="copy" onclick="vlanPro()">Сгенерировать</button><pre id="vlanProOut"></pre><button class="copy" onclick="copyBlock('vlanProOut')">Копировать</button></div>`;vlanPro()}
+function vlanPro(){let v=vpVlan.value||'3573',p=vpPort.value||'1/0/2',u=vpUp.value||'1/0/25';vlanProOut.textContent=`SNR:
 configure terminal
 vlan ${v}
 exit
@@ -425,29 +357,18 @@ interface gigabitethernet ${u}
 switchport mode trunk
 switchport trunk allowed vlan add ${v}
 exit
-copy running-config startup-config`;
-}
-function openMikroTikSignal(){
-show('article');articleBack.setAttribute('onclick','showTools()');
-articleBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal</h2><p>Signal - Noise = SNR</p></div><div class="item"><div class="row"><input id="mtSig" value="-50" oninput="mtSignalCalc()"><input id="mtNoise" value="-117" oninput="mtSignalCalc()"></div><button class="copy" onclick="mtSignalCalc()">Посчитать</button><div id="mtSignalOut" class="out"></div></div>`;
-mtSignalCalc();
-}
+copy running-config startup-config`}
+function openMikroTikSignal(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal</h2><p>Signal - Noise = SNR</p></div><div class="item"><div class="row"><input id="mtSig" value="-50" oninput="mtSignalCalc()"><input id="mtNoise" value="-117" oninput="mtSignalCalc()"></div><button class="copy" onclick="mtSignalCalc()">Посчитать</button><div id="mtSignalOut" class="out"></div></div>`;mtSignalCalc()}
 function mtSignalCalc(){let s=Number(mtSig.value),n=Number(mtNoise.value),snr=s-n,grade=snr>=40?'Отлично':snr>=25?'Нормально':snr>=15?'Слабо':'Плохо';mtSignalOut.innerHTML=`SNR: <b>${snr} dB</b><br>Качество: <b>${grade}</b>`}
-function getReports(){try{return JSON.parse(localStorage.getItem('nh_reports_fixed')||'[]')}catch(e){return[]}}
-function showHistory(){show('history');renderHistory()}
-function renderHistory(){let arr=getReports();historyList.innerHTML=arr.map((r,i)=>`<div class="item"><h3>${escapeHtml(r.obj||'Отчёт')}</h3><pre id="hist_${i}">${escapeHtml(r.text)}</pre><p class="note">${escapeHtml(r.time)}</p><button class="copy" onclick="copyBlock('hist_${i}')">Копировать</button><button class="btn red" onclick="delHistory(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет отчётов</p></div>'}
-function delHistory(i){let arr=getReports();arr.splice(i,1);localStorage.setItem('nh_reports_fixed',JSON.stringify(arr));renderHistory()}
-function getFavs(){try{return JSON.parse(localStorage.getItem('nh_favs_fixed')||'[]')}catch(e){return[]}}
-function showFav(){show('fav');renderFav()}
-function saveFav(){let arr=getFavs();arr.unshift({n:favName.value||'Команда',c:favCmd.value||''});localStorage.setItem('nh_favs_fixed',JSON.stringify(arr));favName.value='';favCmd.value='';renderFav()}
-function delFav(i){let arr=getFavs();arr.splice(i,1);localStorage.setItem('nh_favs_fixed',JSON.stringify(arr));renderFav()}
-function renderFav(){let arr=getFavs();if(!arr.length)arr=[{n:'SNR базовые',c:'show vlan\\nshow interface status\\nshow mac address-table\\nshow arp'},{n:'Huawei базовые',c:'display vlan\\ndisplay interface brief\\ndisplay mac-address\\ndisplay arp'}];favList.innerHTML=arr.map((f,i)=>`<div class="item"><h3>${escapeHtml(f.n)}</h3><pre id="fav_${i}">${escapeHtml(f.c)}</pre><button class="copy" onclick="copyBlock('fav_${i}')">Копировать</button><button class="btn red" onclick="delFav(${i})">Удалить</button></div>`).join('')}
-function showBackup(){show('backup')}
-function makeBackup(){let data={objects:localStorage.getItem('nh_objs_v32')||'[]',reports:localStorage.getItem('nh_reports_fixed')||'[]',favs:localStorage.getItem('nh_favs_fixed')||'[]',worker:localStorage.getItem('nh_worker_name')||''};backupText.value=JSON.stringify(data,null,2)}
-function restoreBackup(){try{let d=JSON.parse(backupText.value);if(d.objects)localStorage.setItem('nh_objs_v32',d.objects);if(d.reports)localStorage.setItem('nh_reports_fixed',d.reports);if(d.favs)localStorage.setItem('nh_favs_fixed',d.favs);if(d.worker)localStorage.setItem('nh_worker_name',d.worker);alert('Backup восстановлен')}catch(e){alert('Ошибка backup')}}
-
+function showInventory(){show('inventory');renderInv()}
+function saveInv(){let arr=getInv();arr.unshift({n:invName.value||'Оборудование',c:invCount.value||'',d:invNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_inv_v38',JSON.stringify(arr));invName.value='';invCount.value='';invNote.value='';renderInv()}
+function delInv(i){let arr=getInv();arr.splice(i,1);localStorage.setItem('nh_inv_v38',JSON.stringify(arr));renderInv();updateStats()}
+function renderInv(){let arr=getInv();invList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>Количество: <b>${escapeHtml(o.c)}</b></p><pre>${escapeHtml(o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delInv(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока склад пуст</p></div>';updateStats()}
+function showDiagHelper(){show('diagHelper');diagAnswer()}
+function diagAnswer(){let q=(document.getElementById('diagInput')?diagInput.value:'').toLowerCase(),ans='Введите проблему: нет arp, нет mac, onu offline, нет линка, нет интернет.';if(q.includes('arp'))ans='1. Проверить MAC клиента.\\n2. Проверить VLAN и PVID.\\n3. Проверить trunk/tagged.\\n4. Проверить gateway.\\n5. Проверить /30 адресацию.';else if(q.includes('mac'))ans='1. Проверить link.\\n2. Проверить кабель.\\n3. Проверить access VLAN/PVID.\\n4. Проверить isolation/protection.\\n5. Проверить radio/bridge.';else if(q.includes('onu')||q.includes('pon'))ans='1. Проверить PON порт.\\n2. Проверить RX/TX.\\n3. Проверить серийник ONU.\\n4. Проверить профиль/VLAN.\\n5. Проверить uplink.';else if(q.includes('линк')||q.includes('link'))ans='1. Проверить кабель/SFP.\\n2. Проверить TX/RX.\\n3. Проверить shutdown.\\n4. Проверить speed/duplex.';else if(q.includes('интернет'))ans='1. Ping gateway.\\n2. Ping 8.8.8.8.\\n3. DNS.\\n4. VLAN/ARP.\\n5. Route/gateway.';diagOut.innerHTML='<pre>'+escapeHtml(ans)+'</pre>'}
 function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
-search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({id:k,title:v.name})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="openVendor('${h.id}')">→ ${h.title}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
+search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({type:'vendor',id:k,title:v.name})});getObjs().forEach((o,i)=>{if((o.n+' '+o.v+' '+o.e).toLowerCase().includes(q))hits.push({type:'object',id:i,title:'Объект: '+o.n})});getReports().forEach((r,i)=>{if((r.text||'').toLowerCase().includes(q))hits.push({type:'report',id:i,title:'Отчёт: '+r.obj})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="${h.type==='vendor'?`openVendor('${h.id}')`:h.type==='object'?`showObjects()`:`showHistory()`}">→ ${escapeHtml(h.title)}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
+updateStats();
 </script>
 </body>
 </html>
