@@ -4,19 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v3.3</title>
+<title>NetHelper KZ v3.4</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),linear-gradient(180deg,#071426,#050b13)}
 #splash{position:fixed;inset:0;background:
-radial-gradient(circle at 50% 32%,rgba(102,214,255,.35),transparent 28%),
-linear-gradient(180deg,#071b33,#06111f 70%);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .7s ease 1.6s forwards;overflow:hidden}
-#splash:before{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(102,214,255,.28);border-radius:50%;animation:ring 1.6s ease-in-out infinite}
-#splash:after{content:"";position:absolute;width:310px;height:310px;border:1px dashed rgba(112,227,154,.22);border-radius:50%;animation:spin 5s linear infinite}
-.sLogo{width:118px;height:118px;border-radius:34px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-size:42px;font-weight:1000;box-shadow:0 0 55px rgba(102,214,255,.45);animation:logoPop 1.6s ease-in-out infinite;z-index:2}
-.sTitle{font-size:28px;font-weight:1000;color:var(--blue);margin-top:18px;z-index:2}.sName{color:var(--muted);letter-spacing:1px;margin-top:7px;z-index:2}
-@keyframes logoPop{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.07) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.18);opacity:.45}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes hide{to{opacity:0;visibility:hidden}}
+radial-gradient(circle at 20% 20%,rgba(102,214,255,.45),transparent 24%),
+radial-gradient(circle at 80% 30%,rgba(112,227,154,.38),transparent 25%),
+radial-gradient(circle at 50% 70%,rgba(255,198,109,.22),transparent 30%),
+linear-gradient(160deg,#04101f,#071b33 48%,#06111f);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .85s ease 2.45s forwards;overflow:hidden}
+#splash:before{content:"";position:absolute;width:280px;height:280px;border:2px solid rgba(102,214,255,.32);border-radius:50%;box-shadow:0 0 40px rgba(102,214,255,.22);animation:ringBright 1.55s ease-in-out infinite}
+#splash:after{content:"";position:absolute;width:360px;height:360px;border:2px dashed rgba(112,227,154,.32);border-radius:50%;animation:spin 4.5s linear infinite}
+.sLogo{width:124px;height:124px;border-radius:36px;background:linear-gradient(135deg,#66d6ff 0%,#70e39a 55%,#ffc66d 100%);display:flex;align-items:center;justify-content:center;color:#06111f;font-size:44px;font-weight:1000;box-shadow:0 0 38px rgba(102,214,255,.65),0 0 90px rgba(112,227,154,.35);animation:logoFlash 1.45s ease-in-out infinite;z-index:2}
+.sTitle{font-size:30px;font-weight:1000;color:#9cecff;margin-top:20px;z-index:2;text-shadow:0 0 18px rgba(102,214,255,.55)}
+.sName{color:#d7f5ff;letter-spacing:1px;margin-top:8px;z-index:2;font-weight:800}
+.sRole{margin-top:6px;color:#70e39a;font-size:13px;font-weight:900;letter-spacing:2px;z-index:2;text-transform:uppercase}
+@keyframes logoFlash{0%,100%{transform:scale(1) rotate(0deg);filter:brightness(1)}50%{transform:scale(1.1) rotate(3deg);filter:brightness(1.2)}}
+@keyframes ringBright{0%,100%{transform:scale(.88);opacity:.85}50%{transform:scale(1.2);opacity:.35}}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes hide{to{opacity:0;visibility:hidden}}
 header{position:sticky;top:0;z-index:20;padding:14px;background:rgba(6,17,31,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:12px}
 .logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px}
@@ -50,9 +56,9 @@ nav button{border:0;background:transparent;color:var(--muted);font-weight:900;fo
 </style>
 </head>
 <body>
-<div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div></div>
+<div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div><div class="sRole">Инженер сети</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.3 — аварии и IP калькулятор</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.4 — Инженер сети • офлайн помощник</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: SNR, VLAN, ARP, /30, D-Link"></div>
 </header>
 <main>
