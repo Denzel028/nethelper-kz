@@ -3,51 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#08111f">
-<title>NetHelper KZ Pro v1.3</title>
+<meta name="theme-color" content="#06111f">
+<title>NetHelper KZ v1.4</title>
 <style>
-:root{--bg:#08111f;--panel:#101b2f;--panel2:#16233b;--line:#2b3d61;--text:#eef6ff;--muted:#aab8cf;--blue:#67d3ff;--green:#72df99;--yellow:#ffd76b;--red:#ff7e7e;--violet:#a88bff;--shadow:0 20px 50px rgba(0,0,0,.28)}
+:root{
+--bg:#06111f;--bg2:#0a1830;--card:#0f2039;--card2:#132845;--line:#2f496f;
+--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--violet:#a98cff;
+--shadow:0 22px 55px rgba(0,0,0,.30)
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:radial-gradient(circle at 50% -10%,#16345a 0,#08111f 44%,#050b14 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#173154,#08111f 65%);z-index:99;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hideSplash .7s ease 2.2s forwards}
-.splashLogo{width:118px;height:118px;border-radius:34px;background:linear-gradient(135deg,#67d3ff,#72df99);display:flex;align-items:center;justify-content:center;color:#07101f;font-weight:1000;font-size:42px;box-shadow:0 0 45px rgba(103,211,255,.45);animation:pulse 1.2s ease-in-out infinite}
-.splashText{margin-top:18px;font-size:28px;font-weight:900;color:var(--blue)}.splashName{margin-top:8px;color:var(--muted);font-size:14px;letter-spacing:1px}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}@keyframes hideSplash{to{opacity:0;visibility:hidden}}
-header{position:sticky;top:0;z-index:20;background:rgba(8,17,31,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px 14px 12px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;gap:12px;align-items:center}
-.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#67d3ff,#72df99);display:flex;align-items:center;justify-content:center;color:#07101f;font-weight:1000;font-size:20px;animation:float 2.8s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-h1{margin:0;color:var(--blue);font-size:29px;line-height:1}.sub{color:var(--muted);font-size:13px;margin-top:6px}
-.lang{display:flex;gap:6px}.lang button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:14px;padding:10px 12px;font-weight:900}.lang button.active{background:var(--blue);color:#07101f}
-.search{margin-top:12px}input,select{width:100%;border:1px solid var(--line);background:#07101f;color:var(--text);padding:14px 15px;border-radius:16px;font-size:16px;outline:none}
-main{padding:14px 14px 118px}.section{display:none}.section.active{display:block}
-.hero{background:linear-gradient(135deg,rgba(103,211,255,.16),rgba(114,223,153,.08));border:1px solid var(--line);border-radius:26px;padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:
+radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),
+radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),
+linear-gradient(180deg,#071426,#050b13 100%)}
+#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#163a63,#06111f 68%);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .7s ease 2.0s forwards}
+.sLogo{width:122px;height:122px;border-radius:36px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-size:43px;font-weight:1000;box-shadow:0 0 60px rgba(102,214,255,.45);animation:pulse 1.2s infinite}
+.sTitle{font-size:29px;font-weight:1000;color:var(--blue);margin-top:18px}.sName{color:var(--muted);letter-spacing:1px;margin-top:7px}
+@keyframes pulse{50%{transform:scale(1.08);filter:brightness(1.18)}}@keyframes hide{to{opacity:0;visibility:hidden}}
+header{position:sticky;top:0;z-index:20;padding:14px 14px 12px;background:rgba(6,17,31,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px;box-shadow:0 0 24px rgba(102,214,255,.25)}
+h1{font-size:27px;color:var(--blue);margin:0}.sub{font-size:12px;color:var(--muted);margin-top:5px}
+.lang button{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:9px 11px;font-weight:900}.lang .active{background:var(--blue);color:#06111f}
+.search{margin-top:12px}input,select{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px}
+main{padding:14px 14px 120px}.section{display:none}.section.active{display:block}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:18px;background:linear-gradient(135deg,rgba(102,214,255,.18),rgba(169,140,255,.09));box-shadow:var(--shadow);margin-bottom:13px}
+.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(112,227,154,.14)}
 .hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:var(--muted);line-height:1.45}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.quick button{border:1px solid var(--line);background:#07101f;color:var(--text);border-radius:15px;padding:11px 7px;font-weight:900;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:linear-gradient(180deg,#13213a,#0f1a2d);border:1px solid var(--line);border-radius:22px;padding:16px;min-height:112px;box-shadow:var(--shadow)}.card:active{transform:scale(.99)}
-.card h2,.card h3{margin:0 0 8px;font-size:22px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.36}.full{grid-column:1/-1}
-.badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;background:#0b2c40;color:#90e6ff;font-size:12px;font-weight:900}
-.back{margin:2px 0 12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:12px 14px;border-radius:16px;font-weight:900}
-.titlebox{background:linear-gradient(135deg,#11213b,#0e1728);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px}.titlebox h2{margin:0 0 6px;font-size:26px}.titlebox p{margin:0;color:var(--muted);line-height:1.4}
-.item{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0}.item h3{margin:0 0 8px;font-size:20px}.item p,.item li{color:var(--muted);line-height:1.55}
-pre{white-space:pre-wrap;background:#030913;border:1px solid var(--line);border-radius:15px;padding:13px;overflow:auto;color:#dff3ff;font-size:13px;line-height:1.45}
-.copy{border:0;background:var(--green);color:#06101d;border-radius:14px;padding:10px 12px;font-weight:900;margin-top:8px}
-.mock{border:1px solid #38527c;border-radius:18px;overflow:hidden;background:#07101f;margin:10px 0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
-.mockTop{display:flex;gap:6px;align-items:center;background:#0d1a2d;border-bottom:1px solid #38527c;padding:10px}.dot{width:9px;height:9px;border-radius:50%;background:var(--red)}.dot:nth-child(2){background:var(--yellow)}.dot:nth-child(3){background:var(--green)}.mockTitle{margin-left:8px;color:var(--muted);font-size:12px;font-weight:900}
-.mockBody{display:grid;grid-template-columns:95px 1fr;min-height:135px}.side{border-right:1px solid #38527c;padding:9px;background:#0a1424}.side div{font-size:11px;padding:7px;border-radius:9px;color:var(--muted)}.side .sel{background:#123456;color:#91e6ff}.screen{padding:10px}.field{height:24px;border:1px solid #355076;border-radius:8px;margin:7px 0;background:#0b1728}.portrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.port{width:22px;height:22px;border-radius:6px;border:1px solid #4b6896;background:#101f36}.port.t{background:#0a4960}.port.u{background:#315326}.save{display:inline-block;margin-top:10px;background:var(--green);color:#06101d;border-radius:10px;padding:7px 10px;font-weight:900;font-size:12px}
-.out{background:#07101f;border:1px solid var(--line);border-radius:15px;padding:12px;line-height:1.65;color:var(--muted);margin-top:10px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{background:rgba(7,16,30,.65);border:1px solid var(--line);border-radius:16px;padding:10px;text-align:center}.stat b{display:block;color:var(--green);font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}.quick button{border:1px solid var(--line);background:linear-gradient(180deg,#132845,#0c1b31);color:var(--text);border-radius:18px;padding:14px 10px;font-weight:900;text-align:left}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:linear-gradient(180deg,#10233e,#0b182c);border:1px solid var(--line);border-radius:22px;padding:16px;min-height:112px;box-shadow:var(--shadow)}.card:active{transform:scale(.99)}
+.card h2{font-size:21px;margin:0 0 8px}.card p{font-size:13px;color:var(--muted);line-height:1.35;margin:0}.full{grid-column:1/-1}
+.badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;background:#0a3145;color:#91e8ff;font-size:12px;font-weight:900}
+.back{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:16px;padding:12px 14px;font-weight:900;margin-bottom:12px}
+.titlebox{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#102846,#0c1729);padding:16px;margin-bottom:12px}.titlebox h2{margin:0 0 6px;font-size:25px}.titlebox p{color:var(--muted);margin:0;line-height:1.45}
+.item{background:rgba(15,32,57,.96);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}.item h3{font-size:20px;margin:0 0 8px}.item p,.item li{color:var(--muted);line-height:1.55}
+pre{white-space:pre-wrap;background:#030913;border:1px solid #233d63;border-radius:16px;padding:13px;overflow:auto;color:#dff6ff;font-size:13px;line-height:1.45}
+.copy{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}
+.mock{border:1px solid #3b5a86;border-radius:18px;overflow:hidden;background:#07101f;margin:10px 0}.mockTop{display:flex;gap:6px;align-items:center;background:#0d1b31;border-bottom:1px solid #3b5a86;padding:10px}.dot{width:9px;height:9px;border-radius:50%;background:var(--red)}.dot:nth-child(2){background:var(--orange)}.dot:nth-child(3){background:var(--green)}.mockTitle{margin-left:8px;color:var(--muted);font-size:12px;font-weight:900}
+.mockBody{display:grid;grid-template-columns:98px 1fr;min-height:132px}.side{border-right:1px solid #3b5a86;padding:9px;background:#0a1424}.side div{font-size:11px;padding:7px;border-radius:9px;color:var(--muted)}.side .sel{background:#123456;color:#91e6ff}.screen{padding:10px}.field{height:24px;border:1px solid #355076;border-radius:8px;margin:7px 0;background:#0b1728}.save{display:inline-block;margin-top:10px;background:var(--green);color:#06111f;border-radius:10px;padding:7px 10px;font-weight:900;font-size:12px}.portrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.port{width:22px;height:22px;border-radius:6px;border:1px solid #4b6896;background:#101f36}.port.t{background:#0a4960}.port.u{background:#315326}
+.out{background:#07101f;border:1px solid var(--line);border-radius:16px;padding:12px;color:var(--muted);line-height:1.65;margin-top:10px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{display:none}.result.active{display:block}
-.footerName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#8da0bd;font-size:13px;font-weight:800;pointer-events:none;z-index:25;text-shadow:0 2px 10px #000}
-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,17,31,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:30}
+.footerName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#9db1d0;font-size:13px;font-weight:900;z-index:25;pointer-events:none;text-shadow:0 3px 14px #000}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
 nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
-@media(max-width:390px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.quick{grid-template-columns:1fr 1fr}h1{font-size:26px}.logo{width:44px;height:44px}}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.status{grid-template-columns:1fr 1fr 1fr}h1{font-size:25px}}
 </style>
 </head>
 <body>
-<div id="splash"><div class="splashLogo">NH</div><div class="splashText">NetHelper KZ</div><div class="splashName">Orynbekov</div></div>
-<header><div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub" id="subtitle">Pro v1.3 — офлайн справочник инженера</div></div></div><div class="lang"><button id="ruBtn" class="active" onclick="setLang('ru')">RU</button><button id="kzBtn" onclick="setLang('kz')">KZ</button></div></div><div class="search"><input id="search" placeholder="Поиск: vlan, arp, snr, /30, mac, d-link"></div></header>
+<div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div></div>
+<header><div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub" id="subtitle">v1.4 — красивый офлайн справочник</div></div></div><div class="lang"><button id="ruBtn" class="active" onclick="setLang('ru')">RU</button><button id="kzBtn" onclick="setLang('kz')">KZ</button></div></div><div class="search"><input id="search" placeholder="Поиск: vlan, d-link, iskratel, arp, /30"></div></header>
 <main>
-<section id="home" class="section active"><div class="hero"><h2>Полевой помощник связи</h2><p>Быстрые команды, web-инструкции, аварийные чек-листы и IP-калькулятор для работы без интернета.</p><div class="quick"><button onclick="openPage('dlinkweb')">D-Link Web</button><button onclick="openPage('snr')">SNR VLAN</button><button onclick="showCalc()">IP /30</button><button onclick="openPage('alarms')">Нет ARP</button><button onclick="showGen()">Генератор</button><button onclick="openPage('iskratel')">DSLAM</button></div></div><div class="grid" id="homeCards"></div><div id="searchResult" class="result"></div></section>
+<section id="home" class="section active">
+<div class="hero"><h2>Полевой центр инженера</h2><p>Команды, web-настройки, аварии, IP-калькулятор и мастера действий — всё в одном офлайн-приложении.</p><div class="status"><div class="stat"><b>12</b><span>разделов</span></div><div class="stat"><b>50+</b><span>шаблонов</span></div><div class="stat"><b>OFF</b><span>offline</span></div></div></div>
+<div class="quick"><button onclick="openPage('dlinkweb')">📷 D-Link Web настройка</button><button onclick="openPage('iskratel')">📞 Iskratel настройка DSLAM</button><button onclick="openPage('wizard')">🧭 Мастер VLAN</button><button onclick="openPage('afterwork')">✅ Проверка после работ</button></div>
+<div class="grid" id="homeCards"></div><div id="searchResult" class="result"></div>
+</section>
 <section id="page" class="section"><button class="back" onclick="goHome()">← Назад</button><div id="pageContent"></div></section>
 <section id="calc" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>IP калькулятор</h2><p>Введи адрес в формате 178.22.174.28/30.</p></div><div class="item"><input id="cidr" value="178.22.174.28/30" oninput="calcIP()"><button class="copy" onclick="calcIP()">Посчитать</button><div id="calcOut" class="out"></div></div></section>
 <section id="gen" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>Генератор команд</h2><p>Выбери оборудование, задачу, VLAN и порт.</p></div><div class="item"><div class="row"><select id="gVendor" onchange="genCmd()"><option>SNR</option><option>Huawei</option><option>Eltex</option></select><select id="gTask" onchange="genCmd()"><option value="access">Access VLAN</option><option value="trunk">Trunk VLAN</option><option value="mgmt">IP управления</option><option value="check">Проверка</option></select><input id="gVlan" value="3573" oninput="genCmd()"><input id="gPort" value="1/0/2" oninput="genCmd()"><input id="gUplink" value="1/0/25" oninput="genCmd()"><input id="gIp" value="178.22.174.29/30" oninput="genCmd()"></div><pre id="genOut"></pre><button class="copy" onclick="copyBlock('genOut')">Копировать</button></div></section>
@@ -56,16 +67,12 @@ nav button{border:0;background:transparent;color:var(--muted);font-weight:900;fo
 <nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="openPage('switches')">Коммутаторы</button><button onclick="openPage('alarms')">Аварии</button><button onclick="showCalc()">IP</button><button onclick="showGen()">Генератор</button></nav>
 <script>
 let lang='ru';
-const ui={ru:{sub:'Pro v1.3 — офлайн справочник инженера',search:'Поиск: vlan, arp, snr, /30, mac, d-link',home:'Главная'},kz:{sub:'Pro v1.3 — инженердің офлайн анықтамалығы',search:'Іздеу: vlan, arp, snr, /30, mac, d-link',home:'Басты'}};
-function mock(title,type){let ports='';for(let i=1;i<=12;i++){ports+=`<span class="port ${i==1?'t':i==2?'u':''}"></span>`}return `<div class="mock"><div class="mockTop"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mockTitle">${title}</span></div><div class="mockBody"><div class="side"><div>System</div><div class="sel">L2 Features</div><div>VLAN</div><div>FDB</div><div>Save</div></div><div class="screen">${type==='ip'?'<b>IP Interface</b><div class="field"></div><div class="field"></div><span class="save">Apply</span>':'<b>802.1Q VLAN</b><div class="portrow">'+ports+'</div><span class="save">Apply</span>'}</div></div></div>`}
-const cards=[['switches','Коммутаторы','SNR, Huawei, Eltex, D-Link, Zyxel, Linksys, Allied, Zelax','База'],['snr','SNR','S2995G-24FX / S2982G: VLAN, trunk, access, PVID','Приоритет'],['huawei','Huawei','S5700 / DSLAM: vlan batch, Vlanif, display','Команды'],['dlinkweb','D-Link Web + фото','VLAN, trunk, access, IP управления, save','Фото'],['iskratel','Iskratel DSLAM CLI','Консольные команды, порты, профили, линия','DSLAM'],['alarms','Аварии','Нет ARP, VLAN не проходит, MAC только uplink','Чек-листы'],['tools','Полезные функции','Памятки: VLAN путь, сохранение, тест после работ','Инструменты'],['calc','IP калькулятор','/30, /29, gateway, broadcast, host range','Инструмент'],['generator','Генератор','Быстрая сборка команд VLAN/IP/порт','Команды']];
+const ui={ru:{sub:'v1.4 — красивый офлайн справочник',search:'Поиск: vlan, d-link, iskratel, arp, /30',home:'Главная'},kz:{sub:'v1.4 — әдемі офлайн анықтамалық',search:'Іздеу: vlan, d-link, iskratel, arp, /30',home:'Басты'}};
+function mock(title,type){let ports='';for(let i=1;i<=12;i++){ports+=`<span class="port ${i==1?'t':i==2?'u':''}"></span>`}return `<div class="mock"><div class="mockTop"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mockTitle">${title}</span></div><div class="mockBody"><div class="side"><div>System</div><div class="sel">${type==='ip'?'L3/IP':'L2 VLAN'}</div><div>Ports</div><div>FDB</div><div>Save</div></div><div class="screen">${type==='ip'?'<b>IP Interface</b><div class="field"></div><div class="field"></div><div class="field"></div><span class="save">Apply</span>':'<b>802.1Q VLAN</b><div class="portrow">'+ports+'</div><span class="save">Apply</span>'}</div></div></div>`}
+const cards=[['snr','SNR','VLAN, trunk, access, PVID, IP управления','CLI'],['huawei','Huawei','S5700 / DSLAM: vlanif, display, route','CLI'],['dlinkweb','D-Link Web','VLAN, trunk, access, IP управления с фото-схемами','Фото'],['iskratel','Iskratel DSLAM','Полная настройка DSLAM через консоль','DSLAM'],['wizard','Мастер VLAN','Пошагово как открыть VLAN по всей цепочке','Новое'],['afterwork','Проверка после работ','Что проверить перед уходом с объекта','Важно'],['alarms','Аварии','Нет ARP, VLAN не проходит, MAC только uplink','SOS'],['calc','IP калькулятор','/30, /29, broadcast, gateway','IP'],['generator','Генератор','Быстро собрать команды','CMD']];
 const pages={
-switches:{title:'Коммутаторы и оборудование',desc:'Список оборудования из твоей практики.',items:[['SNR','SNR-S2995G-24FX, SNR-S2982G-24TE.'],['Huawei','Huawei S5700 и Huawei DSLAM.'],['D-Link','DGS-3620-28SC / DGS-3630-28SC: CLI + Web с визуальными подсказками.'],['Iskratel','DSLAM: консольные команды, порты, профили, линия.']]},
-snr:{title:'SNR — S2995G-24FX / S2982G',desc:'VLAN, access, trunk, PVID, IP управления, диагностика.',items:[['Создать VLAN',`configure terminal
-vlan 3573
-name CLIENT_3573
-exit
-write`],['Access порт',`configure terminal
+switches:{title:'Коммутаторы',desc:'Основные устройства в базе.',items:[['Список','SNR, Huawei, Eltex, D-Link, Zyxel, BDCOM, Iskratel, Allied, Linksys, Zelax.']]},
+snr:{title:'SNR',desc:'S2995G/S2982G.',items:[['Access VLAN',`configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/2
@@ -73,123 +80,186 @@ switchport mode access
 switchport access vlan 3573
 no shutdown
 exit
-write`],['Trunk порт',`configure terminal
+write`],['Trunk VLAN',`configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/25
 switchport mode trunk
 switchport trunk allowed vlan add 3573
-no shutdown
 exit
-write`],['IP управления',`configure terminal
-interface vlan 1706
-ip address 10.151.200.50 255.255.255.252
-no shutdown
-exit
-ip route 0.0.0.0 0.0.0.0 10.151.200.49
-write`],['Проверки',`show vlan
+write`],['Проверка',`show vlan
 show interface status
 show mac address-table
 show arp
 show running-config`]]},
-huawei:{title:'Huawei — S5700 / DSLAM',desc:'VRP команды.',items:[['VLAN + Access',`system-view
+huawei:{title:'Huawei',desc:'S5700 / DSLAM.',items:[['Access VLAN',`system-view
 vlan batch 3573
 interface GigabitEthernet0/0/2
 port link-type access
 port default vlan 3573
-quit
-save`],['Trunk',`system-view
-interface GigabitEthernet0/0/25
-port link-type trunk
-port trunk allow-pass vlan 3573
 quit
 save`],['Vlanif IP',`system-view
 interface Vlanif3573
 ip address 178.22.174.29 255.255.255.252
 quit
 ip route-static 0.0.0.0 0.0.0.0 178.22.174.30
-save`],['Проверки',`display vlan
+save`],['Проверка',`display vlan
 display interface brief
 display mac-address
-display arp
-display current-configuration`]]},
-dlinkweb:{title:'D-Link Web интерфейс: настройка коммутатора',desc:'Визуальная инструкция с псевдо-фото. Когда пришлёшь реальные скрины — заменим эти схемы на настоящие фото.',items:[
-['1. Вход в D-Link',`${mock('D-Link Login / Dashboard','vlan')}
-1. Открыть IP управления коммутатора.
-2. Ввести логин/пароль.
-3. Проверить модель и firmware: System → Device Information.
-4. Перед изменениями сфотографировать текущую VLAN таблицу.`],
-['2. Создать VLAN',`${mock('L2 Features → VLAN → 802.1Q VLAN','vlan')}
+display arp`]]},
+dlinkweb:{title:'D-Link Web: настройка с фото-схемами',desc:'Настройка DGS-3620/3630 через web. Настоящие фото добавим, когда пришлёшь скриншоты.',items:[
+['1. Вход и проверка модели',`${mock('D-Link Login / Dashboard','ip')}
+1. Открыть IP управления D-Link.
+2. Войти под рабочей учёткой.
+3. Проверить модель: System → Device Information.
+4. Перед настройкой сфотографировать VLAN и Port Settings.`],
+['2. Прописать IP управления',`${mock('Management IP / IP Interface','ip')}
+Вариант 1:
+Management → IP Interface.
+- VLAN: 1706
+- IP: 10.151.200.50
+- Mask: 255.255.255.252
+- Gateway: 10.151.200.49
+Apply → Save.
+
+Вариант 2:
+System → System IP Address → Static IP.
+После смены IP доступ может пропасть, заходить уже по новому IP.`],
+['3. Создать VLAN',`${mock('L2 Features → VLAN → 802.1Q VLAN','vlan')}
 1. L2 Features → VLAN → 802.1Q VLAN.
-2. Нажать Add/Create.
+2. Add/Create.
 3. VLAN ID: 3573.
-4. VLAN Name: CLIENT_3573.
-5. Нажать Apply.`],
-['3. Настроить Trunk/Uplink',`${mock('VLAN 3573 → Tagged uplink','vlan')}
+4. Name: CLIENT_3573.
+5. Apply.`],
+['4. Настроить uplink trunk',`${mock('VLAN 3573 → Tagged Uplink','vlan')}
 1. Открыть VLAN 3573.
 2. Uplink порт поставить Tagged.
-3. Остальные рабочие VLAN с uplink не удалять.
+3. Не удалять другие VLAN с uplink.
 4. Apply.
-5. Проверить, что uplink не стал Untagged случайно.`],
-['4. Настроить Access порт',`${mock('VLAN 3573 → Untagged client','vlan')}
+5. Проверить, что управление не пропало.`],
+['5. Настроить client access',`${mock('VLAN 3573 → Untagged Client','vlan')}
 1. В VLAN 3573 клиентский порт поставить Untagged.
-2. Перейти VLAN → PVID Settings.
-3. На клиентском порту поставить PVID 3573.
-4. Apply.
-5. Проверить MAC клиента.`],
-['5. Прописать IP управления',`${mock('L3 Features / IP Interface','ip')}
-Вариант A:
-1. Management → IP Interface.
-2. Выбрать Management VLAN, например 1706.
-3. IP Address: 10.151.200.50.
-4. Mask: 255.255.255.252.
-5. Default Gateway: 10.151.200.49.
-6. Apply → Save.
-
-Вариант B на некоторых D-Link:
-System → System IP Address → Static IP.`],
-['6. Проверить MAC/FDB',`${mock('L2 Features → FDB / MAC Table','vlan')}
-1. L2 Features → FDB / MAC Address Table.
+2. VLAN → PVID Settings.
+3. На клиентском порту PVID = 3573.
+4. Apply.`],
+['6. Проверить MAC/FDB',`${mock('FDB / MAC Address Table','vlan')}
+1. L2 Features → FDB.
 2. Найти MAC клиента.
-3. Если MAC только на uplink — проверить access порт, PVID, VLAN tagged/untagged.
-4. Если MAC не видно — проверить линк, кабель, порт, port security.`],
-['7. Сохранить конфигурацию',`${mock('Tools/System → Save Configuration','ip')}
-1. Tools → Save Configuration.
-2. Или System → Save.
-3. Убедиться, что появилось сообщение Success.
-4. Без Save настройки могут слететь после перезагрузки.`],
-['8. Быстрый чек после настройки',`Проверить:
-1. VLAN создан.
-2. Uplink tagged.
-3. Клиент untagged.
-4. PVID клиента правильный.
-5. MAC клиента виден.
-6. ARP до шлюза есть.
-7. Конфигурация сохранена.`]
+3. MAC должен быть на клиентском порту.
+4. Если MAC только на uplink — проверить access/PVID/trunk.`],
+['7. Сохранить конфигурацию',`${mock('Tools → Save Configuration','ip')}
+Tools/System → Save Configuration.
+Дождаться Success.
+Без сохранения после перезагрузки всё слетит.`]
 ]},
-iskratel:{title:'Iskratel DSLAM — консольные команды',desc:'Упор на консоль: платы, порты, профили, линия, VLAN/PVC.',items:[['Базовая проверка',`show version
-show system
+iskratel:{title:'Iskratel DSLAM: настройка через консоль',desc:'Не просто проверка, а полный порядок настройки порта/сервиса. Синтаксис может отличаться по модели — добавим точные команды по твоему скрину консоли.',items:[
+['0. Перед настройкой',`show version
+show running-config
 show board
 show slot
-show alarm
-show running-config`],['Проверка DSL порта',`show dsl port
+show alarm active
+show interface
+show vlan
+
+Сфотографировать текущую настройку порта и uplink.`],
+['1. Найти плату и порт',`show board
+show slot
+show dsl port
+show dsl port status
+
+Нужно определить:
+- номер slot/платы
+- номер DSL порта
+- состояние порта
+- есть ли alarm`],
+['2. Создать/проверить VLAN сервиса',`show vlan
+configure terminal
+vlan 3573
+name CLIENT_3573
+exit
+
+Проверить, что VLAN есть на uplink и на сервисе абонента.`],
+['3. Настроить uplink VLAN',`show interface uplink
+show vlan port
+configure terminal
+interface uplink 1
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+exit
+
+Важно: не удалить другие рабочие VLAN с uplink.`],
+['4. Назначить сервис на DSL порт',`show service
+show pvc
+configure terminal
+interface dsl 1/1/1
+service vlan 3573
+pvc 0/35 vlan 3573
+exit
+
+Если используется не PVC, а VLAN service — выбрать нужный режим по модели.`],
+['5. Назначить профиль скорости',`show dsl profile
+show line-profile
+configure terminal
+interface dsl 1/1/1
+line-profile PROFILE_NAME
+service-profile SERVICE_NAME
+exit
+
+Профиль должен соответствовать тарифу/линии.`],
+['6. Включить порт',`configure terminal
+interface dsl 1/1/1
+no shutdown
+exit
+
+Потом проверить:
 show dsl port status
 show dsl line
+show dsl statistics`],
+['7. Проверить линию',`show dsl line
 show dsl statistics
-show interface`],['VLAN/PVC сервис',`show vlan
-show pvc
+show counters
+show alarm
+
+Смотреть:
+- SNR Margin
+- Attenuation
+- CRC/FEC
+- attainable rate
+- actual rate`],
+['8. Проверить MAC/ARP',`show mac-address-table
+show arp
+show vlan
 show service
-show bridge
-show mac-address-table`],['Порядок диагностики','Плата → DSL порт → профиль → SNR/Attenuation/CRC → VLAN/PVC → uplink → MAC/ARP.']]},
-tools:{title:'Полезные функции',desc:'Быстрые правила.',items:[['Правило VLAN пути',`1. VLAN создан.
-2. Uplink tagged.
-3. Клиент access/untagged.
-4. PVID = VLAN клиента.
-5. MAC виден.
-6. ARP есть.`],['Перед работой',`1. Сфотографировать текущую настройку.
-2. Понять uplink.
-3. Не удалять чужие VLAN.
-4. После изменения сохранить конфиг.`]]},
+
+Если MAC нет — проверять порт, PVC/VLAN, uplink.
+Если MAC есть, ARP нет — проверять IP/шлюз/маршрут выше.`],
+['9. Сохранить конфигурацию',`write
+save
+copy running-config startup-config
+
+Какая команда сработает — зависит от модели/прошивки.`],
+['Типовая логика настройки','Плата → DSL порт → VLAN/PVC service → профиль скорости → uplink tagged → no shutdown → MAC/ARP → сохранить.']
+]},
+wizard:{title:'Мастер VLAN по объекту',desc:'Пошаговая схема для выезда.',items:[['Шаги',`1. Найти uplink порт.
+2. Проверить, где должен идти VLAN.
+3. Создать VLAN на каждом коммутаторе.
+4. На uplink добавить VLAN tagged.
+5. На клиентский порт поставить access/untagged.
+6. PVID клиента = VLAN.
+7. Проверить MAC.
+8. Проверить ARP.
+9. Ping gateway.
+10. Save config.`]]},
+afterwork:{title:'Проверка после работ',desc:'Перед уходом с объекта.',items:[['Чек-лист',`□ Линк поднят
+□ VLAN создан
+□ Uplink tagged
+□ Client access/untagged
+□ PVID правильный
+□ MAC клиента виден
+□ ARP есть
+□ Ping gateway есть
+□ Конфиг сохранён
+□ Управление коммутатора доступно`]]},
 alarms:{title:'Аварии',desc:'Чек-листы.',items:[['Нет ARP',`1. IP/маска/шлюз.
 2. VLAN создан.
 3. Access/untagged.
@@ -201,9 +271,10 @@ alarms:{title:'Аварии',desc:'Чек-листы.',items:[['Нет ARP',`1. 
 3. Client untagged.
 4. PVID.
 5. MAC.
-6. Save config.`],['MAC только uplink','Проверить access порт, PVID, port isolation, bridge/radio, loop/STP.']]}}
+6. Save config.`]]}
+};
 function setLang(l){lang=l;ruBtn.classList.toggle('active',l==='ru');kzBtn.classList.toggle('active',l==='kz');subtitle.textContent=ui[l].sub;search.placeholder=ui[l].search;navHome.textContent=ui[l].home}
-function renderHome(){homeCards.innerHTML='';cards.forEach(c=>{let d=document.createElement('div');d.className='card '+(['switches','alarms','calc','generator','dlinkweb','tools'].includes(c[0])?'full':'');d.onclick=()=>c[0]==='calc'?showCalc():c[0]==='generator'?showGen():openPage(c[0]);d.innerHTML=`<h2>${c[1]}</h2><p>${c[2]}</p><span class="badge">${c[3]}</span>`;homeCards.appendChild(d)})}
+function renderHome(){homeCards.innerHTML='';cards.forEach(c=>{let d=document.createElement('div');d.className='card '+(['dlinkweb','iskratel','wizard','afterwork','alarms'].includes(c[0])?'full':'');d.onclick=()=>c[0]==='calc'?showCalc():c[0]==='generator'?showGen():openPage(c[0]);d.innerHTML=`<h2>${c[1]}</h2><p>${c[2]}</p><span class="badge">${c[3]}</span>`;homeCards.appendChild(d)})}
 function activeNav(){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'))}
 function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
 function goHome(){show('home');activeNav();navHome.classList.add('active')}
