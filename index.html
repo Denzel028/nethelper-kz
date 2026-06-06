@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v3.6</title>
+<title>NetHelper KZ v3.6 Fixed</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -58,7 +58,7 @@ nav button{border:0;background:transparent;color:var(--muted);font-weight:900;fo
 <body>
 <div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div><div class="sRole">Инженер сети</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.6 — Инженер сети • PRO база</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.6 Fixed — Инженер сети • PRO</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: SNR, VLAN, ARP, /30, D-Link"></div>
 </header>
 <main>
@@ -72,9 +72,9 @@ nav button{border:0;background:transparent;color:var(--muted);font-weight:900;fo
 <button class="big" onclick="showObjects()"><div class="ico">🗂</div><div><h3>Мои объекты</h3><p>VLAN, IP, шлюзы, заметки по объектам</p></div></button>
 
 <button class="big" onclick="showReport()"><div class="ico">📄</div><div><h3>Отчёт после выезда</h3><p>Готовый текст отчёта для отправки</p></div></button>
-<button class="big" onclick="showReportHistory()"><div class="ico">📋</div><div><h3>История отчётов</h3><p>Сохранённые отчёты по выездам</p></div></button>
-<button class="big" onclick="showFavorites()"><div class="ico">⭐</div><div><h3>Избранные команды</h3><p>Свои команды всегда под рукой</p></div></button>
-<button class="big" onclick="showBackup()"><div class="ico">💾</div><div><h3>Backup / Restore</h3><p>Экспорт и восстановление базы</p></div></button>
+<button class="big" onclick="showHistory()"><div class="ico">📋</div><div><h3>История отчётов</h3><p>Все сохранённые отчёты</p></div></button>
+<button class="big" onclick="showFav()"><div class="ico">⭐</div><div><h3>Избранные команды</h3><p>Свои команды под рукой</p></div></button>
+<button class="big" onclick="showBackup()"><div class="ico">💾</div><div><h3>Backup / Restore</h3><p>Сохранить и восстановить базу</p></div></button>
 </div>
 <div id="searchResult" class="result"></div>
 </section>
@@ -83,19 +83,16 @@ nav button{border:0;background:transparent;color:var(--muted);font-weight:900;fo
 <section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии и мастер</h2><p>Выбери проблему — откроется подробный алгоритм проверки.</p></div><div class="grid" id="alarmGrid"></div></section>
 <section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы для работы в поле.</p></div><div class="grid" id="toolGrid"></div></section>
 <section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки для объекта.</p></div><div class="grid" id="refGrid"></div></section>
-<section id="objects" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🗂 Мои объекты</h2><p>Данные сохраняются в телефоне.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px">
-<input id="objPhoto" placeholder="Фото объекта / ссылка / описание фото" style="margin-top:8px">
-<textarea id="objMap" placeholder="Карта сети: Huawei → SNR → MikroTik → Клиенты"></textarea>
-<textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
+<section id="objects" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🗂 Мои объекты</h2><p>Данные сохраняются в телефоне.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
 
 <section id="report" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Заполни поля и скопируй отчёт. Имя сотрудника сохраняется в телефоне.</p></div><div class="item"><input id="repWorker" placeholder="Сотрудник / исполнитель" oninput="saveWorkerName()"><input id="repObj" placeholder="Объект" style="margin-top:8px"><input id="repEquip" placeholder="Оборудование" style="margin-top:8px"><input id="repWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="repResult" placeholder="Результат / проверка / что осталось"></textarea><button class="btn blue" onclick="makeReport()">Сформировать отчёт</button><pre id="reportOut"></pre><button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button></div></section>
 <section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
 
-<section id="reportHistory" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📋 История отчётов</h2><p>Отчёты сохраняются в телефоне после формирования.</p></div><div id="histList"></div></section>
+<section id="history" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📋 История отчётов</h2><p>Каждый сформированный отчёт сохраняется в телефоне.</p></div><div id="historyList"></div></section>
 
-<section id="favorites" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Добавь свои команды для быстрого копирования.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда / набор команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
+<section id="fav" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Добавь свои команды и копируй их одной кнопкой.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда или несколько команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
 
-<section id="backup" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Сохрани объекты, отчёты и избранные команды в один текстовый файл.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Здесь появится backup или вставь сюда backup для восстановления"></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
+<section id="backup" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Экспортирует объекты, отчёты, избранные команды и имя сотрудника.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Тут появится backup. Для восстановления вставь backup сюда."></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
 
 </main>
 <div class="bottomName">Orynbekov © NetHelper KZ</div>
@@ -310,33 +307,34 @@ function renderSwitches(){switchGrid.innerHTML='';Object.keys(vendors).forEach(k
 function openVendor(k){let v=vendors[k];show('vendor');let h=`<div class="titlebox"><h2>${v.name}</h2><p>${v.desc}</p></div>`;v.tasks.forEach((t,i)=>{h+=`<div class="item"><h3>${t[0]}</h3><pre id="cmd_${i}">${escapeHtml(t[1])}</pre><button class="copy" onclick="copyBlock('cmd_${i}')">Копировать</button></div>`});vendorBody.innerHTML=h}
 function renderCards(container,data,icon,back){container.innerHTML='';data.forEach((a,i)=>{let b=document.createElement('button');b.className='card full';b.onclick=()=>openArticle(`${icon} ${a[0]}`,a[1],back);b.innerHTML=`<h3>${a[0]}</h3><p>Открыть</p>`;container.appendChild(b)})}
 function openArticle(title,body,back){show('article');articleBack.setAttribute('onclick',back);articleBody.innerHTML=`<div class="titlebox"><h2>${title}</h2></div><div class="item"><pre>${escapeHtml(body)}</pre></div>`}
-function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openVlanGen()"><h3>Генератор VLAN PRO</h3><p>SNR / Huawei / Eltex</p></button><button class="card full" onclick="openMikroTikCalc()"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button><button class="card" onclick="openArticle('Консоль','9600\\n19200\\n38400\\n57600\\n115200\\n\\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\\n/29 = 255.255.255.248\\n/28 = 255.255.255.240\\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
+function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openVlanPro()"><h3>Генератор VLAN PRO</h3><p>SNR / Huawei / Eltex</p></button><button class="card full" onclick="openMikroTikSignal()"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button><button class="card" onclick="openArticle('Консоль','9600\n19200\n38400\n57600\n115200\n\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\n/29 = 255.255.255.248\n/28 = 255.255.255.240\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
 function openIP(){
 show('article');articleBack.setAttribute('onclick','showTools()');
-articleBody.innerHTML=`<div class="titlebox"><h2>🧮 IP калькулятор</h2><p>Введи IP: 178.22.174.28/30</p></div><div class="item"><input id="ipcalcIn" value="178.22.174.28/30" oninput="calcSmartIP()"><button class="copy" onclick="calcSmartIP()">Посчитать</button><div id="ipcalcOut" class="out"></div></div>`;
-calcSmartIP();
+articleBody.innerHTML=`<div class="titlebox"><h2>🧮 IP калькулятор</h2><p>Введи IP в формате 178.22.174.28/30 или 178.22.174.29/30.</p></div><div class="item"><input id="ipcalcIn" value="178.22.174.28/30" oninput="calcProIP()"><button class="copy" onclick="calcProIP()">Посчитать</button><div id="ipcalcOut" class="out"></div></div>`;
+calcProIP();
 }
 function openGen(){openArticle('Генератор команд', 'Используй раздел Коммутаторы → выбери SNR/Huawei/MikroTik → копируй готовые шаблоны.', 'showTools()')}
 function getObjs(){try{return JSON.parse(localStorage.getItem('nh_objs_v32')||'[]')}catch(e){return[]}}
-function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',e:objEquip.value||'',v:objVlan.value||'',photo:(document.getElementById('objPhoto')?objPhoto.value:''),map:(document.getElementById('objMap')?objMap.value:''),d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v32',JSON.stringify(arr));objName.value='';objEquip.value='';objVlan.value='';if(document.getElementById('objPhoto'))objPhoto.value='';if(document.getElementById('objMap'))objMap.value='';objNote.value='';renderObjects()}
+function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',e:objEquip.value||'',v:objVlan.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v32',JSON.stringify(arr));objName.value='';objEquip.value='';objVlan.value='';objNote.value='';renderObjects()}
 function delObj(i){let arr=getObjs();arr.splice(i,1);localStorage.setItem('nh_objs_v32',JSON.stringify(arr));renderObjects()}
-function renderObjects(){let arr=getObjs();objList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'
-Фото: '+(o.photo||'')+'
-Схема: '+(o.map||'')+'
-'+o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет объектов</p></div>'}
+function renderObjects(){let arr=getObjs();objList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'\\n'+o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет объектов</p></div>'}
 function loadWorkerName(){let w=localStorage.getItem('nh_worker_name')||'';if(document.getElementById('repWorker'))repWorker.value=w}
 function saveWorkerName(){localStorage.setItem('nh_worker_name',repWorker.value||'')}
 function makeReport(){
 let dt=new Date().toLocaleString();
 let worker=(repWorker.value||localStorage.getItem('nh_worker_name')||'').trim();
 if(worker)localStorage.setItem('nh_worker_name',worker);
-reportOut.textContent=`Отчёт по выезду
+let text=`Отчёт по выезду
 Дата: ${dt}
 Сотрудник: ${worker||'Не указано'}
 Объект: ${repObj.value||''}
 Оборудование: ${repEquip.value||''}
 Выполнено: ${repWork.value||''}
 Результат: ${repResult.value||''}`;
+reportOut.textContent=text;
+let arr=getReports();
+arr.unshift({time:dt,obj:repObj.value||'Объект',text:text});
+localStorage.setItem('nh_reports_fixed',JSON.stringify(arr));
 }
 
 function prefixMask(c){let mask=(0xffffffff<<(32-c))>>>0;return intToIp(mask)}
@@ -367,14 +365,28 @@ Gateway: ${longToIp(gateway)}</pre>
 }
 
 
-function prefixMask(c){let mask=(0xffffffff<<(32-c))>>>0;return longToIp(mask)}
-function ipLong(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
-function longToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
-function calcSmartIP(){let el=document.getElementById('ipcalcIn'),out=document.getElementById('ipcalcOut');if(!el||!out)return;let m=el.value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m){out.innerHTML='Формат: <b>178.22.174.28/30</b>';return}let c=+m[2],ip=ipLong(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0,first=c>=31?net:net+1,last=c>=31?b:b-1,device=ip===net?first:ip,gateway=(c===30?(device===first?last:first):last);out.innerHTML=`<div class="kv"><div>IP устройства<br><b>${longToIp(device)}/${c}</b></div><div>Маска<br><b>${longToIp(mask)}</b></div><div>Шлюз<br><b>${longToIp(gateway)}</b></div><div>Сеть<br><b>${longToIp(net)}</b></div><div>Broadcast<br><b>${longToIp(b)}</b></div><div>Рабочие IP<br><b>${longToIp(first)} - ${longToIp(last)}</b></div></div><pre>IP address: ${longToIp(device)}
-Mask: ${longToIp(mask)}
-Gateway: ${longToIp(gateway)}</pre>`}
-function openVlanGen(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>Генератор VLAN PRO</h2><p>Введи VLAN, порт и uplink.</p></div><div class="item"><div class="row"><input id="vgVlan" value="3573" oninput="vlanGen()"><input id="vgPort" value="1/0/2" oninput="vlanGen()"><input id="vgUp" value="1/0/25" oninput="vlanGen()"></div><button class="copy" onclick="vlanGen()">Сгенерировать</button><pre id="vlanOut"></pre><button class="copy" onclick="copyBlock('vlanOut')">Копировать</button></div>`;vlanGen()}
-function vlanGen(){let v=vgVlan.value||'3573',p=vgPort.value||'1/0/2',u=vgUp.value||'1/0/25';vlanOut.textContent=`SNR:
+function ipNum(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
+function numIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
+function calcProIP(){
+let el=document.getElementById('ipcalcIn'),out=document.getElementById('ipcalcOut'); if(!el||!out)return;
+let m=el.value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);
+if(!m){out.innerHTML='Формат: <b>178.22.174.28/30</b>';return}
+let parts=m[1].split('.').map(Number),c=+m[2];
+if(parts.some(x=>x<0||x>255)||c<1||c>32){out.innerHTML='Ошибка IP или маски';return}
+let ip=ipNum(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0;
+let first=c>=31?net:net+1,last=c>=31?b:b-1,device=ip===net?first:ip,gateway=(c===30?(device===first?last:first):last);
+out.innerHTML=`<div class="kv"><div>IP устройства<br><b>${numIp(device)}/${c}</b></div><div>Маска<br><b>${numIp(mask)}</b></div><div>Шлюз<br><b>${numIp(gateway)}</b></div><div>Сеть<br><b>${numIp(net)}</b></div><div>Broadcast<br><b>${numIp(b)}</b></div><div>Рабочие IP<br><b>${numIp(first)} - ${numIp(last)}</b></div></div><pre>IP address: ${numIp(device)}
+Mask: ${numIp(mask)}
+Gateway: ${numIp(gateway)}</pre>`;
+}
+function openVlanPro(){
+show('article');articleBack.setAttribute('onclick','showTools()');
+articleBody.innerHTML=`<div class="titlebox"><h2>Генератор VLAN PRO</h2><p>Введи VLAN, порт клиента и uplink.</p></div><div class="item"><div class="row"><input id="vpVlan" value="3573" oninput="vlanPro()"><input id="vpPort" value="1/0/2" oninput="vlanPro()"><input id="vpUp" value="1/0/25" oninput="vlanPro()"></div><button class="copy" onclick="vlanPro()">Сгенерировать</button><pre id="vlanProOut"></pre><button class="copy" onclick="copyBlock('vlanProOut')">Копировать</button></div>`;
+vlanPro();
+}
+function vlanPro(){
+let v=vpVlan.value||'3573',p=vpPort.value||'1/0/2',u=vpUp.value||'1/0/25';
+vlanProOut.textContent=`SNR:
 configure terminal
 vlan ${v}
 exit
@@ -413,21 +425,26 @@ interface gigabitethernet ${u}
 switchport mode trunk
 switchport trunk allowed vlan add ${v}
 exit
-copy running-config startup-config`}
-function openMikroTikCalc(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal</h2><p>Signal - Noise = SNR</p></div><div class="item"><div class="row"><input id="sig" value="-50" oninput="mtCalc()"><input id="noise" value="-117" oninput="mtCalc()"></div><button class="copy" onclick="mtCalc()">Посчитать</button><div id="mtOut" class="out"></div></div>`;mtCalc()}
-function mtCalc(){let s=Number(sig.value),n=Number(noise.value),snr=s-n,grade=snr>=40?'Отлично':snr>=25?'Нормально':snr>=15?'Слабо':'Плохо';mtOut.innerHTML=`SNR: <b>${snr} dB</b><br>Качество: <b>${grade}</b>`}
-function showReportHistory(){show('reportHistory');renderHistory()}
-function getReports(){try{return JSON.parse(localStorage.getItem('nh_reports')||'[]')}catch(e){return[]}}
-function renderHistory(){let arr=getReports();histList.innerHTML=arr.map((r,i)=>`<div class="item"><h3>${escapeHtml(r.obj||'Отчёт')}</h3><pre id="hist_${i}">${escapeHtml(r.text)}</pre><p class="note">${escapeHtml(r.time)}</p><button class="copy" onclick="copyBlock('hist_${i}')">Копировать</button><button class="btn red" onclick="delReport(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет отчётов</p></div>'}
-function delReport(i){let arr=getReports();arr.splice(i,1);localStorage.setItem('nh_reports',JSON.stringify(arr));renderHistory()}
-function showFavorites(){show('favorites');renderFavs()}
-function getFavs(){try{return JSON.parse(localStorage.getItem('nh_favs')||'[]')}catch(e){return[]}}
-function saveFav(){let arr=getFavs();arr.unshift({n:favName.value||'Команда',c:favCmd.value||''});localStorage.setItem('nh_favs',JSON.stringify(arr));favName.value='';favCmd.value='';renderFavs()}
-function delFav(i){let arr=getFavs();arr.splice(i,1);localStorage.setItem('nh_favs',JSON.stringify(arr));renderFavs()}
-function renderFavs(){let arr=getFavs();if(!arr.length)arr=[{n:'SNR базовые',c:'show vlan\\nshow interface status\\nshow mac address-table\\nshow arp'},{n:'Huawei базовые',c:'display vlan\\ndisplay interface brief\\ndisplay mac-address\\ndisplay arp'}];favList.innerHTML=arr.map((f,i)=>`<div class="item"><h3>${escapeHtml(f.n)}</h3><pre id="fav_${i}">${escapeHtml(f.c)}</pre><button class="copy" onclick="copyBlock('fav_${i}')">Копировать</button><button class="btn red" onclick="delFav(${i})">Удалить</button></div>`).join('')}
+copy running-config startup-config`;
+}
+function openMikroTikSignal(){
+show('article');articleBack.setAttribute('onclick','showTools()');
+articleBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal</h2><p>Signal - Noise = SNR</p></div><div class="item"><div class="row"><input id="mtSig" value="-50" oninput="mtSignalCalc()"><input id="mtNoise" value="-117" oninput="mtSignalCalc()"></div><button class="copy" onclick="mtSignalCalc()">Посчитать</button><div id="mtSignalOut" class="out"></div></div>`;
+mtSignalCalc();
+}
+function mtSignalCalc(){let s=Number(mtSig.value),n=Number(mtNoise.value),snr=s-n,grade=snr>=40?'Отлично':snr>=25?'Нормально':snr>=15?'Слабо':'Плохо';mtSignalOut.innerHTML=`SNR: <b>${snr} dB</b><br>Качество: <b>${grade}</b>`}
+function getReports(){try{return JSON.parse(localStorage.getItem('nh_reports_fixed')||'[]')}catch(e){return[]}}
+function showHistory(){show('history');renderHistory()}
+function renderHistory(){let arr=getReports();historyList.innerHTML=arr.map((r,i)=>`<div class="item"><h3>${escapeHtml(r.obj||'Отчёт')}</h3><pre id="hist_${i}">${escapeHtml(r.text)}</pre><p class="note">${escapeHtml(r.time)}</p><button class="copy" onclick="copyBlock('hist_${i}')">Копировать</button><button class="btn red" onclick="delHistory(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет отчётов</p></div>'}
+function delHistory(i){let arr=getReports();arr.splice(i,1);localStorage.setItem('nh_reports_fixed',JSON.stringify(arr));renderHistory()}
+function getFavs(){try{return JSON.parse(localStorage.getItem('nh_favs_fixed')||'[]')}catch(e){return[]}}
+function showFav(){show('fav');renderFav()}
+function saveFav(){let arr=getFavs();arr.unshift({n:favName.value||'Команда',c:favCmd.value||''});localStorage.setItem('nh_favs_fixed',JSON.stringify(arr));favName.value='';favCmd.value='';renderFav()}
+function delFav(i){let arr=getFavs();arr.splice(i,1);localStorage.setItem('nh_favs_fixed',JSON.stringify(arr));renderFav()}
+function renderFav(){let arr=getFavs();if(!arr.length)arr=[{n:'SNR базовые',c:'show vlan\\nshow interface status\\nshow mac address-table\\nshow arp'},{n:'Huawei базовые',c:'display vlan\\ndisplay interface brief\\ndisplay mac-address\\ndisplay arp'}];favList.innerHTML=arr.map((f,i)=>`<div class="item"><h3>${escapeHtml(f.n)}</h3><pre id="fav_${i}">${escapeHtml(f.c)}</pre><button class="copy" onclick="copyBlock('fav_${i}')">Копировать</button><button class="btn red" onclick="delFav(${i})">Удалить</button></div>`).join('')}
 function showBackup(){show('backup')}
-function makeBackup(){let data={objects:localStorage.getItem('nh_objs_v32')||'[]',reports:localStorage.getItem('nh_reports')||'[]',favs:localStorage.getItem('nh_favs')||'[]',worker:localStorage.getItem('nh_worker_name')||''};backupText.value=JSON.stringify(data,null,2)}
-function restoreBackup(){try{let d=JSON.parse(backupText.value);if(d.objects)localStorage.setItem('nh_objs_v32',d.objects);if(d.reports)localStorage.setItem('nh_reports',d.reports);if(d.favs)localStorage.setItem('nh_favs',d.favs);if(d.worker)localStorage.setItem('nh_worker_name',d.worker);alert('Backup восстановлен')}catch(e){alert('Ошибка backup')}}
+function makeBackup(){let data={objects:localStorage.getItem('nh_objs_v32')||'[]',reports:localStorage.getItem('nh_reports_fixed')||'[]',favs:localStorage.getItem('nh_favs_fixed')||'[]',worker:localStorage.getItem('nh_worker_name')||''};backupText.value=JSON.stringify(data,null,2)}
+function restoreBackup(){try{let d=JSON.parse(backupText.value);if(d.objects)localStorage.setItem('nh_objs_v32',d.objects);if(d.reports)localStorage.setItem('nh_reports_fixed',d.reports);if(d.favs)localStorage.setItem('nh_favs_fixed',d.favs);if(d.worker)localStorage.setItem('nh_worker_name',d.worker);alert('Backup восстановлен')}catch(e){alert('Ошибка backup')}}
 
 function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
 search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({id:k,title:v.name})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="openVendor('${h.id}')">→ ${h.title}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
