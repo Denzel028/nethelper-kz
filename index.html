@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#06111f"><title>NetHelper KZ v1.8</title>
+<meta name="theme-color" content="#06111f"><title>NetHelper KZ v2.0</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -23,7 +23,7 @@ main{padding:14px 14px 120px}.section{display:none}.section.active{display:block
 </head>
 <body>
 <div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div></div>
-<header><div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub" id="subtitle">v1.8 — полевой инженер Pro</div></div></div><div class="lang"><button id="ruBtn" class="active" onclick="setLang('ru')">RU</button><button id="kzBtn" onclick="setLang('kz')">KZ</button></div></div><div class="search"><input id="search" placeholder="Поиск: vlan, авария, d-link, объект, sfp"></div></header>
+<header><div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub" id="subtitle">v2.0 — полевой инженер Pro</div></div></div><div class="lang"><button id="ruBtn" class="active" onclick="setLang('ru')">RU</button><button id="kzBtn" onclick="setLang('kz')">KZ</button></div></div><div class="search"><input id="search" placeholder="Поиск: vlan, авария, d-link, объект, sfp"></div></header>
 <main>
 <section id="home" class="section active">
 <div class="hero"><h2 id="heroTitle">Полевой центр инженера</h2><p id="heroDesc">Команды, диагностика, галерея оборудования, аварийный чемоданчик и заметки по объектам — всё в одном офлайн-приложении.</p><div class="status"><div class="stat"><b>25</b><span>разделов</span></div><div class="stat"><b>140+</b><span>шаблонов</span></div><div class="stat"><b>OFF</b><span>offline</span></div></div></div>
@@ -37,6 +37,11 @@ main{padding:14px 14px 120px}.section{display:none}.section.active{display:block
 
 <section id="worklogSec" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>Журнал работ</h2><p>Записывай, что сделал на объекте. Данные сохраняются в телефоне.</p></div><div class="item"><input id="logObj" placeholder="Объект"><input id="logWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="logNote" placeholder="Подробности / VLAN / IP / результат"></textarea><button class="btn blue" onclick="saveLog()">Сохранить запись</button></div><div id="logList"></div></section>
 <section id="favSec" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>Избранные команды</h2><p>Быстрые команды, которые чаще всего нужны в поле.</p></div><div id="favList"></div></section>
+
+
+<div class="item"><h3>⚙️ Настройка оборудования</h3><p>SNR • Huawei • D-Link • Zyxel • Eltex • Allied • Linksys • Zelax</p></div>
+<div class="item"><h3>📡 GPON / DSL</h3><p>BDCOM OLT • Iskratel DSLAM • Huawei DSLAM</p></div>
+<div class="item"><h3>💾 Backup / Restore</h3><p>Раздел подготовлен для следующих обновлений.</p></div>
 
 </main>
 <div class="footerName">Orynbekov © NetHelper KZ</div>
