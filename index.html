@@ -1,45 +1,422 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NetHelper KZ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08111f">
+<title>NetHelper KZ Pro</title>
 <style>
-body{
-background:#08111f;
-color:white;
-font-family:Arial;
-padding:20px;
-}
-.card{
-background:#16233b;
-padding:15px;
-margin:10px 0;
-border-radius:15px;
-}
-h1{
-color:#67d3ff;
-}
+:root{--bg:#08111f;--panel:#101b2f;--panel2:#16233b;--line:#2b3d61;--text:#eef6ff;--muted:#aab8cf;--blue:#67d3ff;--green:#72df99;--yellow:#ffd76b;--red:#ff7e7e;--shadow:0 20px 50px rgba(0,0,0,.28)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{position:sticky;top:0;z-index:20;background:rgba(8,17,31,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px 14px 12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{margin:0;color:var(--blue);font-size:31px;line-height:1}
+.sub{color:var(--muted);font-size:13px;margin-top:6px}
+.lang{display:flex;gap:6px}.lang button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:14px;padding:10px 12px;font-weight:900}.lang button.active{background:var(--blue);color:#07101f}
+.search{margin-top:12px}input,select,textarea{width:100%;border:1px solid var(--line);background:#07101f;color:var(--text);padding:14px 15px;border-radius:16px;font-size:16px;outline:none}
+main{padding:14px 14px 98px}.section{display:none}.section.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:16px;min-height:112px;box-shadow:var(--shadow)}.card:active{transform:scale(.99)}
+.card h2,.card h3{margin:0 0 8px;font-size:22px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.36}.full{grid-column:1/-1}
+.badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;background:#0b2c40;color:#90e6ff;font-size:12px;font-weight:900}
+.back{margin:2px 0 12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:12px 14px;border-radius:16px;font-weight:900}
+.titlebox{background:linear-gradient(135deg,#11213b,#0e1728);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px}.titlebox h2{margin:0 0 6px;font-size:26px}.titlebox p{margin:0;color:var(--muted);line-height:1.4}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0}.item h3{margin:0 0 8px;font-size:20px}.item p,.item li{color:var(--muted);line-height:1.55}
+pre{white-space:pre-wrap;background:#030913;border:1px solid var(--line);border-radius:15px;padding:13px;overflow:auto;color:#dff3ff;font-size:13px;line-height:1.45}
+.copy{border:0;background:var(--green);color:#06101d;border-radius:14px;padding:10px 12px;font-weight:900;margin-top:8px}.yellow{background:rgba(255,215,107,.1);border-color:#735f25}.red{background:rgba(255,126,126,.08);border-color:#6b3030}
+.out{background:#07101f;border:1px solid var(--line);border-radius:15px;padding:12px;line-height:1.65;color:var(--muted);margin-top:10px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:8px;margin-bottom:10px}.tabs button{white-space:nowrap;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:999px;padding:10px 13px;font-weight:900}.tabs button.active{background:var(--blue);color:#07101f}
+.result{display:none}.result.active{display:block}
+.small{font-size:12px;color:var(--muted)}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,17,31,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:30}
+nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.kv{grid-template-columns:1fr}h1{font-size:28px}}
 </style>
 </head>
 <body>
-
-<h1>NetHelper KZ</h1>
-
-<div class="card">
-<h2>SNR</h2>
-<p>Раздел готовится</p>
+<header>
+<div class="top">
+<div><h1>NetHelper KZ</h1><div class="sub" id="subtitle">Pro v1.0 — офлайн справочник инженера</div></div>
+<div class="lang"><button id="ruBtn" class="active" onclick="setLang('ru')">RU</button><button id="kzBtn" onclick="setLang('kz')">KZ</button></div>
 </div>
+<div class="search"><input id="search" placeholder="Поиск: vlan, arp, snr, /30, mac, pvid"></div>
+</header>
+<main>
+<section id="home" class="section active">
+<div class="grid" id="homeCards"></div>
+<div id="searchResult" class="result"></div>
+</section>
+<section id="page" class="section"><button class="back" onclick="goHome()">← Назад</button><div id="pageContent"></div></section>
+<section id="calc" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>IP калькулятор</h2><p>Подходит для /30, /29, /28, /24. Введи адрес в формате 178.22.174.28/30.</p></div><div class="item"><input id="cidr" value="178.22.174.28/30" oninput="calcIP()"><button class="copy" onclick="calcIP()">Посчитать</button><div id="calcOut" class="out"></div></div></section>
+<section id="gen" class="section"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>Генератор команд</h2><p>Выбери оборудование, задачу, VLAN и порт. Команды появятся сразу.</p></div><div class="item"><div class="row"><select id="gVendor" onchange="genCmd()"><option>SNR</option><option>Huawei</option><option>Eltex</option></select><select id="gTask" onchange="genCmd()"><option value="access">Access VLAN</option><option value="trunk">Trunk VLAN</option><option value="mgmt">IP управления</option><option value="check">Проверка</option></select><input id="gVlan" value="3573" oninput="genCmd()" placeholder="VLAN"><input id="gPort" value="1/0/2" oninput="genCmd()" placeholder="Порт"><input id="gUplink" value="1/0/25" oninput="genCmd()" placeholder="Uplink"><input id="gIp" value="178.22.174.29/30" oninput="genCmd()" placeholder="IP/CIDR"></div><pre id="genOut"></pre><button class="copy" onclick="copyBlock('genOut')">Копировать</button></div></section>
+</main>
+<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="openPage('switches')">Коммутаторы</button><button onclick="openPage('alarms')">Аварии</button><button onclick="showCalc()">IP</button><button onclick="showGen()">Генератор</button></nav>
 
-<div class="card">
-<h2>Huawei</h2>
-<p>Раздел готовится</p>
-</div>
+<script>
+let lang='ru';
+const ui={ru:{sub:'Pro v1.0 — офлайн справочник инженера',search:'Поиск: vlan, arp, snr, /30, mac, pvid',home:'Главная'},kz:{sub:'Pro v1.0 — инженердің офлайн анықтамалығы',search:'Іздеу: vlan, arp, snr, /30, mac, pvid',home:'Басты'}};
+const cards=[
+['switches','Коммутаторы','SNR, Huawei, Eltex, D-Link, Zyxel, Linksys, Allied, Zelax','База'],
+['snr','SNR','S2995G-24FX / S2982G: VLAN, trunk, access, PVID','Приоритет'],
+['huawei','Huawei','S5700 / DSLAM: vlan batch, Vlanif, display','Команды'],
+['eltex','Eltex','MES / LTP-16N: VLAN, trunk, management, OLT','Провайдер'],
+['dlink','D-Link','DGS-3620/3630: VLAN, ports, FDB/MAC','Switch'],
+['zyxel','Zyxel','XGS3700: Tagged, Untagged, Forbidden, PVID','Web'],
+['bdcom','BDCOM','OLT / ONU: PON, регистрация, VLAN, MAC','OLT'],
+['iskratel','Iskratel','DSLAM: платы, порты, линия, профиль','DSLAM'],
+['alarms','Аварии','Нет ARP, VLAN не проходит, MAC только uplink','Чек-листы'],
+['optics','Оптика/консоль','BiDi, SFP, консольные скорости, кабели','Поле'],
+['calc','IP калькулятор','/30, /29, gateway, broadcast, host range','Инструмент'],
+['generator','Генератор','Быстрая сборка команд VLAN/IP/порт','Команды']
+];
+const pages={
+switches:{title:'Коммутаторы и оборудование',desc:'Список оборудования из твоей практики. Открывай нужный раздел и копируй команды.',items:[
+['SNR','SNR-S2995G-24FX, SNR-S2982G-24TE: основной раздел для VLAN, trunk, access, management IP.'],
+['Huawei','Huawei S5700 и Huawei DSLAM: display команды, vlan batch, Vlanif, route-static.'],
+['Eltex','Eltex MES и LTP-16N: коммутаторы и OLT.'],
+['D-Link','DGS-3620-28SC / DGS-3630-28SC: VLAN, FDB, ports.'],
+['Zyxel','XGS3700-48HP и 8-port модели: tagged/untagged/PVID.'],
+['BDCOM','OLT/ONU: регистрация ONU, PON, VLAN, MAC.'],
+['Iskratel','DSLAM: порты, платы, профили, линия.'],
+['Linksys / Allied / Zelax','Базовая логика: VLAN, port status, MAC, save config, консоль.']
+]},
+snr:{title:'SNR — S2995G-24FX / S2982G',desc:'VLAN, access, trunk, PVID, IP управления, диагностика.',items:[
+['Создать VLAN',`configure terminal
+vlan 3573
+name CLIENT_3573
+exit
+write`],
+['Удалить VLAN',`configure terminal
+no vlan 3573
+exit
+write`],
+['Access порт',`configure terminal
+vlan 3573
+exit
+interface ethernet 1/0/2
+switchport mode access
+switchport access vlan 3573
+no shutdown
+exit
+write`],
+['Trunk порт / добавить VLAN',`configure terminal
+vlan 3573
+exit
+interface ethernet 1/0/25
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+no shutdown
+exit
+write`],
+['Hybrid/PVID',`configure terminal
+interface ethernet 1/0/2
+switchport mode hybrid
+switchport hybrid allowed vlan add 3573 untagged
+switchport hybrid native vlan 3573
+exit
+write`],
+['IP управления VLAN 1706',`configure terminal
+interface vlan 1706
+ip address 10.151.200.50 255.255.255.252
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.151.200.49
+write`],
+['Открыть/закрыть порт',`configure terminal
+interface ethernet 1/0/2
+no shutdown
+exit
+write
 
-<div class="card">
-<h2>Аварии</h2>
-<p>Нет ARP, VLAN не проходит</p>
-</div>
+configure terminal
+interface ethernet 1/0/2
+shutdown
+exit
+write`],
+['Скорость auto',`configure terminal
+interface ethernet 1/0/2
+speed auto
+duplex auto
+exit
+write`],
+['Проверки',`show vlan
+show interface status
+show interface ethernet 1/0/2
+show running-config interface ethernet 1/0/2
+show mac address-table
+show arp
+show ip interface brief
+show running-config`],
+['Сброс порта',`configure terminal
+default interface ethernet 1/0/2
+interface ethernet 1/0/2
+no shutdown
+exit
+write`]
+]},
+huawei:{title:'Huawei — S5700 / DSLAM',desc:'VRP команды: VLAN, access, trunk, Vlanif, route-static, display.',items:[
+['Создать VLAN',`system-view
+vlan batch 3573
+quit
+save`],
+['Access порт',`system-view
+vlan batch 3573
+interface GigabitEthernet0/0/2
+port link-type access
+port default vlan 3573
+quit
+save`],
+['Trunk порт',`system-view
+vlan batch 3573
+interface GigabitEthernet0/0/25
+port link-type trunk
+port trunk allow-pass vlan 3573
+quit
+save`],
+['Добавить VLAN в существующий trunk',`system-view
+interface GigabitEthernet0/0/25
+port trunk allow-pass vlan 3573
+quit
+save`],
+['IP на Vlanif',`system-view
+interface Vlanif3573
+ip address 178.22.174.29 255.255.255.252
+quit
+ip route-static 0.0.0.0 0.0.0.0 178.22.174.30
+save`],
+['Проверки',`display vlan
+display interface brief
+display current-configuration interface GigabitEthernet0/0/2
+display mac-address
+display arp
+display ip routing-table
+display current-configuration`],
+['Открыть/закрыть порт',`system-view
+interface GigabitEthernet0/0/2
+undo shutdown
+quit
+save
 
+system-view
+interface GigabitEthernet0/0/2
+shutdown
+quit
+save`],
+['DSLAM Huawei: платы/скорость',`display board
+display version
+display interface
+display current-configuration
+display alarm active
+display cpu-usage
+display memory-usage`]
+]},
+eltex:{title:'Eltex — MES / LTP-16N',desc:'MES VLAN/trunk/access и базовая диагностика OLT LTP.',items:[
+['MES Access VLAN',`configure
+vlan 3573
+exit
+interface gigabitethernet 1/0/2
+switchport mode access
+switchport access vlan 3573
+exit
+copy running-config startup-config`],
+['MES Trunk',`configure
+vlan 3573
+exit
+interface gigabitethernet 1/0/25
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+exit
+copy running-config startup-config`],
+['MES Проверки',`show vlan
+show interfaces status
+show mac address-table
+show arp
+show running-config`],
+['LTP-16N Проверки',`show interface
+show configuration
+show mac
+show vlan
+show pon
+show onu
+show alarms`]
+]},
+dlink:{title:'D-Link — DGS-3620/3630',desc:'Проверка VLAN, портов и MAC/FDB.',items:[
+['Проверка',`show vlan
+show ports
+show fdb
+show config current_config`],
+['Порядок VLAN','Создать VLAN → uplink tagged → клиент untagged → PVID клиента → проверить FDB/MAC → сохранить конфиг.'],
+['Если не пускает под admin','Проверить RADIUS/TACACS, локального пользователя, уровень прав, firmware и консольный доступ.']
+]},
+zyxel:{title:'Zyxel — XGS3700 / 8-port',desc:'Web-логика: Fixed/Forbidden/Untagged/Tagged и PVID.',items:[
+['Web VLAN логика',`VLAN → Static VLAN:
+- Uplink: Fixed / Tagged
+- Клиент: Fixed / Untagged
+- Лишние порты: Forbidden или Normal
+
+VLAN Port Setting:
+- PVID клиентского порта = нужный VLAN`],
+['CLI Проверки',`show vlan
+show interfaces status
+show mac address-table
+show running-config`],
+['Если команды не работают','Часть Zyxel smart/web моделей имеет урезанный CLI. Настраивай через Web: VLAN table + PVID.']
+]},
+bdcom:{title:'BDCOM — OLT/ONU',desc:'ONU, PON, MAC, VLAN и диагностика регистрации.',items:[
+['Проверка ONU',`show onu list
+show pon onu-information
+show interface epon 0/1
+show running-config
+show mac address-table`],
+['ONU offline','Проверить оптический уровень, PON порт, серийник ONU, профиль, VLAN сервиса, uplink, MAC/ARP выше по сети.'],
+['Скорость падает через OLT','Проверить профиль ONU, speed/duplex uplink, ошибки портов, bandwidth/profile, сравнить тест напрямую и через OLT.']
+]},
+iskratel:{title:'Iskratel — DSLAM',desc:'Порты, платы, профили линии и диагностика DSL.',items:[
+['Порядок диагностики DSL','Плата → порт абонента → профиль скорости → состояние линии → CRC/ошибки → VLAN/PVC → uplink.'],
+['Модем не поднимается','Проверить пару, порт DSLAM, профиль, VPI/VCI или VLAN, питание, сплиттер, линию.']
+]},
+optics:{title:'Оптика и консоль',desc:'Полевая шпаргалка по SFP, BiDi, консольным скоростям.',items:[
+['BiDi SFP','BiDi работает парой: один модуль TX 1310/RX 1550, второй наоборот TX 1550/RX 1310. Цвет не всегда стандарт, смотри наклейку TX/RX.'],
+['Если линк не поднялся','Проверить пару TX/RX, тип волокна, скорость SFP, чистоту коннектора, мощность, порт shutdown/no shutdown, совместимость модуля.'],
+['Консольные скорости','Пробовать: 9600, 19200, 38400, 57600, 115200. Чаще всего у OLT/коммутаторов бывает 9600 или 115200.'],
+['PuTTY параметры','Serial → COMx → Speed 9600/115200 → Data bits 8 → Stop bits 1 → Parity None → Flow control None.']
+]},
+alarms:{title:'Аварии — чек-листы',desc:'Типовые проблемы: ARP, VLAN, MAC, порт, скорость, управление.',items:[
+['Нет ARP',`1. Проверить IP/маску/шлюз.
+2. Проверить, создан ли VLAN.
+3. Проверить access/untagged порт клиента.
+4. Проверить trunk/tagged на uplink.
+5. Проверить PVID.
+6. Проверить MAC таблицу.
+7. Проверить port-security/protection.
+8. Проверить ошибку в /30 или /29.`],
+['VLAN не проходит',`1. VLAN создан на каждом коммутаторе по пути.
+2. На uplink VLAN tagged.
+3. На клиентском порту VLAN access/untagged.
+4. PVID совпадает.
+5. MAC клиента виден на нужном порту.
+6. Проверить native VLAN/hybrid.
+7. Сохранить конфиг.`],
+['Неопознанная сеть Windows',`1. Проверить линк.
+2. DHCP или static IP.
+3. Проверить gateway.
+4. Проверить VLAN/PVID.
+5. Проверить ARP до шлюза.
+6. Проверить MAC клиента.
+7. Проверить кабель/патч-панель/радиомост.`],
+['MAC только на uplink',`1. Проверить access порт клиента.
+2. Проверить PVID.
+3. Проверить port isolation/protection.
+4. Проверить bridge/radio.
+5. Проверить loop/STP.
+6. Проверить broadcast/ARP.`],
+['Линк есть, трафика нет',`1. VLAN membership.
+2. Tagged/untagged.
+3. PVID.
+4. MAC learning.
+5. CRC/FCS ошибки.
+6. Speed/duplex.
+7. ACL/security/protection.`],
+['Скорость 100 вместо 1000',`1. Кабель 8 жил.
+2. Обжим.
+3. Auto-negotiation.
+4. Не стоит ли force 100.
+5. SFP/медиаконвертер.
+6. CRC/FCS ошибки.`],
+['Нет доступа к управлению',`1. Management VLAN.
+2. IP управления.
+3. Default gateway/route.
+4. Management VLAN на uplink.
+5. ACL.
+6. PVID/порт не поменялся.
+7. Пробовать из той же подсети.`]
+]}
+};
+function setLang(l){lang=l;ruBtn.classList.toggle('active',l==='ru');kzBtn.classList.toggle('active',l==='kz');subtitle.textContent=ui[l].sub;search.placeholder=ui[l].search;navHome.textContent=ui[l].home}
+function renderHome(){homeCards.innerHTML='';cards.forEach(c=>{let d=document.createElement('div');d.className='card '+(['switches','alarms','calc','generator'].includes(c[0])?'full':'');d.onclick=()=>c[0]==='calc'?showCalc():c[0]==='generator'?showGen():openPage(c[0]);d.innerHTML=`<h2>${c[1]}</h2><p>${c[2]}</p><span class="badge">${c[3]}</span>`;homeCards.appendChild(d)})}
+function activeNav(){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'))}
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+function goHome(){show('home');activeNav();navHome.classList.add('active')}
+function showCalc(){show('calc');activeNav();calcIP()}
+function showGen(){show('gen');activeNav();genCmd()}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function openPage(id){let p=pages[id];if(!p)return;show('page');activeNav();let h=`<div class="titlebox"><h2>${p.title}</h2><p>${p.desc}</p></div>`;p.items.forEach((it,i)=>{h+=`<div class="item"><h3>${it[0]}</h3><pre id="code_${i}">${escapeHtml(it[1])}</pre><button class="copy" onclick="copyBlock('code_${i}')">Копировать</button></div>`});pageContent.innerHTML=h}
+function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
+function ipToInt(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
+function intToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
+function calcIP(){let v=cidr.value.trim(),m=v.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m){calcOut.innerHTML='Формат: <b>178.22.174.28/30</b>';return}let parts=m[1].split('.').map(Number);if(parts.some(x=>x<0||x>255)){calcOut.innerHTML='Ошибка IP';return}let c=+m[2];if(c<1||c>32){calcOut.innerHTML='CIDR 1-32';return}let ip=ipToInt(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0,first=c>=31?net:net+1,last=c>=31?b:b-1,hosts=c>=31?Math.pow(2,32-c):Math.max(0,Math.pow(2,32-c)-2);calcOut.innerHTML=`<div class="kv"><div>Сеть<br><b>${intToIp(net)}</b></div><div>Маска<br><b>${intToIp(mask)}</b></div><div>Первый IP<br><b>${intToIp(first)}</b></div><div>Последний IP<br><b>${intToIp(last)}</b></div><div>Broadcast<br><b>${intToIp(b)}</b></div><div>Host count<br><b>${hosts}</b></div></div><p>Для /30 часто: <b>${intToIp(first)}</b> устройство, <b>${intToIp(last)}</b> шлюз.</p>`}
+function maskFromCidr(s){let m=s.match(/\/(\d+)/);if(!m)return '255.255.255.252';let c=+m[1],mask=(0xffffffff<<(32-c))>>>0;return intToIp(mask)}
+function ipOnly(s){return s.split('/')[0]}
+function genCmd(){let v=gVendor.value,t=gTask.value,vl=gVlan.value||'3573',p=gPort.value||'1/0/2',u=gUplink.value||'1/0/25',ip=gIp.value||'178.22.174.29/30',mask=maskFromCidr(ip);let port=v==='Huawei'?`GigabitEthernet0/0/${p.split('/').pop()}`:v==='Eltex'?`gigabitethernet ${p}`:`ethernet ${p}`;let upl=v==='Huawei'?`GigabitEthernet0/0/${u.split('/').pop()}`:v==='Eltex'?`gigabitethernet ${u}`:`ethernet ${u}`;let cmd='';if(v==='SNR'){if(t==='access')cmd=`configure terminal
+vlan ${vl}
+exit
+interface ${port}
+switchport mode access
+switchport access vlan ${vl}
+no shutdown
+exit
+write`;if(t==='trunk')cmd=`configure terminal
+vlan ${vl}
+exit
+interface ${upl}
+switchport mode trunk
+switchport trunk allowed vlan add ${vl}
+no shutdown
+exit
+write`;if(t==='mgmt')cmd=`configure terminal
+interface vlan ${vl}
+ip address ${ipOnly(ip)} ${mask}
+no shutdown
+exit
+write`;if(t==='check')cmd=`show vlan
+show interface status
+show mac address-table
+show arp`;}
+if(v==='Huawei'){if(t==='access')cmd=`system-view
+vlan batch ${vl}
+interface ${port}
+port link-type access
+port default vlan ${vl}
+quit
+save`;if(t==='trunk')cmd=`system-view
+vlan batch ${vl}
+interface ${upl}
+port link-type trunk
+port trunk allow-pass vlan ${vl}
+quit
+save`;if(t==='mgmt')cmd=`system-view
+interface Vlanif${vl}
+ip address ${ipOnly(ip)} ${mask}
+quit
+save`;if(t==='check')cmd=`display vlan
+display interface brief
+display mac-address
+display arp`;}
+if(v==='Eltex'){if(t==='access')cmd=`configure
+vlan ${vl}
+exit
+interface ${port}
+switchport mode access
+switchport access vlan ${vl}
+exit
+copy running-config startup-config`;if(t==='trunk')cmd=`configure
+vlan ${vl}
+exit
+interface ${upl}
+switchport mode trunk
+switchport trunk allowed vlan add ${vl}
+exit
+copy running-config startup-config`;if(t==='mgmt')cmd=`configure
+interface vlan ${vl}
+ip address ${ipOnly(ip)} ${mask}
+exit
+copy running-config startup-config`;if(t==='check')cmd=`show vlan
+show interfaces status
+show mac address-table
+show arp`;}
+genOut.textContent=cmd}
+search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(pages).forEach(k=>{let p=pages[k],txt=(p.title+' '+p.desc+' '+p.items.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push(k)});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="openPage('${h}')">→ ${pages[h].title}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`});
+renderHome();calcIP();genCmd();
+</script>
 </body>
 </html>
