@@ -4,29 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v3.1</title>
+<title>NetHelper KZ v3.2</title>
 <style>
-:root{
-  --bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;
-  --text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;
-  --orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)
-}
+:root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:
-radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),
-radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),
-linear-gradient(180deg,#071426,#050b13)}
-#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#163a63,#06111f 68%);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .7s ease 1.2s forwards}
-.sLogo{width:122px;height:122px;border-radius:36px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-size:43px;font-weight:1000;box-shadow:0 0 60px rgba(102,214,255,.45);animation:pulse 1.2s infinite}
-.sTitle{font-size:29px;font-weight:1000;color:var(--blue);margin-top:18px}.sName{color:var(--muted);letter-spacing:1px;margin-top:7px}
+html,body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),linear-gradient(180deg,#071426,#050b13)}
+#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#163a63,#06111f 68%);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:hide .6s ease 1.1s forwards}
+.sLogo{width:118px;height:118px;border-radius:34px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-size:42px;font-weight:1000;box-shadow:0 0 55px rgba(102,214,255,.45);animation:pulse 1.2s infinite}
+.sTitle{font-size:28px;font-weight:1000;color:var(--blue);margin-top:18px}.sName{color:var(--muted);letter-spacing:1px;margin-top:7px}
 @keyframes pulse{50%{transform:scale(1.08)}}@keyframes hide{to{opacity:0;visibility:hidden}}
 header{position:sticky;top:0;z-index:20;padding:14px;background:rgba(6,17,31,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:12px}
-.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px;box-shadow:0 0 24px rgba(102,214,255,.25)}
+.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px}
 h1{font-size:27px;color:var(--blue);margin:0}.sub{font-size:12px;color:var(--muted);margin-top:5px}
 .lang button{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:9px 11px;font-weight:900}.lang .active{background:var(--blue);color:#06111f}
-.search{margin-top:12px}input,select,textarea{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px;outline:none}
-textarea{min-height:105px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px;outline:none}
+.search{margin-top:12px}textarea{min-height:105px}
 main{padding:14px 14px 104px}.screen{display:none}.screen.active{display:block}
 .hero{border:1px solid var(--line);border-radius:28px;padding:18px;background:linear-gradient(135deg,rgba(102,214,255,.18),rgba(112,227,154,.08));box-shadow:var(--shadow);margin-bottom:13px}
 .hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:var(--muted);line-height:1.45}
@@ -40,158 +33,57 @@ main{padding:14px 14px 104px}.screen{display:none}.screen.active{display:block}
 .titlebox{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#102846,#0c1729);padding:16px;margin-bottom:12px}
 .titlebox h2{margin:0 0 6px;font-size:25px}.titlebox p{color:var(--muted);margin:0;line-height:1.45}
 .item{background:rgba(15,32,57,.96);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}
-.item h3{font-size:20px;margin:0 0 8px}.item p,.item li{color:var(--muted);line-height:1.55}
+.item h3{font-size:20px;margin:0 0 8px}.item p{color:var(--muted);line-height:1.55}
 pre{white-space:pre-wrap;background:#030913;border:1px solid #233d63;border-radius:16px;padding:13px;overflow:auto;color:#dff6ff;font-size:13px;line-height:1.45}
-.copy,.btn{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}
-.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}
-.mock{border:1px solid #3b5a86;border-radius:18px;overflow:hidden;background:#07101f;margin:10px 0}
-.mockTop{display:flex;gap:6px;align-items:center;background:#0d1b31;border-bottom:1px solid #3b5a86;padding:10px}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--red)}.dot:nth-child(2){background:var(--orange)}.dot:nth-child(3){background:var(--green)}
-.mockTitle{margin-left:8px;color:var(--muted);font-size:12px;font-weight:900}.mockBody{display:grid;grid-template-columns:98px 1fr;min-height:132px}
-.side{border-right:1px solid #3b5a86;padding:9px;background:#0a1424}.side div{font-size:11px;padding:7px;border-radius:9px;color:var(--muted)}.side .sel{background:#123456;color:#91e6ff}
-.screenMock{padding:10px}.field{height:24px;border:1px solid #355076;border-radius:8px;margin:7px 0;background:#0b1728}
-.portrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.port{width:22px;height:22px;border-radius:6px;border:1px solid #4b6896;background:#101f36}.port.t{background:#0a4960}.port.u{background:#315326}
-.save{display:inline-block;margin-top:10px;background:var(--green);color:#06111f;border-radius:10px;padding:7px 10px;font-weight:900;font-size:12px}
-.out{background:#07101f;border:1px solid var(--line);border-radius:16px;padding:12px;color:var(--muted);line-height:1.65;margin-top:10px}
-.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{display:none}.result.active{display:block}
-.note{border-left:4px solid var(--blue);padding-left:10px;color:var(--muted)}
+.copy,.btn{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mock{border:1px solid #3b5a86;border-radius:18px;overflow:hidden;background:#07101f;margin:10px 0}.mockTop{display:flex;gap:6px;align-items:center;background:#0d1b31;border-bottom:1px solid #3b5a86;padding:10px}.dot{width:9px;height:9px;border-radius:50%;background:var(--red)}.dot:nth-child(2){background:var(--orange)}.dot:nth-child(3){background:var(--green)}.mockTitle{margin-left:8px;color:var(--muted);font-size:12px;font-weight:900}.mockBody{display:grid;grid-template-columns:98px 1fr;min-height:132px}.side{border-right:1px solid #3b5a86;padding:9px;background:#0a1424}.side div{font-size:11px;padding:7px;border-radius:9px;color:var(--muted)}.side .sel{background:#123456;color:#91e6ff}.screenMock{padding:10px}.field{height:24px;border:1px solid #355076;border-radius:8px;margin:7px 0;background:#0b1728}.portrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.port{width:22px;height:22px;border-radius:6px;border:1px solid #4b6896;background:#101f36}.port.t{background:#0a4960}.port.u{background:#315326}.save{display:inline-block;margin-top:10px;background:var(--green);color:#06111f;border-radius:10px;padding:7px 10px;font-weight:900;font-size:12px}
+.result{display:none}.result.active{display:block}.note{border-left:4px solid var(--blue);padding-left:10px;color:var(--muted)}
 .bottomName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#9db1d0;font-size:13px;font-weight:900;z-index:25;pointer-events:none;text-shadow:0 3px 14px #000}
 nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
 nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
-.vendorColor{border-left:5px solid var(--blue)}
 @media(max-width:390px){.grid{grid-template-columns:1fr}.row,.kv{grid-template-columns:1fr}h1{font-size:25px}}
 </style>
 </head>
 <body>
 <div id="splash"><div class="sLogo">NH</div><div class="sTitle">NetHelper KZ</div><div class="sName">Orynbekov</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub" id="sub">v3.1 — объекты и отчёты</div></div></div><div class="lang"><button id="ru" class="active" onclick="setLang('ru')">RU</button><button id="kz" onclick="setLang('kz')">KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.2 — рабочие вкладки</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: SNR, VLAN, ARP, /30, D-Link"></div>
 </header>
 <main>
 <section id="home" class="screen active">
-<div class="hero"><h2 id="heroT">Главное меню</h2><p id="heroD">Минимум вкладок: выбери раздел, потом оборудование или задачу. Всё работает офлайн.</p></div>
+<div class="hero"><h2>Главное меню</h2><p>Упрощённый интерфейс: все разделы открываются отдельными рабочими экранами.</p></div>
 <div class="mainGrid">
 <button class="big" onclick="showSwitches()"><div class="ico">🔧</div><div><h3>Коммутаторы</h3><p>SNR, Huawei, D-Link, Zyxel, Eltex, MikroTik, Iskratel, BDCOM</p></div></button>
 <button class="big" onclick="showAlarms()"><div class="ico">⚡</div><div><h3>Аварии</h3><p>Нет ARP, VLAN не проходит, нет линка, MAC не видно</p></div></button>
-<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, генератор команд, консоль, маски</p></div></button>
+<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, генератор, консоль, маски</p></div></button>
 <button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, BiDi, GPON, DSL, шлюзы /30</p></div></button>
-<button class="big" onclick="showObjectsPro()"><div class="ico">🗂</div><div><h3>Мои объекты PRO</h3><p>Объекты, VLAN, IP, шлюзы и заметки</p></div></button>
-<button class="big" onclick="showWizard()"><div class="ico">🧠</div><div><h3>Аварийный мастер</h3><p>Нет ARP, нет MAC, ONU Offline, управление</p></div></button>
+<button class="big" onclick="showObjects()"><div class="ico">🗂</div><div><h3>Мои объекты</h3><p>VLAN, IP, шлюзы, заметки по объектам</p></div></button>
+<button class="big" onclick="showWizard()"><div class="ico">🧠</div><div><h3>Аварийный мастер</h3><p>Нет ARP, нет MAC, управление, ONU Offline</p></div></button>
 <button class="big" onclick="showReport()"><div class="ico">📄</div><div><h3>Отчёт после выезда</h3><p>Готовый текст отчёта для отправки</p></div></button>
 </div>
 <div id="searchResult" class="result"></div>
 </section>
-
-<section id="switches" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>🔧 Коммутаторы</h2><p>Выбери оборудование, потом нужную настройку.</p></div>
-<div class="grid" id="switchGrid"></div>
-</section>
-
-<section id="vendor" class="screen">
-<button class="back" onclick="showSwitches()">← Коммутаторы</button>
-<div id="vendorBody"></div>
-</section>
-
-<section id="alarms" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>⚡ Аварии</h2><p>Выбери проблему и проверь по шагам.</p></div>
-<div class="grid" id="alarmGrid"></div>
-</section>
-
-<section id="tools" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы для работы в поле.</p></div>
-<div class="grid">
-<button class="card full" onclick="openTool('ip')"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast, host range</p></button>
-<button class="card full" onclick="openTool('gen')"><h3>Генератор команд</h3><p>SNR, Huawei, Eltex, MikroTik</p></button>
-<button class="card" onclick="openTool('console')"><h3>Консоль</h3><p>Скорости и параметры</p></button>
-<button class="card" onclick="openTool('masks')"><h3>Маски</h3><p>/30, /29, /28, /24</p></button>
-<button class="card full" onclick="openTool('radio')"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button>
-</div>
-</section>
-
-<section id="toolPage" class="screen">
-<button class="back" onclick="showTools()">← Инструменты</button>
-<div id="toolBody"></div>
-</section>
-
-<section id="reference" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки для объекта.</p></div>
-<div class="grid" id="refGrid"></div>
-</section>
-
-<section id="article" class="screen">
-<button class="back" id="articleBack" onclick="goHome()">← Назад</button>
-<div id="articleBody"></div>
-</section>
-
-<section id="objectsPro" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>🗂 Мои объекты PRO</h2><p>Сохраняй объект, оборудование, VLAN, IP, шлюз и заметки. Всё хранится локально в телефоне.</p></div>
-<div class="item">
-<input id="objName" placeholder="Название объекта">
-<input id="objAddr" placeholder="Адрес / населённый пункт" style="margin-top:8px">
-<input id="objEquip" placeholder="Оборудование: SNR / Huawei / D-Link" style="margin-top:8px">
-<input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px">
-<textarea id="objNote" placeholder="Заметки: что настроено, какие порты, проблемы"></textarea>
-<button class="btn blue" onclick="saveObj()">Сохранить объект</button>
-</div>
-<div id="objList"></div>
-</section>
-
-<section id="reportPage" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Заполни поля — получишь готовый текст отчёта, который можно скопировать и отправить.</p></div>
-<div class="item">
-<input id="repObj" placeholder="Объект">
-<input id="repEquip" placeholder="Оборудование" style="margin-top:8px">
-<input id="repWork" placeholder="Что сделано" style="margin-top:8px">
-<textarea id="repResult" placeholder="Результат / проверка / что осталось"></textarea>
-<button class="btn blue" onclick="makeReport()">Сформировать отчёт</button>
-<pre id="reportOut"></pre>
-<button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button>
-</div>
-</section>
-
-<section id="wizardPage" class="screen">
-<button class="back" onclick="goHome()">← Назад</button>
-<div class="titlebox"><h2>🧠 Аварийный мастер</h2><p>Быстро выбери проблему — получишь самый короткий путь проверки.</p></div>
-<div class="grid">
-<button class="card full" onclick="openArticle('🧠 Мастер: Нет ARP', wizard.arp, 'showWizard()')"><h3>Нет ARP</h3><p>VLAN, PVID, trunk, MAC, gateway</p></button>
-<button class="card full" onclick="openArticle('🧠 Мастер: Нет MAC', wizard.mac, 'showWizard()')"><h3>Нет MAC</h3><p>Порт, линк, PVID, изоляция, STP</p></button>
-<button class="card full" onclick="openArticle('🧠 Мастер: Нет управления', wizard.mgmt, 'showWizard()')"><h3>Нет управления</h3><p>Management VLAN, IP, route, ACL</p></button>
-<button class="card full" onclick="openArticle('🧠 Мастер: ONU Offline', wizard.onu, 'showWizard()')"><h3>ONU Offline</h3><p>PON, уровень, серийник, профиль</p></button>
-</div>
-</section>
-
+<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Коммутаторы</h2><p>Выбери оборудование, потом нужную настройку.</p></div><div class="grid" id="switchGrid"></div></section>
+<section id="vendor" class="screen"><button class="back" onclick="showSwitches()">← Коммутаторы</button><div id="vendorBody"></div></section>
+<section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии</h2><p>Выбери проблему и проверь по шагам.</p></div><div class="grid" id="alarmGrid"></div></section>
+<section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы для работы в поле.</p></div><div class="grid" id="toolGrid"></div></section>
+<section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки для объекта.</p></div><div class="grid" id="refGrid"></div></section>
+<section id="objects" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🗂 Мои объекты</h2><p>Данные сохраняются в телефоне.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
+<section id="wizard" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧠 Аварийный мастер</h2><p>Выбери проблему.</p></div><div class="grid" id="wizardGrid"></div></section>
+<section id="report" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Заполни поля и скопируй отчёт.</p></div><div class="item"><input id="repObj" placeholder="Объект"><input id="repEquip" placeholder="Оборудование" style="margin-top:8px"><input id="repWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="repResult" placeholder="Результат"></textarea><button class="btn blue" onclick="makeReport()">Сформировать отчёт</button><pre id="reportOut"></pre><button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button></div></section>
+<section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
 </main>
 <div class="bottomName">Orynbekov © NetHelper KZ</div>
-<nav>
-<button id="navHome" class="active" onclick="goHome()">Главная</button>
-<button onclick="showSwitches()">Коммутаторы</button>
-<button onclick="showAlarms()">Аварии</button>
-<button onclick="showTools()">Инструменты</button>
-</nav>
+<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showSwitches()">Коммутаторы</button><button onclick="showAlarms()">Аварии</button><button onclick="showTools()">Инструменты</button></nav>
 <script>
-let lang='ru';
-
-function dlinkMock(title,type){
-let ports='';for(let i=1;i<=12;i++){ports+=`<span class="port ${i==1?'t':i==2?'u':''}"></span>`}
-return `<div class="mock"><div class="mockTop"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mockTitle">${title}</span></div><div class="mockBody"><div class="side"><div>System</div><div class="sel">${type==='ip'?'IP':'VLAN'}</div><div>Ports</div><div>FDB</div><div>Save</div></div><div class="screenMock">${type==='ip'?'<b>IP Interface</b><div class="field"></div><div class="field"></div><div class="field"></div><span class="save">Apply</span>':'<b>802.1Q VLAN</b><div class="portrow">'+ports+'</div><span class="save">Apply</span>'}</div></div></div>`;
-}
-
 const vendors={
-snr:{name:'SNR',desc:'S2995G / S2982G',tasks:[
-['Создать VLAN',`configure terminal
+snr:{name:'SNR',desc:'S2995G / S2982G',tasks:[['Создать VLAN',`configure terminal
 vlan 3573
 name CLIENT_3573
 exit
-write`],
-['Access порт',`configure terminal
+write`],['Access порт',`configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/2
@@ -199,8 +91,7 @@ switchport mode access
 switchport access vlan 3573
 no shutdown
 exit
-write`],
-['Trunk uplink',`configure terminal
+write`],['Trunk uplink',`configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/25
@@ -208,152 +99,99 @@ switchport mode trunk
 switchport trunk allowed vlan add 3573
 no shutdown
 exit
-write`],
-['PVID / Hybrid',`configure terminal
-interface ethernet 1/0/2
-switchport mode hybrid
-switchport hybrid allowed vlan add 3573 untagged
-switchport hybrid native vlan 3573
-exit
-write`],
-['IP управления',`configure terminal
+write`],['IP управления',`configure terminal
 interface vlan 1706
 ip address 10.151.200.50 255.255.255.252
 no shutdown
 exit
 ip route 0.0.0.0 0.0.0.0 10.151.200.49
-write`],
-['Проверка',`show vlan
+write`],['Проверка',`show vlan
 show interface status
-show interface ethernet 1/0/2
 show mac address-table
 show arp
-show running-config`],
-['Сохранить',`write
-copy running-config startup-config`]
-]},
-huawei:{name:'Huawei',desc:'S5700 / DSLAM',tasks:[
-['Создать VLAN',`system-view
+show running-config`]]},
+huawei:{name:'Huawei',desc:'S5700 / DSLAM',tasks:[['Создать VLAN',`system-view
 vlan batch 3573
 quit
-save`],
-['Access порт',`system-view
+save`],['Access порт',`system-view
 vlan batch 3573
 interface GigabitEthernet0/0/2
 port link-type access
 port default vlan 3573
 quit
-save`],
-['Trunk uplink',`system-view
+save`],['Trunk uplink',`system-view
 interface GigabitEthernet0/0/25
 port link-type trunk
 port trunk allow-pass vlan 3573
 quit
-save`],
-['Vlanif / IP',`system-view
+save`],['Vlanif / IP',`system-view
 interface Vlanif3573
 ip address 178.22.174.29 255.255.255.252
 quit
 ip route-static 0.0.0.0 0.0.0.0 178.22.174.30
-save`],
-['Проверка',`display vlan
+save`],['Проверка',`display vlan
 display interface brief
 display mac-address
 display arp
-display current-configuration`],
-['Сохранить',`save`]
-]},
-dlink:{name:'D-Link',desc:'DGS-3620 / DGS-3630 Web',tasks:[
-['Web: Создать VLAN',`${dlinkMock('D-Link → VLAN','vlan')}
-1. L2 Features → VLAN → 802.1Q VLAN.
+display current-configuration`]]},
+dlink:{name:'D-Link',desc:'DGS-3620 / DGS-3630 Web',tasks:[['Web: Создать VLAN',`1. L2 Features → VLAN → 802.1Q VLAN.
 2. Add/Create VLAN.
 3. VLAN ID: 3573.
 4. Name: CLIENT_3573.
-5. Apply.`],
-['Web: Tagged uplink',`${dlinkMock('D-Link → Tagged uplink','vlan')}
-1. Открыть VLAN 3573.
+5. Apply.`],['Web: Tagged uplink',`1. Открыть VLAN 3573.
 2. Uplink порт поставить Tagged.
 3. Не удалять остальные VLAN с uplink.
-4. Apply.`],
-['Web: Untagged client / PVID',`${dlinkMock('D-Link → Untagged + PVID','vlan')}
-1. Client port = Untagged.
+4. Apply.`],['Web: Untagged / PVID',`1. Client port = Untagged.
 2. VLAN → PVID Settings.
 3. Client PVID = 3573.
-4. Apply.`],
-['Web: IP управления',`${dlinkMock('D-Link → Management IP','ip')}
-Management / IP Interface:
+4. Apply.`],['Web: IP управления',`Management / IP Interface:
 VLAN: 1706
 IP: 10.151.200.50
 Mask: 255.255.255.252
 Gateway: 10.151.200.49
-Apply.`],
-['FDB / MAC',`L2 Features → FDB / MAC Address Table.
-Проверить MAC клиента.
-Если MAC только на uplink — проверить access/PVID/trunk.`],
-['Save Configuration',`Tools/System → Save Configuration → Success.`]
-]},
-zyxel:{name:'Zyxel',desc:'XGS3700 / Smart',tasks:[
-['VLAN таблица',`Advanced Application → VLAN → Static VLAN.
+Apply.`],['Save Configuration',`Tools/System → Save Configuration → Success.`]]},
+zyxel:{name:'Zyxel',desc:'XGS3700 / Smart',tasks:[['VLAN таблица',`Advanced Application → VLAN → Static VLAN.
 VLAN ID: 3573.
 Uplink: Fixed / Tagged.
-Client: Fixed / Untagged.`],
-['PVID',`VLAN Port Setting.
+Client: Fixed / Untagged.`],['PVID',`VLAN Port Setting.
 Client port PVID = 3573.
-Apply / Save.`],
-['Проверка',`show vlan
+Apply / Save.`],['Проверка',`show vlan
 show interfaces status
-show mac address-table
-show running-config`],
-['Важно','На web/smart моделях CLI может быть урезан. Основное — Static VLAN + PVID.']
-]},
-eltex:{name:'Eltex',desc:'MES / LTP',tasks:[
-['MES Access',`configure
+show mac address-table`]]},
+eltex:{name:'Eltex',desc:'MES / LTP',tasks:[['MES Access',`configure
 vlan 3573
 exit
 interface gigabitethernet 1/0/2
 switchport mode access
 switchport access vlan 3573
 exit
-copy running-config startup-config`],
-['MES Trunk',`configure
+copy running-config startup-config`],['MES Trunk',`configure
 vlan 3573
 exit
 interface gigabitethernet 1/0/25
 switchport mode trunk
 switchport trunk allowed vlan add 3573
 exit
-copy running-config startup-config`],
-['Проверка',`show vlan
+copy running-config startup-config`],['Проверка',`show vlan
 show interfaces status
 show mac address-table
-show arp
-show running-config`]
-]},
-mikrotik:{name:'MikroTik',desc:'Bridge / VLAN / Wireless',tasks:[
-['Bridge hub',`/interface bridge add name=bridge1
+show arp`]]},
+mikrotik:{name:'MikroTik',desc:'Bridge / VLAN / Wireless',tasks:[['Bridge hub',`/interface bridge add name=bridge1
 /interface bridge port add bridge=bridge1 interface=ether1
-/interface bridge port add bridge=bridge1 interface=ether2`],
-['IP управления',`/ip address add address=10.151.200.50/30 interface=bridge1
-/ip route add gateway=10.151.200.49`],
-['Wireless проверка',`/interface wireless registration-table print
+/interface bridge port add bridge=bridge1 interface=ether2`],['IP управления',`/ip address add address=10.151.200.50/30 interface=bridge1
+/ip route add gateway=10.151.200.49`],['Wireless проверка',`/interface wireless registration-table print
 /interface wireless monitor wlan1
-/ping 8.8.8.8`],
-['VLAN basic',`/interface vlan add name=vlan3573 vlan-id=3573 interface=bridge1
-/ip address add address=178.22.174.29/30 interface=vlan3573`]
-]},
-iskratel:{name:'Iskratel DSLAM',desc:'Платы / порты / линия',tasks:[
-['Перед настройкой',`show version
+/ping 8.8.8.8`]]},
+iskratel:{name:'Iskratel DSLAM',desc:'Платы / порты / линия',tasks:[['Перед настройкой',`show version
 show running-config
 show board
 show slot
 show alarm active
 show interface
-show vlan`],
-['Плата и порт',`show board
+show vlan`],['Плата и порт',`show board
 show slot
 show dsl port
-show dsl port status`],
-['VLAN / uplink',`show vlan
+show dsl port status`],['VLAN / uplink',`show vlan
 configure terminal
 vlan 3573
 name CLIENT_3573
@@ -362,262 +200,93 @@ exit
 interface uplink 1
 switchport mode trunk
 switchport trunk allowed vlan add 3573
-exit`],
-['DSL порт / сервис',`show service
+exit`],['DSL порт / сервис',`show service
 show pvc
 interface dsl 1/1/1
 service vlan 3573
 pvc 0/35 vlan 3573
 line-profile PROFILE_NAME
 no shutdown
-exit`],
-['Диагностика линии',`show dsl line
-show dsl statistics
-show counters
-show mac-address-table
-show arp`],
-['Сохранить',`write
-save
-copy running-config startup-config`]
-]},
-bdcom:{name:'BDCOM OLT',desc:'ONU / PON / VLAN',tasks:[
-['Проверка ONU',`show onu list
+exit`]]},
+bdcom:{name:'BDCOM OLT',desc:'ONU / PON / VLAN',tasks:[['Проверка ONU',`show onu list
 show pon onu-information
 show interface epon 0/1
 show mac address-table
-show running-config`],
-['ONU offline','Проверить PON порт, уровень, серийник ONU, профиль, VLAN сервиса и uplink.'],
-['VLAN логика','Создать VLAN → добавить на uplink → привязать к ONU/service/profile → проверить MAC/ARP.']
-]}
+show running-config`],['ONU offline','Проверить PON порт, уровень, серийник ONU, профиль, VLAN сервиса и uplink.']]}
 };
-
-const alarms=[
-['Нет ARP',`1. Проверить IP/маску/шлюз.
+const alarms=[['Нет ARP',`1. Проверить IP/маску/шлюз.
 2. Проверить VLAN на клиентском порту.
 3. Проверить PVID.
 4. Проверить trunk/tagged на uplink.
 5. Проверить MAC клиента.
-6. Проверить port-security/protection.
-7. Проверить шлюз.`],
-['VLAN не проходит',`1. VLAN создан на каждом коммутаторе.
+6. Проверить gateway.`],['VLAN не проходит',`1. VLAN создан на каждом коммутаторе.
 2. Uplink tagged.
 3. Client access/untagged.
 4. PVID = VLAN.
-5. Проверить MAC на каждом участке.
-6. Не удалить другие VLAN с trunk.
-7. Save config.`],
-['Нет линка',`1. Кабель/патчкорд.
+5. Проверить MAC.
+6. Save config.`],['Нет линка',`1. Кабель/патчкорд.
 2. SFP и TX/RX.
 3. shutdown/no shutdown.
 4. Speed/duplex.
-5. Питание второго устройства.
-6. Ошибки CRC/FCS.`],
-['MAC не видно',`1. Проверить client port.
+5. Питание второго устройства.`],['MAC не видно',`1. Проверить client port.
 2. Проверить PVID.
-3. Проверить port isolation/protection.
+3. Проверить port isolation.
 4. Проверить bridge/radio.
-5. Проверить loop/STP.`],
-['Неизвестная сеть Windows',`1. Link есть?
-2. DHCP или static IP?
-3. VLAN/PVID.
-4. ARP до шлюза.
-5. MAC клиента.
-6. Кабель/патч-панель.`],
-['Скорость режется',`1. Кабель 8 жил.
-2. Auto-negotiation.
-3. Force 100 отключить.
-4. SFP/медиаконвертер.
-5. CRC/FCS.
-6. Проверить профиль ONU/DSL.`]
-];
-
-const refs=[
-['SFP / BiDi','BiDi работает парой: один TX1310/RX1550, второй TX1550/RX1310. Цвет не всегда гарантия — смотри наклейку.'],
-['Оптика','Проверить чистоту коннектора, патчкорд, TX/RX, уровень сигнала, тип SFP и длину волны.\n\nRX ориентир:\n-8…-20 dBm обычно нормально\n-20…-27 dBm слабовато\nниже -27 dBm часто проблемы\n\nSC/UPC обычно синий, SC/APC обычно зелёный.'],
-['GPON','ONU offline: проверить PON порт, уровень, серийник, профиль, VLAN сервиса, uplink.'],
-['DSL','DSL down: проверить пару, порт DSLAM, профиль скорости, SNR Margin, Attenuation, CRC/FEC.'],
-['Консоль','Скорости: 9600, 19200, 38400, 57600, 115200. Параметры: 8N1, Flow None.'],
-['Маски',`/30 = 255.255.255.252
+5. Проверить STP.`]];
+const refs=[['SFP / BiDi','BiDi работает парой: один TX1310/RX1550, второй TX1550/RX1310.'],['Оптика','Проверить чистоту коннектора, патчкорд, TX/RX, уровень сигнала, тип SFP.'],['GPON','ONU offline: проверить PON порт, уровень, серийник, профиль, VLAN сервиса.'],['DSL','DSL down: проверить пару, порт DSLAM, профиль скорости, SNR, CRC/FEC.'],['Консоль','9600, 19200, 38400, 57600, 115200. Параметры: 8N1, Flow None.'],['Маски',`/30 = 255.255.255.252
 /29 = 255.255.255.248
 /28 = 255.255.255.240
-/24 = 255.255.255.0`],
-['/30 логика','Например 178.22.174.28/30: сеть .28, host .29, host .30, broadcast .31. Обычно один IP устройство, второй шлюз.']
-];
-
-function setLang(l){lang=l;ru.classList.toggle('active',l==='ru');kz.classList.toggle('active',l==='kz')}
-function setNav(name){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active')); if(name) name.classList.add('active')}
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
-function goHome(){show('home');setNav(navHome)}
-function showSwitches(){show('switches');setNav(null);renderSwitches()}
-function showAlarms(){show('alarms');setNav(null);renderAlarms()}
-function showTools(){show('tools');setNav(null)}
-function showReference(){show('reference');setNav(null);renderRefs()}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function renderSwitches(){
-switchGrid.innerHTML='';
-Object.keys(vendors).forEach(k=>{
- let v=vendors[k], b=document.createElement('button');
- b.className='card'; b.onclick=()=>openVendor(k);
- b.className+=' vendorColor'; b.innerHTML=`<h3>${vendorIcon(k)} ${v.name}</h3><p>${v.desc}</p><span class="badge">Открыть</span>`;
- switchGrid.appendChild(b);
-})
-}
-function openVendor(k){
-let v=vendors[k];show('vendor');
-let h=`<div class="titlebox"><h2>${v.name}</h2><p>${v.desc}</p></div>`;
-v.tasks.forEach((t,i)=>{
- let raw=String(t[1]); let isHtml=raw.includes('<div class="mock">');
- h+=`<div class="item"><h3>${t[0]}</h3>${isHtml?raw:`<pre id="cmd_${i}">${escapeHtml(raw)}</pre><button class="copy" onclick="copyBlock('cmd_${i}')">Копировать</button>`}</div>`;
-});
-vendorBody.innerHTML=h;
-}
-function renderAlarms(){
-alarmGrid.innerHTML='';
-alarms.forEach((a,i)=>{
- let b=document.createElement('button'); b.className='card full';
- b.onclick=()=>openArticle('⚡ '+a[0], a[1], 'showAlarms()');
- b.innerHTML=`<h3>${a[0]}</h3><p>Открыть чек-лист</p>`;
- alarmGrid.appendChild(b);
-})
-}
-function renderRefs(){
-refGrid.innerHTML='';
-refs.forEach((r,i)=>{
- let b=document.createElement('button'); b.className='card '+(i>3?'full':'');
- b.onclick=()=>openArticle('📚 '+r[0], r[1], 'showReference()');
- b.innerHTML=`<h3>${r[0]}</h3><p>Открыть памятку</p>`;
- refGrid.appendChild(b);
-})
-}
-function openArticle(title,body,back){
-show('article'); articleBack.setAttribute('onclick', back); articleBody.innerHTML=`<div class="titlebox"><h2>${title}</h2></div><div class="item"><pre>${escapeHtml(body)}</pre></div>`;
-}
-function openTool(t){
-show('toolPage');
-if(t==='ip'){toolBody.innerHTML=`<div class="titlebox"><h2>IP калькулятор</h2><p>Введи адрес в формате 178.22.174.28/30.</p></div><div class="item"><input id="cidr" value="178.22.174.28/30" oninput="calcIP()"><button class="copy" onclick="calcIP()">Посчитать</button><div id="calcOut" class="out"></div></div>`;calcIP();return}
-if(t==='gen'){toolBody.innerHTML=`<div class="titlebox"><h2>Генератор команд</h2><p>Быстрая сборка команд.</p></div><div class="item"><div class="row"><select id="gVendor" onchange="genCmd()"><option>SNR</option><option>Huawei</option><option>Eltex</option><option>MikroTik</option></select><select id="gTask" onchange="genCmd()"><option value="access">Access VLAN</option><option value="trunk">Trunk VLAN</option><option value="mgmt">IP управления</option><option value="check">Проверка</option></select><input id="gVlan" value="3573" oninput="genCmd()"><input id="gPort" value="1/0/2" oninput="genCmd()"><input id="gUplink" value="1/0/25" oninput="genCmd()"><input id="gIp" value="178.22.174.29/30" oninput="genCmd()"></div><pre id="genOut"></pre><button class="copy" onclick="copyBlock('genOut')">Копировать</button></div>`;genCmd();return}
-if(t==='console')openToolArticle('Консольные скорости',`9600
-19200
-38400
-57600
-115200
-
-Параметры:
-Data bits: 8
-Parity: none
-Stop bits: 1
-Flow control: none`);
-if(t==='masks')openToolArticle('Маски подсетей',`/30 = 255.255.255.252 = 2 host
-/29 = 255.255.255.248 = 6 host
-/28 = 255.255.255.240 = 14 host
-/24 = 255.255.255.0 = 254 host`);
-if(t==='radio')openRadioCalc();
-}
-function openToolArticle(t,b){toolBody.innerHTML=`<div class="titlebox"><h2>${t}</h2></div><div class="item"><pre>${escapeHtml(b)}</pre></div>`}
-function openRadioCalc(){toolBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal калькулятор</h2><p>Введи Signal и Noise. Например -50 и -117.</p></div><div class="item"><div class="row"><input id="sig" value="-50" oninput="radioCalc()"><input id="noi" value="-117" oninput="radioCalc()"></div><button class="copy" onclick="radioCalc()">Посчитать</button><div id="radioOut" class="out"></div></div>`;radioCalc()}
-function radioCalc(){let s=Number(sig.value),n=Number(noi.value),snr=s-n;let grade=snr>=40?'Отлично':snr>=25?'Нормально':snr>=15?'Слабо':'Плохо';radioOut.innerHTML=`SNR: <b>${snr} dB</b><br>Оценка: <b>${grade}</b>`}
-function ipToInt(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
-function intToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
-function calcIP(){let el=document.getElementById('cidr'), out=document.getElementById('calcOut'); if(!el||!out)return;let v=el.value.trim(),m=v.match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m){out.innerHTML='Формат: <b>178.22.174.28/30</b>';return}let c=+m[2],ip=ipToInt(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0,first=c>=31?net:net+1,last=c>=31?b:b-1;out.innerHTML=`<div class="kv"><div>Network<br><b>${intToIp(net)}</b></div><div>Mask<br><b>${intToIp(mask)}</b></div><div>First IP<br><b>${intToIp(first)}</b></div><div>Last IP<br><b>${intToIp(last)}</b></div><div>Broadcast<br><b>${intToIp(b)}</b></div></div>`}
-function maskFromCidr(s){let m=s.match(/\/(\d+)/);if(!m)return '255.255.255.252';let c=+m[1],mask=(0xffffffff<<(32-c))>>>0;return intToIp(mask)}
-function ipOnly(s){return s.split('/')[0]}
-function genCmd(){let gv=document.getElementById('gVendor');if(!gv)return;let v=gv.value,t=gTask.value,vl=gVlan.value||'3573',p=gPort.value||'1/0/2',u=gUplink.value||'1/0/25',ip=gIp.value||'178.22.174.29/30',mask=maskFromCidr(ip);let cmd='';if(v==='SNR'){if(t==='access')cmd=`configure terminal
-vlan ${vl}
-exit
-interface ethernet ${p}
-switchport mode access
-switchport access vlan ${vl}
-no shutdown
-exit
-write`;if(t==='trunk')cmd=`configure terminal
-vlan ${vl}
-exit
-interface ethernet ${u}
-switchport mode trunk
-switchport trunk allowed vlan add ${vl}
-exit
-write`;if(t==='mgmt')cmd=`configure terminal
-interface vlan ${vl}
-ip address ${ipOnly(ip)} ${mask}
-no shutdown
-exit
-write`;if(t==='check')cmd=`show vlan
-show interface status
-show mac address-table
-show arp`;}
-if(v==='Huawei'){if(t==='access')cmd=`system-view
-vlan batch ${vl}
-interface GigabitEthernet0/0/${p.split('/').pop()}
-port link-type access
-port default vlan ${vl}
-quit
-save`;if(t==='trunk')cmd=`system-view
-vlan batch ${vl}
-interface GigabitEthernet0/0/${u.split('/').pop()}
-port link-type trunk
-port trunk allow-pass vlan ${vl}
-quit
-save`;if(t==='mgmt')cmd=`system-view
-interface Vlanif${vl}
-ip address ${ipOnly(ip)} ${mask}
-quit
-save`;if(t==='check')cmd=`display vlan
-display interface brief
-display mac-address
-display arp`;}
-if(v==='Eltex'){cmd=`show vlan
-show interfaces status
-show mac address-table
-show arp`}
-if(v==='MikroTik'){cmd=`/ip address add address=${ip} interface=bridge1
-/interface bridge print
-/interface bridge port print
-/ip route print
-/ping 8.8.8.8`}
-genOut.textContent=cmd}
-function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
-
-const wizard={
-arp:`1. Есть MAC клиента?
-- Нет: проверить port/link/PVID/access.
+/24 = 255.255.255.0`]];
+const wizard=[['Нет ARP',`Есть MAC?
+- Нет: порт/PVID/access.
 - Да: проверить gateway и VLAN путь.
 
-2. VLAN есть на всех коммутаторах?
-3. Uplink tagged?
-4. Client untagged/access?
-5. PVID совпадает?
-6. На шлюзе виден ARP?
-7. Проверить /30 или /29 адресацию.`,
-mac:`1. Проверить link up/down.
-2. Проверить кабель/патч-панель.
-3. Проверить access VLAN и PVID.
-4. Проверить port isolation/protection.
-5. Проверить STP/loop.
-6. Проверить, не подключён ли промежуточный switch/radio.`,
-mgmt:`1. Проверить management VLAN.
-2. Проверить IP управления и маску.
-3. Проверить default gateway/route.
-4. Проверить, проходит ли VLAN управления по uplink.
-5. Проверить ACL/RADIUS.
-6. Подключиться из той же подсети.`,
-onu:`1. Проверить PON порт.
-2. Проверить оптический уровень.
-3. Проверить серийный номер ONU.
-4. Проверить профиль ONU.
-5. Проверить VLAN сервиса.
-6. Проверить uplink и MAC выше по сети.`
-};
-function vendorIcon(k){return {snr:'🟦',huawei:'🟥',dlink:'🟧',zyxel:'🟩',eltex:'🟨',mikrotik:'🟩',iskratel:'🟪',bdcom:'⬛'}[k]||'🔧'}
-function showObjectsPro(){show('objectsPro');renderObjPro()}
-function showReport(){show('reportPage')}
-function showWizard(){show('wizardPage')}
-function getObjsPro(){try{return JSON.parse(localStorage.getItem('nh_objects_pro')||'[]')}catch(e){return[]}}
-function saveObj(){let arr=getObjsPro();arr.unshift({n:objName.value||'Объект',a:objAddr.value||'',e:objEquip.value||'',v:objVlan.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objects_pro',JSON.stringify(arr));objName.value='';objAddr.value='';objEquip.value='';objVlan.value='';objNote.value='';renderObjPro()}
-function delObjPro(i){let arr=getObjsPro();arr.splice(i,1);localStorage.setItem('nh_objects_pro',JSON.stringify(arr));renderObjPro()}
-function renderObjPro(){if(!document.getElementById('objList'))return;let arr=getObjsPro();objList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.a)}</p><p><b>${escapeHtml(o.e)}</b></p><pre>${escapeHtml(o.v+'\n'+o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delObjPro(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет объектов</p></div>'}
-function makeReport(){let dt=new Date().toLocaleString();reportOut.textContent=`Отчёт по выезду\nДата: ${dt}\nОбъект: ${repObj.value||''}\nОборудование: ${repEquip.value||''}\nВыполнено: ${repWork.value||''}\nРезультат: ${repResult.value||''}\nИсполнитель: Orynbekov`;}
-
-search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({type:'vendor',id:k,title:v.name})});alarms.forEach((a,i)=>{if((a[0]+' '+a[1]).toLowerCase().includes(q))hits.push({type:'alarm',id:i,title:a[0]})});refs.forEach((r,i)=>{if((r[0]+' '+r[1]).toLowerCase().includes(q))hits.push({type:'ref',id:i,title:r[0]})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="${h.type==='vendor'?`openVendor('${h.id}')`:h.type==='alarm'?`openArticle('⚡ ${alarms[h.id][0]}', alarms[${h.id}][1], 'showAlarms()')`:`openArticle('📚 ${refs[h.id][0]}', refs[${h.id}][1], 'showReference()')`}">→ ${h.title}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
+Потом проверить:
+1. VLAN есть на всех коммутаторах.
+2. Uplink tagged.
+3. Client untagged.
+4. PVID совпадает.
+5. /30 или /29 адресация.`],['Нет MAC',`1. Link up/down.
+2. Кабель/патч-панель.
+3. Access VLAN и PVID.
+4. Port isolation/protection.
+5. STP/loop.
+6. Промежуточный switch/radio.`],['Нет управления',`1. Management VLAN.
+2. IP управления и маска.
+3. Default gateway/route.
+4. VLAN управления на uplink.
+5. ACL/RADIUS.
+6. Подключиться из той же подсети.`],['ONU Offline',`1. PON порт.
+2. Оптический уровень.
+3. Серийный номер ONU.
+4. Профиль ONU.
+5. VLAN сервиса.
+6. Uplink и MAC выше по сети.`]];
+function setNav(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+function goHome(){show('home');setNav(navHome)}
+function showSwitches(){show('switches');renderSwitches();setNav(null)}
+function showAlarms(){show('alarms');renderCards(alarmGrid,alarms,'⚡','showAlarms()');setNav(null)}
+function showTools(){show('tools');renderTools();setNav(null)}
+function showReference(){show('reference');renderCards(refGrid,refs,'📚','showReference()');setNav(null)}
+function showObjects(){show('objects');renderObjects()}
+function showWizard(){show('wizard');renderCards(wizardGrid,wizard,'🧠','showWizard()')}
+function showReport(){show('report')}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function renderSwitches(){switchGrid.innerHTML='';Object.keys(vendors).forEach(k=>{let v=vendors[k],b=document.createElement('button');b.className='card';b.onclick=()=>openVendor(k);b.innerHTML=`<h3>${v.name}</h3><p>${v.desc}</p><span class="badge">Открыть</span>`;switchGrid.appendChild(b)})}
+function openVendor(k){let v=vendors[k];show('vendor');let h=`<div class="titlebox"><h2>${v.name}</h2><p>${v.desc}</p></div>`;v.tasks.forEach((t,i)=>{h+=`<div class="item"><h3>${t[0]}</h3><pre id="cmd_${i}">${escapeHtml(t[1])}</pre><button class="copy" onclick="copyBlock('cmd_${i}')">Копировать</button></div>`});vendorBody.innerHTML=h}
+function renderCards(container,data,icon,back){container.innerHTML='';data.forEach((a,i)=>{let b=document.createElement('button');b.className='card full';b.onclick=()=>openArticle(`${icon} ${a[0]}`,a[1],back);b.innerHTML=`<h3>${a[0]}</h3><p>Открыть</p>`;container.appendChild(b)})}
+function openArticle(title,body,back){show('article');articleBack.setAttribute('onclick',back);articleBody.innerHTML=`<div class="titlebox"><h2>${title}</h2></div><div class="item"><pre>${escapeHtml(body)}</pre></div>`}
+function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openGen()"><h3>Генератор команд</h3><p>SNR/Huawei/MikroTik</p></button><button class="card" onclick="openArticle('Консоль','9600\\n19200\\n38400\\n57600\\n115200\\n\\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\\n/29 = 255.255.255.248\\n/28 = 255.255.255.240\\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
+function openIP(){openArticle('IP калькулятор', 'В этой версии IP калькулятор оставлен как справка. /30: сеть, 2 host, broadcast. /29: сеть, 6 host, broadcast.', 'showTools()')}
+function openGen(){openArticle('Генератор команд', 'Используй раздел Коммутаторы → выбери SNR/Huawei/MikroTik → копируй готовые шаблоны.', 'showTools()')}
+function getObjs(){try{return JSON.parse(localStorage.getItem('nh_objs_v32')||'[]')}catch(e){return[]}}
+function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',e:objEquip.value||'',v:objVlan.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v32',JSON.stringify(arr));objName.value='';objEquip.value='';objVlan.value='';objNote.value='';renderObjects()}
+function delObj(i){let arr=getObjs();arr.splice(i,1);localStorage.setItem('nh_objs_v32',JSON.stringify(arr));renderObjects()}
+function renderObjects(){let arr=getObjs();objList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'\\n'+o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет объектов</p></div>'}
+function makeReport(){let dt=new Date().toLocaleString();reportOut.textContent=`Отчёт по выезду\nДата: ${dt}\nОбъект: ${repObj.value||''}\nОборудование: ${repEquip.value||''}\nВыполнено: ${repWork.value||''}\nРезультат: ${repResult.value||''}\nИсполнитель: Orynbekov`}
+function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
+search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({id:k,title:v.name})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="openVendor('${h.id}')">→ ${h.title}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
 </script>
 </body>
 </html>
