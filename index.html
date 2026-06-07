@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v3.8</title>
+<title>NetHelper KZ v3.9</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -43,7 +43,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 <body>
 <div id="splash"><div class="sLogo">NH</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.8 — Инженер сети • связанная база</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v3.9 — Инженер сети • Field PRO</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
 </header>
 <main>
@@ -56,10 +56,11 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 <button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, VLAN PRO, MikroTik Signal, консоль</p></div></button>
 <button class="big" onclick="showInventory()"><div class="ico">📦</div><div><h3>Склад и оборудование</h3><p>SFP, ONU, кабели, патчкорды и учёт остатков</p></div></button>
 <button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, GPON, DSL, маски и /30</p></div></button>
+<button class="big" onclick="showWeatherTrip()"><div class="ico">🌦️</div><div><h3>Погода для выезда</h3><p>Ветер, температура, осадки и чек‑лист</p></div></button>
 </div><div id="searchResult" class="result"></div>
 </section>
 
-<section id="workCenter" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧭 Рабочий центр</h2><p>Всё, что связано с объектами и выездами.</p></div><div class="grid"><button class="card full" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Карточки объектов, IP, VLAN, схема сети</p></button><button class="card full" onclick="showReport()"><h3>📄 Создать отчёт</h3><p>Отчёт можно привязать к объекту</p></button><button class="card" onclick="showHistory()"><h3>📋 История</h3><p>Все отчёты</p></button><button class="card" onclick="showStats()"><h3>📊 Статистика</h3><p>Сводка по базе</p></button><button class="card" onclick="showFav()"><h3>⭐ Избранное</h3><p>Команды</p></button><button class="card" onclick="showBackup()"><h3>💾 Backup</h3><p>Экспорт/импорт</p></button></div></section>
+<section id="workCenter" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧭 Рабочий центр</h2><p>Всё, что связано с объектами и выездами.</p></div><div class="grid"><button class="card full" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Карточки объектов, IP, VLAN, схема сети</p></button><button class="card full" onclick="showReport()"><h3>📄 Создать отчёт</h3><p>Отчёт можно привязать к объекту</p></button><button class="card" onclick="showHistory()"><h3>📋 История</h3><p>Все отчёты</p></button><button class="card" onclick="showStats()"><h3>📊 Статистика</h3><p>Сводка по базе</p></button><button class="card" onclick="showFav()"><h3>⭐ Избранное</h3><p>Команды</p></button><button class="card" onclick="showBackup()"><h3>💾 Backup</h3><p>Экспорт/импорт</p></button><button class="card" onclick="showWeatherTrip()"><h3>🌦️ Погода</h3><p>Погода и чек-лист выезда</p></button><button class="card" onclick="showAbout()"><h3>ℹ️ О программе</h3><p>Orynbekov Product</p></button></div></section>
 
 <section id="objects" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>🗂 Объекты</h2><p>Карточка объекта связана с отчётами и историей работ.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objAddr" placeholder="Адрес / населённый пункт" style="margin-top:8px"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objMap" placeholder="Схема сети: Huawei → SNR → MikroTik → Клиенты"></textarea><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
 
@@ -79,6 +80,28 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 <section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы.</p></div><div class="grid" id="toolGrid"></div></section>
 <section id="inventory" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📦 Склад и оборудование</h2><p>Учёт оборудования связан с backup и статистикой.</p></div><div class="item"><input id="invName" placeholder="Оборудование: SFP 1G / ONU / патчкорд"><input id="invCount" placeholder="Количество" style="margin-top:8px"><textarea id="invNote" placeholder="Примечание / где лежит / объект"></textarea><button class="btn blue" onclick="saveInv()">Сохранить</button></div><div id="invList"></div></section>
 <section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки.</p></div><div class="grid" id="refGrid"></div></section>
+
+<section id="weatherTrip" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>🌦️ Погода для выезда</h2><p>Работает при наличии интернета. Если интернета нет — остаётся офлайн чек‑лист.</p></div><div class="item"><input id="weatherCity" value="Aktobe" placeholder="Город: Aktobe"><button class="btn blue" onclick="loadWeather()">Показать погоду</button><div id="weatherOut" class="out">Офлайн чек‑лист: ноутбук, зарядка, консольный кабель, SFP, патчкорды, тестер, отвёртка, powerbank.</div></div><div class="item"><h3>📋 Чек‑лист выезда</h3><pre>☐ Ноутбук
+☐ Зарядка
+☐ Консольный кабель
+☐ USB-C/USB переходник
+☐ SFP 1G/10G
+☐ Патчкорды
+☐ Тестер
+☐ Отвёртка
+☐ Обжимка
+☐ PowerBank
+☐ Фото до работ
+☐ Фото после работ
+☐ Сохранить конфигурацию
+☐ Создать отчёт</pre></div></section>
+
+<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v3.9</h3><pre>Автор: Orynbekov
+Продукт: Orynbekov Product
+Назначение: Network Engineer Toolkit
+Режим: Offline-first
+Год: 2026</pre></div></section>
+
 <section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
 </main>
 <div class="bottomName">© 2026 Orynbekov Product • Network Engineer Toolkit</div>
@@ -366,6 +389,25 @@ function delInv(i){let arr=getInv();arr.splice(i,1);localStorage.setItem('nh_inv
 function renderInv(){let arr=getInv();invList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>Количество: <b>${escapeHtml(o.c)}</b></p><pre>${escapeHtml(o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delInv(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока склад пуст</p></div>';updateStats()}
 function showDiagHelper(){show('diagHelper');diagAnswer()}
 function diagAnswer(){let q=(document.getElementById('diagInput')?diagInput.value:'').toLowerCase(),ans='Введите проблему: нет arp, нет mac, onu offline, нет линка, нет интернет.';if(q.includes('arp'))ans='1. Проверить MAC клиента.\\n2. Проверить VLAN и PVID.\\n3. Проверить trunk/tagged.\\n4. Проверить gateway.\\n5. Проверить /30 адресацию.';else if(q.includes('mac'))ans='1. Проверить link.\\n2. Проверить кабель.\\n3. Проверить access VLAN/PVID.\\n4. Проверить isolation/protection.\\n5. Проверить radio/bridge.';else if(q.includes('onu')||q.includes('pon'))ans='1. Проверить PON порт.\\n2. Проверить RX/TX.\\n3. Проверить серийник ONU.\\n4. Проверить профиль/VLAN.\\n5. Проверить uplink.';else if(q.includes('линк')||q.includes('link'))ans='1. Проверить кабель/SFP.\\n2. Проверить TX/RX.\\n3. Проверить shutdown.\\n4. Проверить speed/duplex.';else if(q.includes('интернет'))ans='1. Ping gateway.\\n2. Ping 8.8.8.8.\\n3. DNS.\\n4. VLAN/ARP.\\n5. Route/gateway.';diagOut.innerHTML='<pre>'+escapeHtml(ans)+'</pre>'}
+
+function showWeatherTrip(){show('weatherTrip')}
+async function loadWeather(){
+let city=(weatherCity.value||'Aktobe').trim();
+weatherOut.innerHTML='Загрузка погоды...';
+try{
+ let geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(city)+'&count=1&language=ru&format=json');
+ let gj=await geo.json();
+ if(!gj.results||!gj.results.length){weatherOut.innerHTML='Город не найден. Офлайн чек‑лист: ноутбук, консольный кабель, SFP, тестер.';return}
+ let g=gj.results[0];
+ let res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${g.latitude}&longitude=${g.longitude}&current=temperature_2m,wind_speed_10m,precipitation`);
+ let data=await res.json(), c=data.current||{};
+ weatherOut.innerHTML=`<b>${escapeHtml(g.name)}</b><br>Температура: <b>${c.temperature_2m}°C</b><br>Ветер: <b>${c.wind_speed_10m} км/ч</b><br>Осадки: <b>${c.precipitation} мм</b><br><br><b>Рекомендация:</b> если ветер сильный — проверь радиомост и крепления антенны.`;
+}catch(e){
+ weatherOut.innerHTML='Погода недоступна без интернета.<br><br>Офлайн чек‑лист: ноутбук, зарядка, консольный кабель, SFP, патчкорды, тестер, отвёртка, powerbank.';
+}
+}
+function showAbout(){show('about')}
+
 function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
 search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({type:'vendor',id:k,title:v.name})});getObjs().forEach((o,i)=>{if((o.n+' '+o.v+' '+o.e).toLowerCase().includes(q))hits.push({type:'object',id:i,title:'Объект: '+o.n})});getReports().forEach((r,i)=>{if((r.text||'').toLowerCase().includes(q))hits.push({type:'report',id:i,title:'Отчёт: '+r.obj})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="${h.type==='vendor'?`openVendor('${h.id}')`:h.type==='object'?`showObjects()`:`showHistory()`}">→ ${escapeHtml(h.title)}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
 updateStats();
