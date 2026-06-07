@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v4.0</title>
+<title>NetHelper KZ v4.1</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -43,7 +43,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 <body>
 <div id="splash"><div class="sLogo">NH</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.0 — Equipment PRO</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.1 — Equipment PRO • Полная база</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
 </header>
 <main>
@@ -71,7 +71,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 <section id="fav" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Сохраняй свои команды для быстрого копирования.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда или набор команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
 <section id="backup" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Экспортирует объекты, отчёты, склад, избранное и имя сотрудника.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Тут появится backup. Для восстановления вставь backup сюда."></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
 
-<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Настройка оборудования</h2><p>Выбери производителя, затем нужную настройку.</p></div><div class="grid" id="switchGrid"></div></section>
+<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Настройка оборудования PRO</h2><p>Выбери производителя. Внутри каждой задачи есть: что делает, когда использовать, команды, проверка и ошибки.</p></div><div class="grid" id="switchGrid"></div></section>
 <section id="vendor" class="screen"><button class="back" onclick="showSwitches()">← Оборудование</button><div id="vendorBody"></div></section>
 
 <section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии и диагностика</h2><p>Готовые сценарии и помощник диагностики в одном разделе.</p></div><div class="grid"><button class="card full" onclick="showDiagHelper()"><h3>🤖 Помощник диагностики</h3><p>Напиши проблему и получи алгоритм</p></button></div><div class="grid" id="alarmGrid" style="margin-top:12px"></div></section>
@@ -96,7 +96,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 ☐ Сохранить конфигурацию
 ☐ Создать отчёт</pre></div></section>
 
-<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v3.9</h3><pre>Автор: Orynbekov
+<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.1</h3><pre>Автор: Orynbekov
 Продукт: Orynbekov Product
 Назначение: Network Engineer Toolkit
 Режим: Offline-first
@@ -109,11 +109,51 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 
 <script>
 const vendors={
-snr:{name:'SNR',desc:'S2995G / S2982G',tasks:[['Создать VLAN',`configure terminal
+snr:{name:'SNR PRO',desc:'VLAN • Access • Trunk • Hybrid • SNMP • Security • Diagnostics',tasks:[
+['Создать VLAN',`📌 Что делает
+Создаёт новый VLAN на коммутаторе.
+
+🛠 Когда использовать
+Когда нужно открыть новый сервис, клиента или объект.
+
+⌨ Команды
+configure terminal
 vlan 3573
 name CLIENT_3573
 exit
-write`],['Access порт',`configure terminal
+write
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+VLAN создан только на одном коммутаторе.
+VLAN не добавлен в uplink/trunk.`],
+['Удалить VLAN',`📌 Что делает
+Удаляет VLAN из конфигурации.
+
+🛠 Когда использовать
+Когда VLAN больше не используется.
+
+⌨ Команды
+configure terminal
+no vlan 3573
+exit
+write
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+Перед удалением не проверили, что через VLAN не работает клиент.`],
+['Access порт',`📌 Что делает
+Делает порт клиентским в одном VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер, клиентское устройство.
+
+⌨ Команды
+configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/2
@@ -121,7 +161,25 @@ switchport mode access
 switchport access vlan 3573
 no shutdown
 exit
-write`],['Trunk uplink',`configure terminal
+write
+
+✅ Как проверить
+show vlan
+show interface status
+show mac address-table
+
+⚠ Возможные ошибки
+Забыли PVID/access VLAN.
+Порт shutdown.
+Кабель или патч-панель неисправны.`],
+['Trunk uplink',`📌 Что делает
+Передаёт несколько VLAN через один uplink.
+
+🛠 Когда использовать
+Между коммутаторами, до OLT, радиомоста или агрегации.
+
+⌨ Команды
+configure terminal
 vlan 3573
 exit
 interface ethernet 1/0/25
@@ -129,117 +187,1204 @@ switchport mode trunk
 switchport trunk allowed vlan add 3573
 no shutdown
 exit
-write`],['IP управления',`configure terminal
+write
+
+✅ Как проверить
+show vlan
+show interface ethernet 1/0/25
+show mac address-table
+
+⚠ Возможные ошибки
+VLAN не добавлен в allowed list.
+Удалили другие VLAN из trunk.
+На второй стороне VLAN не открыт.`],
+['Hybrid / PVID',`📌 Что делает
+Позволяет порту принимать untagged и tagged VLAN.
+
+🛠 Когда использовать
+Когда устройство требует native VLAN + tagged VLAN.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+switchport mode hybrid
+switchport hybrid native vlan 3573
+switchport hybrid allowed vlan add 3573 untagged
+exit
+write
+
+✅ Как проверить
+show running-config interface ethernet 1/0/2
+show vlan
+
+⚠ Возможные ошибки
+Native VLAN не совпадает.
+Untagged/Tagged перепутаны.`],
+['IP управления / VLANIF',`📌 Что делает
+Назначает IP управления на VLAN.
+
+🛠 Когда использовать
+Для доступа к коммутатору по management VLAN.
+
+⌨ Команды
+configure terminal
 interface vlan 1706
 ip address 10.151.200.50 255.255.255.252
 no shutdown
 exit
 ip route 0.0.0.0 0.0.0.0 10.151.200.49
-write`],['Проверка',`show vlan
+write
+
+✅ Как проверить
+show ip interface brief
+show arp
+ping 10.151.200.49
+
+⚠ Возможные ошибки
+Неверная маска /30.
+Неверный gateway.
+Management VLAN не проходит по uplink.`],
+['SNMP',`📌 Что делает
+Включает мониторинг коммутатора.
+
+🛠 Когда использовать
+Для NMS/мониторинга состояния.
+
+⌨ Команды
+configure terminal
+snmp-server community public ro
+snmp-server host 100.64.40.61 public
+exit
+write
+
+✅ Как проверить
+show running-config | include snmp
+ping 100.64.40.61
+
+⚠ Возможные ошибки
+Community не совпадает.
+ACL блокирует SNMP.
+Нет маршрута до NMS.`],
+['Port Security / Protection',`📌 Что делает
+Ограничивает или защищает MAC на порту.
+
+🛠 Когда использовать
+Когда нужно защитить клиентский порт.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+switchport port-security
+switchport port-security maximum 1
+exit
+write
+
+✅ Как проверить
+show port-security
+show mac address-table
+
+⚠ Возможные ошибки
+Порт блокирует нового клиента.
+MAC старого устройства остался в таблице.`],
+['Скорость порта',`📌 Что делает
+Настраивает скорость и duplex порта.
+
+🛠 Когда использовать
+Когда порт поднялся на 100M вместо 1G или есть проблемы negotiation.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+speed auto
+duplex auto
+exit
+write
+
+✅ Как проверить
+show interface ethernet 1/0/2
 show interface status
+
+⚠ Возможные ошибки
+Кабель 4 жилы.
+Устройство на другой стороне force 100.
+Плохой патчкорд.`],
+['Диагностика MAC/ARP/CRC/SFP',`📌 Что делает
+Проверяет клиента, ARP, ошибки и оптику.
+
+🛠 Когда использовать
+Нет интернета, нет ARP, режется скорость, нет линка.
+
+⌨ Команды
 show mac address-table
 show arp
-show running-config`]]},
-huawei:{name:'Huawei',desc:'S5700 / DSLAM',tasks:[['Создать VLAN',`system-view
+show interface ethernet 1/0/2
+show interface ethernet 1/0/2 counters
+show transceiver
+
+✅ Как проверить
+MAC клиента виден на нужном порту.
+ARP появляется на шлюзе.
+CRC/FCS не растут.
+
+⚠ Возможные ошибки
+MAC виден только на uplink.
+VLAN не проходит.
+Плохой кабель/SFP.`],
+['Сохранить / Backup',`📌 Что делает
+Сохраняет конфигурацию.
+
+🛠 Когда использовать
+После любых изменений.
+
+⌨ Команды
+write
+copy running-config startup-config
+show running-config
+
+✅ Как проверить
+После перезагрузки настройки остались.
+
+⚠ Возможные ошибки
+Забыли сохранить — после ребута настройки пропали.`]
+]},
+huawei:{name:'Huawei PRO',desc:'VLAN • Trunk • Hybrid • Vlanif • Route • SNMP • Optical',tasks:[
+['VLAN batch',`📌 Что делает
+Создаёт один или несколько VLAN.
+
+🛠 Когда использовать
+Для нового клиента, сервиса или управления.
+
+⌨ Команды
+system-view
 vlan batch 3573
 quit
-save`],['Access порт',`system-view
+save
+
+✅ Как проверить
+display vlan
+
+⚠ Возможные ошибки
+VLAN создан, но не добавлен на порт/uplink.`],
+['Access порт',`📌 Что делает
+Назначает клиентский порт в один VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер, клиент.
+
+⌨ Команды
+system-view
 vlan batch 3573
 interface GigabitEthernet0/0/2
 port link-type access
 port default vlan 3573
 quit
-save`],['Trunk uplink',`system-view
+save
+
+✅ Как проверить
+display vlan
+display interface brief
+display mac-address
+
+⚠ Возможные ошибки
+Не тот номер порта.
+Порт shutdown.
+VLAN не проходит дальше.`],
+['Trunk порт',`📌 Что делает
+Передаёт VLAN через uplink.
+
+🛠 Когда использовать
+Связь между коммутаторами, OLT, радиомостом.
+
+⌨ Команды
+system-view
 interface GigabitEthernet0/0/25
 port link-type trunk
 port trunk allow-pass vlan 3573
 quit
-save`],['Vlanif / IP',`system-view
-interface Vlanif3573
-ip address 178.22.174.29 255.255.255.252
+save
+
+✅ Как проверить
+display vlan
+display interface GigabitEthernet0/0/25
+
+⚠ Возможные ошибки
+Забыли allow-pass vlan.
+На второй стороне VLAN не открыт.`],
+['Hybrid порт',`📌 Что делает
+Настраивает порт с tagged и untagged VLAN.
+
+🛠 Когда использовать
+Для сложных схем, телефонии, радиомостов, native VLAN.
+
+⌨ Команды
+system-view
+interface GigabitEthernet0/0/2
+port link-type hybrid
+port hybrid pvid vlan 3573
+port hybrid untagged vlan 3573
 quit
-ip route-static 0.0.0.0 0.0.0.0 178.22.174.30
-save`],['Проверка',`display vlan
-display interface brief
+save
+
+✅ Как проверить
+display current-configuration interface GigabitEthernet0/0/2
+
+⚠ Возможные ошибки
+PVID не совпадает.
+VLAN tagged/untagged перепутан.`],
+['Vlanif / IP управления',`📌 Что делает
+Назначает IP на VLAN-интерфейс.
+
+🛠 Когда использовать
+Для управления или шлюза VLAN.
+
+⌨ Команды
+system-view
+interface Vlanif1706
+ip address 10.151.200.50 255.255.255.252
+quit
+ip route-static 0.0.0.0 0.0.0.0 10.151.200.49
+save
+
+✅ Как проверить
+display ip interface brief
+display arp
+ping 10.151.200.49
+
+⚠ Возможные ошибки
+Management VLAN не проходит по trunk.
+Неверный gateway.`],
+['Eth-Trunk',`📌 Что делает
+Объединяет несколько физических портов в один логический канал.
+
+🛠 Когда использовать
+Для резервирования или увеличения пропускной способности.
+
+⌨ Команды
+system-view
+interface Eth-Trunk1
+mode lacp-static
+quit
+interface GigabitEthernet0/0/23
+eth-trunk 1
+quit
+interface GigabitEthernet0/0/24
+eth-trunk 1
+quit
+save
+
+✅ Как проверить
+display eth-trunk 1
+
+⚠ Возможные ошибки
+Разные настройки VLAN на участниках.
+LACP не совпадает на второй стороне.`],
+['SSH / Telnet',`📌 Что делает
+Включает удалённый доступ.
+
+🛠 Когда использовать
+Для безопасного управления коммутатором.
+
+⌨ Команды
+system-view
+stelnet server enable
+ssh user admin
+ssh user admin authentication-type password
+ssh user admin service-type stelnet
+user-interface vty 0 4
+authentication-mode aaa
+protocol inbound ssh
+quit
+save
+
+✅ Как проверить
+display ssh server status
+display users
+
+⚠ Возможные ошибки
+VTY разрешает только telnet.
+AAA пользователь не создан.`],
+['SNMP',`📌 Что делает
+Подключает коммутатор к мониторингу.
+
+🛠 Когда использовать
+Для NMS, графиков и аварий.
+
+⌨ Команды
+system-view
+snmp-agent
+snmp-agent community read public
+snmp-agent target-host trap address udp-domain 100.64.40.61 params securityname public
+save
+
+✅ Как проверить
+display snmp-agent community
+ping 100.64.40.61
+
+⚠ Возможные ошибки
+Community не совпадает.
+Нет маршрута до сервера.`],
+['ACL basic',`📌 Что делает
+Ограничивает доступ к управлению.
+
+🛠 Когда использовать
+Когда нужно разрешить доступ только с нужной подсети.
+
+⌨ Команды
+system-view
+acl number 2000
+rule permit source 10.0.0.0 0.255.255.255
+rule deny
+quit
+save
+
+✅ Как проверить
+display acl 2000
+
+⚠ Возможные ошибки
+Можно случайно закрыть себе доступ.`],
+['Диагностика MAC/ARP/Interface',`📌 Что делает
+Проверяет клиента и состояние портов.
+
+🛠 Когда использовать
+Нет ARP, нет MAC, нет интернета.
+
+⌨ Команды
 display mac-address
 display arp
-display current-configuration`]]},
-dlink:{name:'D-Link',desc:'DGS-3620 / DGS-3630 Web',tasks:[['Web: Создать VLAN',`1. L2 Features → VLAN → 802.1Q VLAN.
-2. Add/Create VLAN.
-3. VLAN ID: 3573.
-4. Name: CLIENT_3573.
-5. Apply.`],['Web: Tagged uplink',`1. Открыть VLAN 3573.
-2. Uplink порт поставить Tagged.
-3. Не удалять остальные VLAN с uplink.
-4. Apply.`],['Web: Untagged / PVID',`1. Client port = Untagged.
-2. VLAN → PVID Settings.
-3. Client PVID = 3573.
-4. Apply.`],['Web: IP управления',`Management / IP Interface:
-VLAN: 1706
-IP: 10.151.200.50
-Mask: 255.255.255.252
-Gateway: 10.151.200.49
-Apply.`],['Save Configuration',`Tools/System → Save Configuration → Success.`]]},
-zyxel:{name:'Zyxel',desc:'XGS3700 / Smart',tasks:[['VLAN таблица',`Advanced Application → VLAN → Static VLAN.
-VLAN ID: 3573.
-Uplink: Fixed / Tagged.
-Client: Fixed / Untagged.`],['PVID',`VLAN Port Setting.
-Client port PVID = 3573.
-Apply / Save.`],['Проверка',`show vlan
-show interfaces status
-show mac address-table`]]},
-eltex:{name:'Eltex',desc:'MES / LTP',tasks:[['MES Access',`configure
+display interface brief
+display current-configuration
+
+✅ Как проверить
+MAC клиента на правильном порту.
+ARP появляется на gateway.
+
+⚠ Возможные ошибки
+Смотреть MAC на не том коммутаторе.
+VLAN не проходит через uplink.`],
+['Оптика / Transceiver',`📌 Что делает
+Проверяет SFP модуль и уровни оптики.
+
+🛠 Когда использовать
+Нет линка, нестабильный линк, потери.
+
+⌨ Команды
+display transceiver interface GigabitEthernet0/0/25
+display interface GigabitEthernet0/0/25
+
+✅ Как проверить
+RX/TX в норме, ошибок CRC нет.
+
+⚠ Возможные ошибки
+BiDi модули не пара.
+Перепутаны TX/RX.
+Грязный коннектор.`],
+['CPU / Memory',`📌 Что делает
+Проверяет нагрузку коммутатора.
+
+🛠 Когда использовать
+Коммутатор тормозит, пропадает доступ, высокая задержка.
+
+⌨ Команды
+display cpu-usage
+display memory-usage
+display alarm active
+
+✅ Как проверить
+Нет высокой загрузки и активных аварий.
+
+⚠ Возможные ошибки
+Петля в сети.
+Storm/broadcast.`]
+]},
+eltex:{name:'Eltex PRO',desc:'MES / LTP • VLAN • Access • Trunk • Management • Diagnostics',tasks:[
+['Создать VLAN',`📌 Что делает
+Создаёт VLAN на Eltex MES.
+
+🛠 Когда использовать
+Новый клиент, сервис или объект.
+
+⌨ Команды
+configure
 vlan 3573
 exit
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+VLAN не добавлен на порт.`],
+['Access порт',`📌 Что делает
+Назначает клиентский порт в VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер.
+
+⌨ Команды
+configure
 interface gigabitethernet 1/0/2
 switchport mode access
 switchport access vlan 3573
 exit
-copy running-config startup-config`],['MES Trunk',`configure
-vlan 3573
-exit
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+show interfaces status
+show mac address-table
+
+⚠ Возможные ошибки
+Порт не поднят.
+VLAN не создан.`],
+['Trunk порт',`📌 Что делает
+Передаёт VLAN через uplink.
+
+🛠 Когда использовать
+Между коммутаторами или к OLT/радиомосту.
+
+⌨ Команды
+configure
 interface gigabitethernet 1/0/25
 switchport mode trunk
 switchport trunk allowed vlan add 3573
 exit
-copy running-config startup-config`]]},
-mikrotik:{name:'MikroTik',desc:'Bridge / VLAN / Wireless',tasks:[['Bridge hub',`/interface bridge add name=bridge1
-/interface bridge port add bridge=bridge1 interface=ether1
-/interface bridge port add bridge=bridge1 interface=ether2`],['IP управления',`/ip address add address=10.151.200.50/30 interface=bridge1
-/ip route add gateway=10.151.200.49`],['Wireless проверка',`/interface wireless registration-table print
-/interface wireless monitor wlan1
-/ping 8.8.8.8`]]},
-iskratel:{name:'Iskratel DSLAM',desc:'Платы / порты / линия',tasks:[['Перед настройкой',`show version
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+show interfaces switchport
+
+⚠ Возможные ошибки
+Allowed VLAN перезаписан вместо add.`],
+['Hybrid порт',`📌 Что делает
+Настраивает смешанный порт tagged/untagged.
+
+🛠 Когда использовать
+Когда нужен native VLAN и tagged сервисы.
+
+⌨ Команды
+configure
+interface gigabitethernet 1/0/2
+switchport mode general
+switchport general pvid 3573
+switchport general allowed vlan add 3573 untagged
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show running-config interface gigabitethernet 1/0/2
+
+⚠ Возможные ошибки
+PVID не совпадает с untagged VLAN.`],
+['IP управления',`📌 Что делает
+Назначает IP управления.
+
+🛠 Когда использовать
+Для доступа к коммутатору по сети.
+
+⌨ Команды
+configure
+interface vlan 1706
+ip address 10.151.200.50 255.255.255.252
+exit
+ip default-gateway 10.151.200.49
+copy running-config startup-config
+
+✅ Как проверить
+show ip interface
 show running-config
+
+⚠ Возможные ошибки
+VLAN управления не открыт на uplink.`],
+['SNMP',`📌 Что делает
+Включает мониторинг.
+
+🛠 Когда использовать
+Для NMS и аварий.
+
+⌨ Команды
+configure
+snmp-server community public ro
+snmp-server host 100.64.40.61 public
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show running-config | include snmp
+
+⚠ Возможные ошибки
+Community или route неверные.`],
+['Диагностика',`📌 Что делает
+Проверяет состояние коммутатора и клиента.
+
+🛠 Когда использовать
+Нет ARP, MAC, VLAN, линка.
+
+⌨ Команды
+show vlan
+show interfaces status
+show mac address-table
+show arp
+show interfaces counters
+show running-config
+
+✅ Как проверить
+MAC клиента на нужном порту.
+Ошибки не растут.
+
+⚠ Возможные ошибки
+Смотреть не тот uplink.
+Не сохранить конфигурацию.`]
+]},
+zyxel:{name:'Zyxel PRO',desc:'Fixed • Tagged • Untagged • Forbidden • PVID • Management',tasks:[
+['Static VLAN / Fixed',`📌 Что делает
+Добавляет порт в VLAN через Fixed.
+
+🛠 Когда использовать
+Когда VLAN должен существовать на порту.
+
+⌨ Настройка WEB
+Advanced Application → VLAN → Static VLAN
+VLAN ID: 3573
+Uplink: Fixed / Tagged
+Client: Fixed / Untagged
+Apply
+
+✅ Как проверить
+VLAN Table
+MAC Table
+
+⚠ Возможные ошибки
+Порт не Fixed.
+Поставили Forbidden вместо Fixed.`],
+['Tagged uplink',`📌 Что делает
+Передаёт VLAN tagged на uplink.
+
+🛠 Когда использовать
+Между коммутаторами, до OLT, радиомоста.
+
+⌨ Настройка WEB
+Static VLAN → VLAN 3573
+Uplink port: Fixed
+Tagging: Tagged
+Apply
+
+✅ Как проверить
+VLAN Table
+Port Status
+
+⚠ Возможные ошибки
+Uplink оставлен Untagged.
+VLAN не открыт на второй стороне.`],
+['Untagged client',`📌 Что делает
+Делает клиентский порт untagged.
+
+🛠 Когда использовать
+ПК, камера, роутер без VLAN tag.
+
+⌨ Настройка WEB
+Static VLAN → VLAN 3573
+Client port: Fixed
+Tagging: Untagged
+Apply
+
+✅ Как проверить
+MAC клиента появляется в VLAN.
+
+⚠ Возможные ошибки
+Не выставлен PVID.`],
+['PVID',`📌 Что делает
+Назначает VLAN по умолчанию для untagged трафика.
+
+🛠 Когда использовать
+Для access/client порта.
+
+⌨ Настройка WEB
+VLAN → VLAN Port Setting
+Port: client
+PVID: 3573
+Apply / Save
+
+✅ Как проверить
+VLAN Port Setting
+MAC Table
+
+⚠ Возможные ошибки
+Untagged VLAN есть, но PVID старый.`],
+['Forbidden',`📌 Что делает
+Запрещает VLAN на порту.
+
+🛠 Когда использовать
+Чтобы исключить VLAN с порта.
+
+⌨ Настройка WEB
+Static VLAN
+Port: Forbidden
+Apply
+
+✅ Как проверить
+VLAN Table
+
+⚠ Возможные ошибки
+Случайно поставили Forbidden на uplink.`],
+['CLI проверка',`📌 Что делает
+Проверяет состояние VLAN и портов.
+
+🛠 Когда использовать
+После настройки или аварии.
+
+⌨ Команды
+show vlan
+show interfaces status
+show mac address-table
+show running-config
+
+✅ Как проверить
+VLAN, PVID, MAC клиента.
+
+⚠ Возможные ошибки
+На Smart моделях CLI может быть урезан.`]
+]},
+dlink:{name:'D-Link PRO',desc:'WEB • CLI • VLAN • PVID • Management • Save',tasks:[
+['WEB: Создать VLAN',`📌 Что делает
+Создаёт VLAN через WEB-интерфейс.
+
+🛠 Когда использовать
+Если удобнее настраивать D-Link через браузер.
+
+⌨ Где находится
+L2 Features → VLAN → 802.1Q VLAN → Add/Create
+
+Поля:
+VLAN ID: 3573
+Name: CLIENT_3573
+Apply
+
+✅ Как проверить
+VLAN List
+FDB / MAC Address Table
+
+⚠ Возможные ошибки
+Создали VLAN, но не добавили порты.`],
+['WEB: Tagged uplink',`📌 Что делает
+Добавляет VLAN tagged на uplink.
+
+🛠 Когда использовать
+Для связи с другим коммутатором/OLT.
+
+⌨ Где находится
+L2 Features → VLAN → 802.1Q VLAN
+Открыть VLAN 3573
+Uplink port: Tagged
+Apply
+
+✅ Как проверить
+VLAN Membership
+FDB Table
+
+⚠ Возможные ошибки
+Удалили другие VLAN с uplink.`],
+['WEB: Untagged + PVID',`📌 Что делает
+Настраивает клиентский порт.
+
+🛠 Когда использовать
+Для ПК/роутера/камеры без VLAN tag.
+
+⌨ Где находится
+VLAN Membership:
+Client port = Untagged
+
+PVID Settings:
+Client PVID = 3573
+
+✅ Как проверить
+FDB Table
+PVID Settings
+
+⚠ Возможные ошибки
+Untagged настроили, но PVID не поменяли.`],
+['WEB: IP управления',`📌 Что делает
+Назначает IP управления.
+
+🛠 Когда использовать
+Для доступа к D-Link по сети.
+
+⌨ Где находится
+System → IP Interface / Management
+VLAN: 1706
+IP: 10.151.200.50
+Mask: 255.255.255.252
+Gateway: 10.151.200.49
+Apply
+
+✅ Как проверить
+Ping IP управления
+System Information
+
+⚠ Возможные ошибки
+Неверный VLAN управления.
+Gateway из другой подсети.`],
+['WEB: Save Config',`📌 Что делает
+Сохраняет настройки.
+
+🛠 Когда использовать
+После любых изменений.
+
+⌨ Где находится
+Tools → Save Configuration
+Save
+
+✅ Как проверить
+После перезагрузки настройки остались.
+
+⚠ Возможные ошибки
+Не нажали Save — после ребута всё пропало.`],
+['CLI: VLAN / Access / Trunk',`📌 Что делает
+CLI-шаблон для D-Link.
+
+🛠 Когда использовать
+Если доступ через консоль/SSH.
+
+⌨ Команды
+create vlan CLIENT_3573 tag 3573
+config vlan CLIENT_3573 add untagged 2
+config vlan CLIENT_3573 add tagged 25
+config pvid 2 3573
+save
+
+✅ Как проверить
+show vlan
+show fdb
+show ports
+
+⚠ Возможные ошибки
+Синтаксис зависит от модели DGS-3620/3630.`],
+['SNMP / Monitoring',`📌 Что делает
+Подключает D-Link к мониторингу.
+
+🛠 Когда использовать
+Для NMS и аварий.
+
+⌨ Команды
+create snmp community public view CommunityView read_only
+config snmp system_contact admin
+save
+
+✅ Как проверить
+show snmp
+ping NMS
+
+⚠ Возможные ошибки
+SNMP отключен или ACL блокирует доступ.`],
+['Loopback / Storm Control',`📌 Что делает
+Защита от петель и шторма.
+
+🛠 Когда использовать
+Если сеть падает от петли или broadcast.
+
+⌨ Где искать
+L2 Features → Loopback Detection
+Traffic Control / Storm Control
+
+✅ Как проверить
+Logs
+Port Status
+
+⚠ Возможные ошибки
+Можно заблокировать рабочий порт.`]
+]},
+mikrotik:{name:'MikroTik PRO',desc:'Bridge • VLAN • Wireless • PTP • DHCP • PPPoE • Firewall',tasks:[
+['Bridge hub',`📌 Что делает
+Объединяет порты в мост.
+
+🛠 Когда использовать
+Когда MikroTik работает как прозрачный мост/хаб.
+
+⌨ Команды
+/interface bridge add name=bridge1
+/interface bridge port add bridge=bridge1 interface=ether1
+/interface bridge port add bridge=bridge1 interface=ether2
+
+✅ Как проверить
+/interface bridge print
+/interface bridge port print
+
+⚠ Возможные ошибки
+Не добавили нужный порт в bridge.`],
+['VLAN через Bridge',`📌 Что делает
+Создаёт VLAN-интерфейс.
+
+🛠 Когда использовать
+Для управления или сервиса через VLAN.
+
+⌨ Команды
+/interface vlan add name=vlan3573 vlan-id=3573 interface=bridge1
+/ip address add address=178.22.174.29/30 interface=vlan3573
+
+✅ Как проверить
+/interface vlan print
+/ip address print
+/ping 178.22.174.30
+
+⚠ Возможные ошибки
+VLAN создан на неверном interface.`],
+['IP Route',`📌 Что делает
+Добавляет маршрут по умолчанию.
+
+🛠 Когда использовать
+Для выхода управления наружу.
+
+⌨ Команды
+/ip route add gateway=10.151.200.49
+/ip route print
+
+✅ Как проверить
+/ping 8.8.8.8
+
+⚠ Возможные ошибки
+Gateway недоступен в этом VLAN.`],
+['Wireless PTP AP',`📌 Что делает
+Настраивает сторону AP радиомоста.
+
+🛠 Когда использовать
+Для точка-точка линка.
+
+⌨ Команды
+/interface wireless set wlan1 mode=bridge ssid=LINK_3573 frequency=5680 band=5ghz-a/n/ac disabled=no
+/interface bridge port add bridge=bridge1 interface=wlan1
+
+✅ Как проверить
+/interface wireless registration-table print
+
+⚠ Возможные ошибки
+Частота занята.
+SSID/security не совпадает.`],
+['Wireless Station Bridge',`📌 Что делает
+Настраивает клиентскую сторону радиомоста.
+
+🛠 Когда использовать
+Вторая сторона PTP.
+
+⌨ Команды
+/interface wireless set wlan1 mode=station-bridge ssid=LINK_3573 frequency=5680 band=5ghz-a/n/ac disabled=no
+/interface bridge port add bridge=bridge1 interface=wlan1
+
+✅ Как проверить
+/interface wireless registration-table print
+/interface wireless monitor wlan1
+
+⚠ Возможные ошибки
+Station не подключается из-за security/frequency.`],
+['DHCP Server',`📌 Что делает
+Раздаёт IP адреса клиентам.
+
+🛠 Когда использовать
+Для локальной сети.
+
+⌨ Команды
+/ip pool add name=pool1 ranges=192.168.88.10-192.168.88.254
+/ip dhcp-server add name=dhcp1 interface=bridge1 address-pool=pool1 disabled=no
+/ip dhcp-server network add address=192.168.88.0/24 gateway=192.168.88.1
+
+✅ Как проверить
+/ip dhcp-server lease print
+
+⚠ Возможные ошибки
+DHCP включен не на том интерфейсе.`],
+['NAT / Internet',`📌 Что делает
+Включает NAT для доступа в интернет.
+
+🛠 Когда использовать
+Когда MikroTik работает как роутер.
+
+⌨ Команды
+/ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
+
+✅ Как проверить
+/ip firewall nat print
+/ping 8.8.8.8
+
+⚠ Возможные ошибки
+Out-interface выбран неверно.`],
+['Signal / CCQ / Throughput',`📌 Что делает
+Проверяет качество радиомоста.
+
+🛠 Когда использовать
+Скорость падает, пинг нестабилен.
+
+⌨ Команды
+/interface wireless registration-table print
+/interface wireless monitor wlan1
+/tool bandwidth-test
+
+✅ Как проверить
+Signal около -45…-65 dBm.
+CCQ ближе к 90-100%.
+SNR высокий.
+
+⚠ Возможные ошибки
+Шумная частота.
+Нет прямой видимости.
+Плохая юстировка.`]
+]},
+iskratel:{name:'Iskratel DSLAM PRO',desc:'Boards • Ports • PVC • Profiles • VLAN • Line diagnostics',tasks:[
+['Проверка плат',`📌 Что делает
+Показывает установленные платы DSLAM.
+
+🛠 Когда использовать
+Перед настройкой или диагностикой.
+
+⌨ Команды
 show board
 show slot
-show alarm active
-show interface
-show vlan`],['Плата и порт',`show board
-show slot
+show card
+show version
+
+✅ Как проверить
+Плата видна и в рабочем состоянии.
+
+⚠ Возможные ошибки
+Команды зависят от версии ПО.`],
+['Проверка DSL порта',`📌 Что делает
+Показывает состояние абонентского порта.
+
+🛠 Когда использовать
+Нет синхронизации или низкая скорость.
+
+⌨ Команды
 show dsl port
-show dsl port status`],['VLAN / uplink',`show vlan
+show dsl port status
+show interface
+
+✅ Как проверить
+Порт up, линия синхронизирована.
+
+⚠ Возможные ошибки
+Неверный slot/port.
+Пара повреждена.`],
+['Профиль скорости',`📌 Что делает
+Назначает профиль линии.
+
+🛠 Когда использовать
+Для ограничения/увеличения скорости ADSL/VDSL.
+
+⌨ Команды
+show profile
+show line-profile
+configure terminal
+interface dsl 1/1/1
+line-profile PROFILE_NAME
+exit
+
+✅ Как проверить
+show dsl line
+show dsl port status
+
+⚠ Возможные ошибки
+Профиль не поддерживается платой или линией.`],
+['PVC / Service',`📌 Что делает
+Настраивает PVC/сервис абонента.
+
+🛠 Когда использовать
+Для ADSL сервиса с VPI/VCI и VLAN.
+
+⌨ Команды
+show pvc
+show service
+configure terminal
+interface dsl 1/1/1
+pvc 0/35 vlan 3573
+service vlan 3573
+exit
+
+✅ Как проверить
+show service
+show pvc
+
+⚠ Возможные ошибки
+Неверный VPI/VCI.
+Неверный VLAN сервиса.`],
+['VLAN / Uplink',`📌 Что делает
+Открывает VLAN на DSLAM/uplink.
+
+🛠 Когда использовать
+Чтобы сервис дошёл до агрегации.
+
+⌨ Команды
+show vlan
 configure terminal
 vlan 3573
 name CLIENT_3573
 exit
-
 interface uplink 1
 switchport mode trunk
 switchport trunk allowed vlan add 3573
-exit`],['DSL порт / сервис',`show service
-show pvc
+exit
+
+✅ Как проверить
+show vlan
+show mac-address-table
+
+⚠ Возможные ошибки
+VLAN открыт на порту, но не на uplink.`],
+['Диагностика линии SNR/Attenuation',`📌 Что делает
+Проверяет качество медной линии.
+
+🛠 Когда использовать
+Низкая скорость, обрывы, ошибки.
+
+⌨ Команды
+show dsl line
+show dsl statistics
+show dsl port status
+
+✅ Как проверить
+SNR Margin нормальный.
+Attenuation не высокий.
+Ошибки не растут.
+
+⚠ Возможные ошибки
+Плохая пара.
+Длинная линия.
+Наводки.`],
+['CRC / FEC ошибки',`📌 Что делает
+Проверяет ошибки линии.
+
+🛠 Когда использовать
+Интернет есть, но потери/обрывы.
+
+⌨ Команды
+show counters
+show dsl statistics
+show dsl errors
+
+✅ Как проверить
+CRC не растёт быстро.
+FEC допустим, но не должен быть огромным.
+
+⚠ Возможные ошибки
+Плохой кабель.
+Проблема на кроссе.
+Плохой модем.`],
+['Перезапуск порта',`📌 Что делает
+Перезапускает абонентский DSL порт.
+
+🛠 Когда использовать
+После изменения профиля или зависания линии.
+
+⌨ Команды
+configure terminal
 interface dsl 1/1/1
-service vlan 3573
-pvc 0/35 vlan 3573
-line-profile PROFILE_NAME
+shutdown
 no shutdown
-exit`]]},
-bdcom:{name:'BDCOM OLT',desc:'ONU / PON / VLAN',tasks:[['Проверка ONU',`show onu list
+exit
+
+✅ Как проверить
+show dsl port status
+
+⚠ Возможные ошибки
+Абонент временно потеряет связь.`],
+['Активные аварии',`📌 Что делает
+Показывает аварии DSLAM.
+
+🛠 Когда использовать
+Перед работами и при массовой проблеме.
+
+⌨ Команды
+show alarm active
+show log
+show events
+
+✅ Как проверить
+Нет критических active alarm.
+
+⚠ Возможные ошибки
+Не отличили старые события от активных.`]
+]},
+bdcom:{name:'BDCOM OLT PRO',desc:'ONU • PON • Signal • VLAN • MAC • Service',tasks:[
+['Проверка ONU',`📌 Что делает
+Показывает список ONU.
+
+🛠 Когда использовать
+ONU offline или не работает клиент.
+
+⌨ Команды
+show onu list
 show pon onu-information
 show interface epon 0/1
+
+✅ Как проверить
+ONU online, статус normal.
+
+⚠ Возможные ошибки
+Смотреть не тот PON порт.`],
+['Поиск ONU по MAC/Serial',`📌 Что делает
+Ищет ONU по серийному номеру или MAC.
+
+🛠 Когда использовать
+Нужно понять где подключена ONU.
+
+⌨ Команды
+show onu list
 show mac address-table
-show running-config`],['ONU offline','Проверить PON порт, уровень, серийник ONU, профиль, VLAN сервиса и uplink.']]}
+show running-config
+
+✅ Как проверить
+Найден PON и ONU ID.
+
+⚠ Возможные ошибки
+ONU не зарегистрирована.`],
+['Уровень сигнала',`📌 Что делает
+Проверяет RX/TX ONU.
+
+🛠 Когда использовать
+ONU offline, потери, низкая скорость.
+
+⌨ Команды
+show pon optical-transceiver
+show onu optical-info
+
+✅ Как проверить
+Уровень в допустимых пределах.
+
+⚠ Возможные ошибки
+Грязный коннектор.
+Плохой сплиттер.
+Перегиб оптики.`],
+['VLAN сервис',`📌 Что делает
+Проверяет VLAN сервиса ONU.
+
+🛠 Когда использовать
+ONU online, но интернета нет.
+
+⌨ Команды
+show vlan
+show running-config
+show mac address-table
+
+✅ Как проверить
+VLAN есть на uplink и service.
+
+⚠ Возможные ошибки
+VLAN есть на ONU, но нет на uplink.`],
+['MAC / Traffic',`📌 Что делает
+Проверяет MAC клиента и трафик.
+
+🛠 Когда использовать
+Нет ARP или клиент не выходит.
+
+⌨ Команды
+show mac address-table
+show interface counters
+show interface epon 0/1
+
+✅ Как проверить
+MAC клиента виден за ONU.
+
+⚠ Возможные ошибки
+MAC виден только на uplink.
+Клиентский VLAN не совпадает.`]
+]}
 };
 const alarms=[
 ['Нет ARP',`1. Есть MAC клиента?
