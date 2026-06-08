@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06111f">
+<title>NetHelper KZ v4.3</title>
+<style>
+:root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(102,214,255,.20),transparent 38%),radial-gradient(circle at top right,rgba(112,227,154,.12),transparent 35%),linear-gradient(180deg,#071426,#050b13)}
+#splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,rgba(102,214,255,.34),transparent 28%),linear-gradient(160deg,#04101f,#071b33 48%,#06111f);z-index:100;display:flex;align-items:center;justify-content:center;animation:hide .75s ease 1.6s forwards;overflow:hidden}
+#splash:before{content:"";position:absolute;width:280px;height:280px;border:2px solid rgba(102,214,255,.32);border-radius:50%;box-shadow:0 0 40px rgba(102,214,255,.22);animation:ring 1.55s ease-in-out infinite}
+#splash:after{content:"";position:absolute;width:360px;height:360px;border:2px dashed rgba(112,227,154,.32);border-radius:50%;animation:spin 4.5s linear infinite}
+.sLogo{width:124px;height:124px;border-radius:36px;background:linear-gradient(135deg,#66d6ff 0%,#70e39a 55%,#ffc66d 100%);display:flex;align-items:center;justify-content:center;color:#06111f;font-size:44px;font-weight:1000;box-shadow:0 0 38px rgba(102,214,255,.65),0 0 90px rgba(112,227,154,.35);animation:logo 1.45s ease-in-out infinite;z-index:2}
+@keyframes logo{50%{transform:scale(1.1) rotate(3deg);filter:brightness(1.2)}}@keyframes ring{50%{transform:scale(1.2);opacity:.35}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes hide{to{opacity:0;visibility:hidden}}
+header{position:sticky;top:0;z-index:20;padding:14px;background:rgba(6,17,31,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;color:#06111f;font-weight:1000;font-size:20px}
+h1{font-size:27px;color:var(--blue);margin:0}.sub{font-size:12px;color:var(--muted);margin-top:5px}
+.lang button{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:9px 11px;font-weight:900}.lang .active{background:var(--blue);color:#06111f}
+.search{margin-top:12px}input,select,textarea{width:100%;border:1px solid var(--line);background:#07101e;color:var(--text);padding:14px;border-radius:16px;font-size:16px;outline:none}textarea{min-height:105px}
+main{padding:14px 14px 110px}.screen{display:none}.screen.active{display:block}
+.hero{border:1px solid var(--line);border-radius:28px;padding:18px;background:linear-gradient(135deg,rgba(102,214,255,.18),rgba(112,227,154,.08));box-shadow:var(--shadow);margin-bottom:13px}
+.hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:var(--muted);line-height:1.45}
+.status{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{background:rgba(7,16,30,.65);border:1px solid var(--line);border-radius:16px;padding:10px;text-align:center}.stat b{display:block;color:var(--green);font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mainGrid{display:grid;grid-template-columns:1fr;gap:12px}.big,.card{background:linear-gradient(180deg,#10233e,#0b182c);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text);text-align:left}
+.big{display:flex;gap:14px;align-items:center;border-radius:24px;padding:17px;font-weight:900}.card{border-radius:22px;padding:16px;min-height:108px}.card:active,.big:active{transform:scale(.99)}
+.ico{width:52px;height:52px;border-radius:17px;background:#07101e;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:25px;flex:0 0 auto}
+.big h3,.card h3{font-size:21px;margin:0 0 8px}.big p,.card p{font-size:13px;color:var(--muted);line-height:1.35;margin:0;font-weight:500}.full{grid-column:1/-1}
+.badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;background:#0a3145;color:#91e8ff;font-size:12px;font-weight:900}
+.back{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:16px;padding:12px 14px;font-weight:900;margin-bottom:12px}.titlebox{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#102846,#0c1729);padding:16px;margin-bottom:12px}.titlebox h2{margin:0 0 6px;font-size:25px}.titlebox p{color:var(--muted);margin:0;line-height:1.45}
+.item{background:rgba(15,32,57,.96);border:1px solid var(--line);border-radius:20px;padding:14px;margin:10px 0}.item h3{font-size:20px;margin:0 0 8px}.item p{color:var(--muted);line-height:1.55}
+pre{white-space:pre-wrap;background:#030913;border:1px solid #233d63;border-radius:16px;padding:13px;overflow:auto;color:#dff6ff;font-size:13px;line-height:1.45}
+.copy,.btn{border:0;background:var(--green);color:#06111f;border-radius:14px;padding:10px 12px;font-weight:1000;margin-top:8px}.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}.btn.orange{background:var(--orange)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kv div{background:#07101f;border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--muted)}.out{background:#07101f;border:1px solid var(--line);border-radius:16px;padding:12px;color:var(--muted);line-height:1.65;margin-top:10px}.note{border-left:4px solid var(--blue);padding-left:10px;color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow:auto;margin:10px 0 12px}.tabs button{white-space:nowrap;border:1px solid var(--line);background:#07101f;color:var(--text);border-radius:999px;padding:10px 13px;font-weight:900}.tabs button.active{background:var(--blue);color:#06111f}
+.result{display:none}.result.active{display:block}.bottomName{position:fixed;bottom:58px;left:12px;right:12px;text-align:center;color:#9db1d0;font-size:13px;font-weight:900;z-index:25;pointer-events:none;text-shadow:0 3px 14px #000}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}nav button{border:0;background:transparent;color:var(--muted);font-weight:900;font-size:11px;padding:8px 4px;min-width:58px}nav button.active{color:var(--blue)}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.row,.kv,.status{grid-template-columns:1fr 1fr}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div id="splash"><div class="sLogo">NH</div></div>
+<header>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.3 — Object PRO • Offline Core</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
+</header>
+<main>
+<section id="home" class="screen active">
+<div class="hero"><h2>Главное меню</h2><p>Разделы связаны между собой: объект → отчёты → история → оборудование → диагностика → backup.</p><div class="status"><div class="stat"><b id="stObj">0</b><span>объектов</span></div><div class="stat"><b id="stRep">0</b><span>отчётов</span></div><div class="stat"><b id="stInv">0</b><span>склад</span></div><div class="stat"><b>OFF</b><span>offline</span></div></div></div>
+<div class="mainGrid">
+<button class="big" onclick="showWorkCenter()"><div class="ico">🧭</div><div><h3>Рабочий центр</h3><p>Объекты, отчёты, история и статистика в одном месте</p></div></button><button class="big" onclick="showObjectPro()"><div class="ico">📍</div><div><h3>Паспорт объекта PRO</h3><p>IP, VLAN, оборудование, схема, аварии и история</p></div></button>
+<button class="big" onclick="showSwitches()"><div class="ico">🔧</div><div><h3>Настройка оборудования</h3><p>SNR, Huawei, D-Link, Zyxel, Eltex, MikroTik, Iskratel, BDCOM</p></div></button><button class="big" onclick="showQuickTasks()"><div class="ico">⚡</div><div><h3>Быстрые задачи PRO</h3><p>VLAN, ARP, MAC, оптика, DSLAM, ONU</p></div></button>
+<button class="big" onclick="showAlarms()"><div class="ico">⚡</div><div><h3>Аварии и диагностика</h3><p>Нет ARP, VLAN не проходит, ONU Offline, помощник</p></div></button>
+<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, VLAN PRO, MikroTik Signal, консоль</p></div></button>
+<button class="big" onclick="showInventory()"><div class="ico">📦</div><div><h3>Склад и оборудование</h3><p>SFP, ONU, кабели, патчкорды и учёт остатков</p></div></button>
+<button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, GPON, DSL, маски и /30</p></div></button><button class="big" onclick="showGlossary()"><div class="ico">📘</div><div><h3>Словарь инженера</h3><p>VLAN, PVID, Tagged, ARP, MAC, SFP</p></div></button>
+<button class="big" onclick="showWeatherTrip()"><div class="ico">🌦️</div><div><h3>Погода для выезда</h3><p>Ветер, температура, осадки и чек‑лист</p></div></button>
+</div><div id="searchResult" class="result"></div>
+</section>
+
+<section id="workCenter" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧭 Рабочий центр</h2><p>Всё, что связано с объектами и выездами.</p></div><div class="grid"><button class="card full" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Карточки объектов, IP, VLAN, схема сети</p></button><button class="card full" onclick="showObjectPro()"><h3>📍 Паспорт объекта PRO</h3><p>Расширенная карточка объекта</p></button><button class="card" onclick="showIncidentBase()"><h3>⚠️ База аварий</h3><p>Проблема → причина → решение</p></button><button class="card" onclick="showDiagMaster()"><h3>🤖 Мастер диагностики</h3><p>Link → MAC → ARP → IP</p></button><button class="card full" onclick="showReport()"><h3>📄 Создать отчёт</h3><p>Отчёт можно привязать к объекту</p></button><button class="card" onclick="showHistory()"><h3>📋 История</h3><p>Все отчёты</p></button><button class="card" onclick="showStats()"><h3>📊 Статистика</h3><p>Сводка по базе</p></button><button class="card" onclick="showFav()"><h3>⭐ Избранное</h3><p>Команды</p></button><button class="card" onclick="showBackup()"><h3>💾 Backup</h3><p>Экспорт/импорт</p></button><button class="card" onclick="showWeatherTrip()"><h3>🌦️ Погода</h3><p>Погода и чек-лист выезда</p></button><button class="card" onclick="showAbout()"><h3>ℹ️ О программе</h3><p>Orynbekov Product</p></button></div></section>
+
+<section id="objects" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>🗂 Объекты</h2><p>Карточка объекта связана с отчётами и историей работ.</p></div><div class="item"><input id="objName" placeholder="Название объекта"><input id="objAddr" placeholder="Адрес / населённый пункт" style="margin-top:8px"><input id="objEquip" placeholder="Оборудование" style="margin-top:8px"><input id="objVlan" placeholder="VLAN / IP / Gateway" style="margin-top:8px"><textarea id="objMap" placeholder="Схема сети: Huawei → SNR → MikroTik → Клиенты"></textarea><textarea id="objNote" placeholder="Заметки"></textarea><button class="btn blue" onclick="saveObj()">Сохранить объект</button></div><div id="objList"></div></section>
+
+<section id="report" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📄 Отчёт после выезда</h2><p>Отчёт сохраняется в историю и привязывается к объекту по названию.</p></div><div class="item"><input id="repWorker" placeholder="Сотрудник / исполнитель" oninput="saveWorkerName()"><select id="repObjSelect" style="margin-top:8px" onchange="fillReportObject()"></select><input id="repObj" placeholder="Объект" style="margin-top:8px"><input id="repEquip" placeholder="Оборудование" style="margin-top:8px"><input id="repWork" placeholder="Что сделано" style="margin-top:8px"><textarea id="repResult" placeholder="Результат / проверка / что осталось"></textarea><button class="btn blue" onclick="makeReport()">Сформировать и сохранить отчёт</button><pre id="reportOut"></pre><button class="copy" onclick="copyBlock('reportOut')">Копировать отчёт</button></div></section>
+
+<section id="history" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📋 История отчётов</h2><p>Отчёты можно открыть, скопировать или удалить.</p></div><div id="historyList"></div></section>
+<section id="stats" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>📊 Статистика</h2><p>Сводка по объектам, отчётам, складу и командам.</p></div><div id="statsBox"></div></section>
+<section id="fav" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>⭐ Избранные команды</h2><p>Сохраняй свои команды для быстрого копирования.</p></div><div class="item"><input id="favName" placeholder="Название команды"><textarea id="favCmd" placeholder="Команда или набор команд"></textarea><button class="btn blue" onclick="saveFav()">Сохранить команду</button></div><div id="favList"></div></section>
+<section id="backup" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>💾 Backup / Restore</h2><p>Экспортирует объекты, отчёты, склад, избранное и имя сотрудника.</p></div><div class="item"><button class="btn blue" onclick="makeBackup()">Сделать backup</button><textarea id="backupText" placeholder="Тут появится backup. Для восстановления вставь backup сюда."></textarea><button class="btn" onclick="restoreBackup()">Восстановить backup</button></div></section>
+
+<section id="switches" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🔧 Настройка оборудования PRO</h2><p>Выбери производителя. Внутри каждой задачи есть: что делает, когда использовать, команды, проверка и ошибки.</p></div><div class="grid" id="switchGrid"></div></section>
+<section id="vendor" class="screen"><button class="back" onclick="showSwitches()">← Оборудование</button><div id="vendorBody"></div></section>
+
+<section id="alarms" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Аварии и диагностика</h2><p>Готовые сценарии и помощник диагностики в одном разделе.</p></div><div class="grid"><button class="card full" onclick="showDiagHelper()"><h3>🤖 Помощник диагностики</h3><p>Напиши проблему и получи алгоритм</p></button></div><div class="grid" id="alarmGrid" style="margin-top:12px"></div></section>
+<section id="diagHelper" class="screen"><button class="back" onclick="showAlarms()">← Аварии</button><div class="titlebox"><h2>🤖 Помощник диагностики</h2><p>Например: нет ARP, нет MAC, ONU offline, нет линка.</p></div><div class="item"><input id="diagInput" placeholder="Введите проблему" oninput="diagAnswer()"><button class="btn blue" onclick="diagAnswer()">Показать алгоритм</button><div id="diagOut" class="out"></div></div></section>
+
+<section id="tools" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧮 Инструменты</h2><p>Калькуляторы и генераторы.</p></div><div class="grid" id="toolGrid"></div></section>
+<section id="inventory" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📦 Склад и оборудование</h2><p>Учёт оборудования связан с backup и статистикой.</p></div><div class="item"><input id="invName" placeholder="Оборудование: SFP 1G / ONU / патчкорд"><input id="invCount" placeholder="Количество" style="margin-top:8px"><textarea id="invNote" placeholder="Примечание / где лежит / объект"></textarea><button class="btn blue" onclick="saveInv()">Сохранить</button></div><div id="invList"></div></section>
+<section id="reference" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📚 Справочник</h2><p>Короткие памятки.</p></div><div class="grid" id="refGrid"></div></section>
+
+<section id="weatherTrip" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>🌦️ Погода для выезда</h2><p>Работает при наличии интернета. Если интернета нет — остаётся офлайн чек‑лист.</p></div><div class="item"><input id="weatherCity" value="Aktobe" placeholder="Город: Aktobe"><button class="btn blue" onclick="loadWeather()">Показать погоду</button><div id="weatherOut" class="out">Офлайн чек‑лист: ноутбук, зарядка, консольный кабель, SFP, патчкорды, тестер, отвёртка, powerbank.</div></div><div class="item"><h3>📋 Чек‑лист выезда</h3><pre>☐ Ноутбук
+☐ Зарядка
+☐ Консольный кабель
+☐ USB-C/USB переходник
+☐ SFP 1G/10G
+☐ Патчкорды
+☐ Тестер
+☐ Отвёртка
+☐ Обжимка
+☐ PowerBank
+☐ Фото до работ
+☐ Фото после работ
+☐ Сохранить конфигурацию
+☐ Создать отчёт</pre></div></section>
+
+<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.3</h3><pre>Автор: Orynbekov
+Продукт: Orynbekov Product
+Назначение: Network Engineer Toolkit
+Режим: Offline-first
+Год: 2026</pre></div></section>
+
+
+<section id="quickTasks" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚡ Быстрые задачи PRO</h2><p>Готовые алгоритмы для выезда: что делать, команды, проверка и ошибки.</p></div><div class="grid" id="quickTaskGrid"></div></section>
+<section id="taskArticle" class="screen"><button class="back" onclick="showQuickTasks()">← Быстрые задачи</button><div id="taskArticleBody"></div></section>
+<section id="vlanPath" class="screen"><button class="back" onclick="showTools()">← Инструменты</button><div class="titlebox"><h2>🧵 Карта VLAN</h2><p>Показывает как должен идти VLAN от клиента до uplink/gateway.</p></div><div class="item"><input id="vpName" value="3573" placeholder="VLAN ID"><input id="vpClient" value="Client port 1/0/2" style="margin-top:8px"><input id="vpUplink" value="Uplink 1/0/25" style="margin-top:8px"><button class="btn blue" onclick="makeVlanPath()">Собрать схему</button><pre id="vlanPathOut"></pre></div></section>
+<section id="opticalCalc" class="screen"><button class="back" onclick="showTools()">← Инструменты</button><div class="titlebox"><h2>🔦 Оптический калькулятор</h2><p>Оценка RX/TX и подсказки что проверить.</p></div><div class="item"><div class="row"><input id="rxVal" value="-21" placeholder="RX dBm"><input id="txVal" value="-3" placeholder="TX dBm"></div><button class="btn blue" onclick="calcOptics()">Проверить</button><div id="opticsOut" class="out"></div></div></section>
+<section id="portDoctor" class="screen"><button class="back" onclick="showTools()">← Инструменты</button><div class="titlebox"><h2>🩺 Диагностика порта</h2><p>Нет линка, MAC, ARP, VLAN или скорость режется.</p></div><div class="item"><select id="portProblem" onchange="portDoctor()"><option value="link">Нет линка</option><option value="mac">Нет MAC</option><option value="arp">Нет ARP</option><option value="speed">Режется скорость</option><option value="vlan">VLAN не проходит</option></select><button class="btn blue" onclick="portDoctor()">Показать</button><pre id="portDoctorOut"></pre></div></section>
+<section id="glossary" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📘 Словарь инженера</h2><p>Коротко и понятно по основным терминам.</p></div><div id="glossaryList"></div></section>
+
+
+<section id="objectPro" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📍 Паспорт объекта PRO</h2><p>Полная карточка объекта: адрес, IP, VLAN, оборудование, схема, контакты и история.</p></div><div class="item"><input id="opName" placeholder="Название объекта"><input id="opAddress" placeholder="Адрес / населённый пункт" style="margin-top:8px"><input id="opCoords" placeholder="Координаты / ссылка на карту" style="margin-top:8px"><input id="opContact" placeholder="Контакт / ответственный" style="margin-top:8px"><input id="opMgmt" placeholder="IP управления: 10.151.200.50/30" style="margin-top:8px"><input id="opVlan" placeholder="VLAN управления / клиентский VLAN" style="margin-top:8px"><input id="opGateway" placeholder="Gateway" style="margin-top:8px"><textarea id="opEquip" placeholder="Оборудование: Huawei → SNR → MikroTik → Клиенты"></textarea><textarea id="opSerials" placeholder="Серийные номера / SFP / ONU"></textarea><textarea id="opMap" placeholder="Схема сети объекта"></textarea><textarea id="opNote" placeholder="Примечания"></textarea><button class="btn blue" onclick="saveObjectPro()">Сохранить паспорт</button></div><div id="objectProList"></div></section>
+
+<section id="incidentBase" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚠️ База аварий</h2><p>Сохраняй аварии по объектам: проблема, причина, решение и проверка.</p></div><div class="item"><input id="incObject" placeholder="Объект"><input id="incWorker" placeholder="Инженер" style="margin-top:8px"><input id="incProblem" placeholder="Проблема: Нет ARP / ONU Offline / Нет линка" style="margin-top:8px"><textarea id="incReason" placeholder="Причина"></textarea><textarea id="incSolution" placeholder="Что сделали / решение"></textarea><textarea id="incCheck" placeholder="Как проверили результат"></textarea><button class="btn blue" onclick="saveIncident()">Сохранить аварию</button></div><div id="incidentList"></div></section>
+
+<section id="diagMaster" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🤖 Мастер диагностики сети</h2><p>Ответь на вопросы — NetHelper покажет вероятную причину и что делать дальше.</p></div><div class="item"><select id="dmLink"><option value="yes">Линк есть</option><option value="no">Линка нет</option></select><select id="dmMac" style="margin-top:8px"><option value="yes">MAC есть</option><option value="no">MAC нет</option></select><select id="dmArp" style="margin-top:8px"><option value="yes">ARP есть</option><option value="no">ARP нет</option></select><select id="dmIp" style="margin-top:8px"><option value="yes">IP/маска правильные</option><option value="no">IP/маска под вопросом</option></select><button class="btn blue" onclick="runDiagMaster()">Диагностировать</button><pre id="diagMasterOut"></pre></div></section>
+
+<section id="configBuilder" class="screen"><button class="back" onclick="showTools()">← Инструменты</button><div class="titlebox"><h2>🛠️ Конструктор конфигов MAX</h2><p>Введи VLAN, порт клиента, uplink и IP управления — получи готовые команды.</p></div><div class="item"><input id="cbVlan" value="3573" placeholder="VLAN"><input id="cbClient" value="1/0/2" style="margin-top:8px" placeholder="Порт клиента"><input id="cbUplink" value="1/0/25" style="margin-top:8px" placeholder="Uplink"><input id="cbMgmt" value="10.151.200.50/30" style="margin-top:8px" placeholder="IP управления /30"><button class="btn blue" onclick="buildConfigMax()">Собрать конфиг</button><pre id="configBuilderOut"></pre><button class="copy" onclick="copyBlock('configBuilderOut')">Копировать</button></div></section>
+
+<section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
+</main>
+<div class="bottomName">© 2026 Orynbekov Product • Network Engineer Toolkit</div>
+<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showWorkCenter()">Работа</button><button onclick="showSwitches()">Оборуд.</button><button onclick="showAlarms()">Аварии</button><button onclick="showTools()">Инструм.</button></nav>
+
+<script>
+const vendors={
+snr:{name:'SNR PRO',desc:'VLAN • Access • Trunk • Hybrid • SNMP • Security • Diagnostics',tasks:[
+['Создать VLAN',`📌 Что делает
+Создаёт новый VLAN на коммутаторе.
+
+🛠 Когда использовать
+Когда нужно открыть новый сервис, клиента или объект.
+
+⌨ Команды
+configure terminal
+vlan 3573
+name CLIENT_3573
+exit
+write
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+VLAN создан только на одном коммутаторе.
+VLAN не добавлен в uplink/trunk.`],
+['Удалить VLAN',`📌 Что делает
+Удаляет VLAN из конфигурации.
+
+🛠 Когда использовать
+Когда VLAN больше не используется.
+
+⌨ Команды
+configure terminal
+no vlan 3573
+exit
+write
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+Перед удалением не проверили, что через VLAN не работает клиент.`],
+['Access порт',`📌 Что делает
+Делает порт клиентским в одном VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер, клиентское устройство.
+
+⌨ Команды
+configure terminal
+vlan 3573
+exit
+interface ethernet 1/0/2
+switchport mode access
+switchport access vlan 3573
+no shutdown
+exit
+write
+
+✅ Как проверить
+show vlan
+show interface status
+show mac address-table
+
+⚠ Возможные ошибки
+Забыли PVID/access VLAN.
+Порт shutdown.
+Кабель или патч-панель неисправны.`],
+['Trunk uplink',`📌 Что делает
+Передаёт несколько VLAN через один uplink.
+
+🛠 Когда использовать
+Между коммутаторами, до OLT, радиомоста или агрегации.
+
+⌨ Команды
+configure terminal
+vlan 3573
+exit
+interface ethernet 1/0/25
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+no shutdown
+exit
+write
+
+✅ Как проверить
+show vlan
+show interface ethernet 1/0/25
+show mac address-table
+
+⚠ Возможные ошибки
+VLAN не добавлен в allowed list.
+Удалили другие VLAN из trunk.
+На второй стороне VLAN не открыт.`],
+['Hybrid / PVID',`📌 Что делает
+Позволяет порту принимать untagged и tagged VLAN.
+
+🛠 Когда использовать
+Когда устройство требует native VLAN + tagged VLAN.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+switchport mode hybrid
+switchport hybrid native vlan 3573
+switchport hybrid allowed vlan add 3573 untagged
+exit
+write
+
+✅ Как проверить
+show running-config interface ethernet 1/0/2
+show vlan
+
+⚠ Возможные ошибки
+Native VLAN не совпадает.
+Untagged/Tagged перепутаны.`],
+['IP управления / VLANIF',`📌 Что делает
+Назначает IP управления на VLAN.
+
+🛠 Когда использовать
+Для доступа к коммутатору по management VLAN.
+
+⌨ Команды
+configure terminal
+interface vlan 1706
+ip address 10.151.200.50 255.255.255.252
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.151.200.49
+write
+
+✅ Как проверить
+show ip interface brief
+show arp
+ping 10.151.200.49
+
+⚠ Возможные ошибки
+Неверная маска /30.
+Неверный gateway.
+Management VLAN не проходит по uplink.`],
+['SNMP',`📌 Что делает
+Включает мониторинг коммутатора.
+
+🛠 Когда использовать
+Для NMS/мониторинга состояния.
+
+⌨ Команды
+configure terminal
+snmp-server community public ro
+snmp-server host 100.64.40.61 public
+exit
+write
+
+✅ Как проверить
+show running-config | include snmp
+ping 100.64.40.61
+
+⚠ Возможные ошибки
+Community не совпадает.
+ACL блокирует SNMP.
+Нет маршрута до NMS.`],
+['Port Security / Protection',`📌 Что делает
+Ограничивает или защищает MAC на порту.
+
+🛠 Когда использовать
+Когда нужно защитить клиентский порт.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+switchport port-security
+switchport port-security maximum 1
+exit
+write
+
+✅ Как проверить
+show port-security
+show mac address-table
+
+⚠ Возможные ошибки
+Порт блокирует нового клиента.
+MAC старого устройства остался в таблице.`],
+['Скорость порта',`📌 Что делает
+Настраивает скорость и duplex порта.
+
+🛠 Когда использовать
+Когда порт поднялся на 100M вместо 1G или есть проблемы negotiation.
+
+⌨ Команды
+configure terminal
+interface ethernet 1/0/2
+speed auto
+duplex auto
+exit
+write
+
+✅ Как проверить
+show interface ethernet 1/0/2
+show interface status
+
+⚠ Возможные ошибки
+Кабель 4 жилы.
+Устройство на другой стороне force 100.
+Плохой патчкорд.`],
+['Диагностика MAC/ARP/CRC/SFP',`📌 Что делает
+Проверяет клиента, ARP, ошибки и оптику.
+
+🛠 Когда использовать
+Нет интернета, нет ARP, режется скорость, нет линка.
+
+⌨ Команды
+show mac address-table
+show arp
+show interface ethernet 1/0/2
+show interface ethernet 1/0/2 counters
+show transceiver
+
+✅ Как проверить
+MAC клиента виден на нужном порту.
+ARP появляется на шлюзе.
+CRC/FCS не растут.
+
+⚠ Возможные ошибки
+MAC виден только на uplink.
+VLAN не проходит.
+Плохой кабель/SFP.`],
+['Сохранить / Backup',`📌 Что делает
+Сохраняет конфигурацию.
+
+🛠 Когда использовать
+После любых изменений.
+
+⌨ Команды
+write
+copy running-config startup-config
+show running-config
+
+✅ Как проверить
+После перезагрузки настройки остались.
+
+⚠ Возможные ошибки
+Забыли сохранить — после ребута настройки пропали.`]
+]},
+huawei:{name:'Huawei PRO',desc:'VLAN • Trunk • Hybrid • Vlanif • Route • SNMP • Optical',tasks:[
+['VLAN batch',`📌 Что делает
+Создаёт один или несколько VLAN.
+
+🛠 Когда использовать
+Для нового клиента, сервиса или управления.
+
+⌨ Команды
+system-view
+vlan batch 3573
+quit
+save
+
+✅ Как проверить
+display vlan
+
+⚠ Возможные ошибки
+VLAN создан, но не добавлен на порт/uplink.`],
+['Access порт',`📌 Что делает
+Назначает клиентский порт в один VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер, клиент.
+
+⌨ Команды
+system-view
+vlan batch 3573
+interface GigabitEthernet0/0/2
+port link-type access
+port default vlan 3573
+quit
+save
+
+✅ Как проверить
+display vlan
+display interface brief
+display mac-address
+
+⚠ Возможные ошибки
+Не тот номер порта.
+Порт shutdown.
+VLAN не проходит дальше.`],
+['Trunk порт',`📌 Что делает
+Передаёт VLAN через uplink.
+
+🛠 Когда использовать
+Связь между коммутаторами, OLT, радиомостом.
+
+⌨ Команды
+system-view
+interface GigabitEthernet0/0/25
+port link-type trunk
+port trunk allow-pass vlan 3573
+quit
+save
+
+✅ Как проверить
+display vlan
+display interface GigabitEthernet0/0/25
+
+⚠ Возможные ошибки
+Забыли allow-pass vlan.
+На второй стороне VLAN не открыт.`],
+['Hybrid порт',`📌 Что делает
+Настраивает порт с tagged и untagged VLAN.
+
+🛠 Когда использовать
+Для сложных схем, телефонии, радиомостов, native VLAN.
+
+⌨ Команды
+system-view
+interface GigabitEthernet0/0/2
+port link-type hybrid
+port hybrid pvid vlan 3573
+port hybrid untagged vlan 3573
+quit
+save
+
+✅ Как проверить
+display current-configuration interface GigabitEthernet0/0/2
+
+⚠ Возможные ошибки
+PVID не совпадает.
+VLAN tagged/untagged перепутан.`],
+['Vlanif / IP управления',`📌 Что делает
+Назначает IP на VLAN-интерфейс.
+
+🛠 Когда использовать
+Для управления или шлюза VLAN.
+
+⌨ Команды
+system-view
+interface Vlanif1706
+ip address 10.151.200.50 255.255.255.252
+quit
+ip route-static 0.0.0.0 0.0.0.0 10.151.200.49
+save
+
+✅ Как проверить
+display ip interface brief
+display arp
+ping 10.151.200.49
+
+⚠ Возможные ошибки
+Management VLAN не проходит по trunk.
+Неверный gateway.`],
+['Eth-Trunk',`📌 Что делает
+Объединяет несколько физических портов в один логический канал.
+
+🛠 Когда использовать
+Для резервирования или увеличения пропускной способности.
+
+⌨ Команды
+system-view
+interface Eth-Trunk1
+mode lacp-static
+quit
+interface GigabitEthernet0/0/23
+eth-trunk 1
+quit
+interface GigabitEthernet0/0/24
+eth-trunk 1
+quit
+save
+
+✅ Как проверить
+display eth-trunk 1
+
+⚠ Возможные ошибки
+Разные настройки VLAN на участниках.
+LACP не совпадает на второй стороне.`],
+['SSH / Telnet',`📌 Что делает
+Включает удалённый доступ.
+
+🛠 Когда использовать
+Для безопасного управления коммутатором.
+
+⌨ Команды
+system-view
+stelnet server enable
+ssh user admin
+ssh user admin authentication-type password
+ssh user admin service-type stelnet
+user-interface vty 0 4
+authentication-mode aaa
+protocol inbound ssh
+quit
+save
+
+✅ Как проверить
+display ssh server status
+display users
+
+⚠ Возможные ошибки
+VTY разрешает только telnet.
+AAA пользователь не создан.`],
+['SNMP',`📌 Что делает
+Подключает коммутатор к мониторингу.
+
+🛠 Когда использовать
+Для NMS, графиков и аварий.
+
+⌨ Команды
+system-view
+snmp-agent
+snmp-agent community read public
+snmp-agent target-host trap address udp-domain 100.64.40.61 params securityname public
+save
+
+✅ Как проверить
+display snmp-agent community
+ping 100.64.40.61
+
+⚠ Возможные ошибки
+Community не совпадает.
+Нет маршрута до сервера.`],
+['ACL basic',`📌 Что делает
+Ограничивает доступ к управлению.
+
+🛠 Когда использовать
+Когда нужно разрешить доступ только с нужной подсети.
+
+⌨ Команды
+system-view
+acl number 2000
+rule permit source 10.0.0.0 0.255.255.255
+rule deny
+quit
+save
+
+✅ Как проверить
+display acl 2000
+
+⚠ Возможные ошибки
+Можно случайно закрыть себе доступ.`],
+['Диагностика MAC/ARP/Interface',`📌 Что делает
+Проверяет клиента и состояние портов.
+
+🛠 Когда использовать
+Нет ARP, нет MAC, нет интернета.
+
+⌨ Команды
+display mac-address
+display arp
+display interface brief
+display current-configuration
+
+✅ Как проверить
+MAC клиента на правильном порту.
+ARP появляется на gateway.
+
+⚠ Возможные ошибки
+Смотреть MAC на не том коммутаторе.
+VLAN не проходит через uplink.`],
+['Оптика / Transceiver',`📌 Что делает
+Проверяет SFP модуль и уровни оптики.
+
+🛠 Когда использовать
+Нет линка, нестабильный линк, потери.
+
+⌨ Команды
+display transceiver interface GigabitEthernet0/0/25
+display interface GigabitEthernet0/0/25
+
+✅ Как проверить
+RX/TX в норме, ошибок CRC нет.
+
+⚠ Возможные ошибки
+BiDi модули не пара.
+Перепутаны TX/RX.
+Грязный коннектор.`],
+['CPU / Memory',`📌 Что делает
+Проверяет нагрузку коммутатора.
+
+🛠 Когда использовать
+Коммутатор тормозит, пропадает доступ, высокая задержка.
+
+⌨ Команды
+display cpu-usage
+display memory-usage
+display alarm active
+
+✅ Как проверить
+Нет высокой загрузки и активных аварий.
+
+⚠ Возможные ошибки
+Петля в сети.
+Storm/broadcast.`]
+]},
+eltex:{name:'Eltex PRO',desc:'MES / LTP • VLAN • Access • Trunk • Management • Diagnostics',tasks:[
+['Создать VLAN',`📌 Что делает
+Создаёт VLAN на Eltex MES.
+
+🛠 Когда использовать
+Новый клиент, сервис или объект.
+
+⌨ Команды
+configure
+vlan 3573
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+
+⚠ Возможные ошибки
+VLAN не добавлен на порт.`],
+['Access порт',`📌 Что делает
+Назначает клиентский порт в VLAN.
+
+🛠 Когда использовать
+ПК, камера, роутер.
+
+⌨ Команды
+configure
+interface gigabitethernet 1/0/2
+switchport mode access
+switchport access vlan 3573
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+show interfaces status
+show mac address-table
+
+⚠ Возможные ошибки
+Порт не поднят.
+VLAN не создан.`],
+['Trunk порт',`📌 Что делает
+Передаёт VLAN через uplink.
+
+🛠 Когда использовать
+Между коммутаторами или к OLT/радиомосту.
+
+⌨ Команды
+configure
+interface gigabitethernet 1/0/25
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show vlan
+show interfaces switchport
+
+⚠ Возможные ошибки
+Allowed VLAN перезаписан вместо add.`],
+['Hybrid порт',`📌 Что делает
+Настраивает смешанный порт tagged/untagged.
+
+🛠 Когда использовать
+Когда нужен native VLAN и tagged сервисы.
+
+⌨ Команды
+configure
+interface gigabitethernet 1/0/2
+switchport mode general
+switchport general pvid 3573
+switchport general allowed vlan add 3573 untagged
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show running-config interface gigabitethernet 1/0/2
+
+⚠ Возможные ошибки
+PVID не совпадает с untagged VLAN.`],
+['IP управления',`📌 Что делает
+Назначает IP управления.
+
+🛠 Когда использовать
+Для доступа к коммутатору по сети.
+
+⌨ Команды
+configure
+interface vlan 1706
+ip address 10.151.200.50 255.255.255.252
+exit
+ip default-gateway 10.151.200.49
+copy running-config startup-config
+
+✅ Как проверить
+show ip interface
+show running-config
+
+⚠ Возможные ошибки
+VLAN управления не открыт на uplink.`],
+['SNMP',`📌 Что делает
+Включает мониторинг.
+
+🛠 Когда использовать
+Для NMS и аварий.
+
+⌨ Команды
+configure
+snmp-server community public ro
+snmp-server host 100.64.40.61 public
+exit
+copy running-config startup-config
+
+✅ Как проверить
+show running-config | include snmp
+
+⚠ Возможные ошибки
+Community или route неверные.`],
+['Диагностика',`📌 Что делает
+Проверяет состояние коммутатора и клиента.
+
+🛠 Когда использовать
+Нет ARP, MAC, VLAN, линка.
+
+⌨ Команды
+show vlan
+show interfaces status
+show mac address-table
+show arp
+show interfaces counters
+show running-config
+
+✅ Как проверить
+MAC клиента на нужном порту.
+Ошибки не растут.
+
+⚠ Возможные ошибки
+Смотреть не тот uplink.
+Не сохранить конфигурацию.`]
+]},
+zyxel:{name:'Zyxel PRO',desc:'Fixed • Tagged • Untagged • Forbidden • PVID • Management',tasks:[
+['Static VLAN / Fixed',`📌 Что делает
+Добавляет порт в VLAN через Fixed.
+
+🛠 Когда использовать
+Когда VLAN должен существовать на порту.
+
+⌨ Настройка WEB
+Advanced Application → VLAN → Static VLAN
+VLAN ID: 3573
+Uplink: Fixed / Tagged
+Client: Fixed / Untagged
+Apply
+
+✅ Как проверить
+VLAN Table
+MAC Table
+
+⚠ Возможные ошибки
+Порт не Fixed.
+Поставили Forbidden вместо Fixed.`],
+['Tagged uplink',`📌 Что делает
+Передаёт VLAN tagged на uplink.
+
+🛠 Когда использовать
+Между коммутаторами, до OLT, радиомоста.
+
+⌨ Настройка WEB
+Static VLAN → VLAN 3573
+Uplink port: Fixed
+Tagging: Tagged
+Apply
+
+✅ Как проверить
+VLAN Table
+Port Status
+
+⚠ Возможные ошибки
+Uplink оставлен Untagged.
+VLAN не открыт на второй стороне.`],
+['Untagged client',`📌 Что делает
+Делает клиентский порт untagged.
+
+🛠 Когда использовать
+ПК, камера, роутер без VLAN tag.
+
+⌨ Настройка WEB
+Static VLAN → VLAN 3573
+Client port: Fixed
+Tagging: Untagged
+Apply
+
+✅ Как проверить
+MAC клиента появляется в VLAN.
+
+⚠ Возможные ошибки
+Не выставлен PVID.`],
+['PVID',`📌 Что делает
+Назначает VLAN по умолчанию для untagged трафика.
+
+🛠 Когда использовать
+Для access/client порта.
+
+⌨ Настройка WEB
+VLAN → VLAN Port Setting
+Port: client
+PVID: 3573
+Apply / Save
+
+✅ Как проверить
+VLAN Port Setting
+MAC Table
+
+⚠ Возможные ошибки
+Untagged VLAN есть, но PVID старый.`],
+['Forbidden',`📌 Что делает
+Запрещает VLAN на порту.
+
+🛠 Когда использовать
+Чтобы исключить VLAN с порта.
+
+⌨ Настройка WEB
+Static VLAN
+Port: Forbidden
+Apply
+
+✅ Как проверить
+VLAN Table
+
+⚠ Возможные ошибки
+Случайно поставили Forbidden на uplink.`],
+['CLI проверка',`📌 Что делает
+Проверяет состояние VLAN и портов.
+
+🛠 Когда использовать
+После настройки или аварии.
+
+⌨ Команды
+show vlan
+show interfaces status
+show mac address-table
+show running-config
+
+✅ Как проверить
+VLAN, PVID, MAC клиента.
+
+⚠ Возможные ошибки
+На Smart моделях CLI может быть урезан.`]
+]},
+dlink:{name:'D-Link PRO',desc:'WEB • CLI • VLAN • PVID • Management • Save',tasks:[
+['WEB: Создать VLAN',`📌 Что делает
+Создаёт VLAN через WEB-интерфейс.
+
+🛠 Когда использовать
+Если удобнее настраивать D-Link через браузер.
+
+⌨ Где находится
+L2 Features → VLAN → 802.1Q VLAN → Add/Create
+
+Поля:
+VLAN ID: 3573
+Name: CLIENT_3573
+Apply
+
+✅ Как проверить
+VLAN List
+FDB / MAC Address Table
+
+⚠ Возможные ошибки
+Создали VLAN, но не добавили порты.`],
+['WEB: Tagged uplink',`📌 Что делает
+Добавляет VLAN tagged на uplink.
+
+🛠 Когда использовать
+Для связи с другим коммутатором/OLT.
+
+⌨ Где находится
+L2 Features → VLAN → 802.1Q VLAN
+Открыть VLAN 3573
+Uplink port: Tagged
+Apply
+
+✅ Как проверить
+VLAN Membership
+FDB Table
+
+⚠ Возможные ошибки
+Удалили другие VLAN с uplink.`],
+['WEB: Untagged + PVID',`📌 Что делает
+Настраивает клиентский порт.
+
+🛠 Когда использовать
+Для ПК/роутера/камеры без VLAN tag.
+
+⌨ Где находится
+VLAN Membership:
+Client port = Untagged
+
+PVID Settings:
+Client PVID = 3573
+
+✅ Как проверить
+FDB Table
+PVID Settings
+
+⚠ Возможные ошибки
+Untagged настроили, но PVID не поменяли.`],
+['WEB: IP управления',`📌 Что делает
+Назначает IP управления.
+
+🛠 Когда использовать
+Для доступа к D-Link по сети.
+
+⌨ Где находится
+System → IP Interface / Management
+VLAN: 1706
+IP: 10.151.200.50
+Mask: 255.255.255.252
+Gateway: 10.151.200.49
+Apply
+
+✅ Как проверить
+Ping IP управления
+System Information
+
+⚠ Возможные ошибки
+Неверный VLAN управления.
+Gateway из другой подсети.`],
+['WEB: Save Config',`📌 Что делает
+Сохраняет настройки.
+
+🛠 Когда использовать
+После любых изменений.
+
+⌨ Где находится
+Tools → Save Configuration
+Save
+
+✅ Как проверить
+После перезагрузки настройки остались.
+
+⚠ Возможные ошибки
+Не нажали Save — после ребута всё пропало.`],
+['CLI: VLAN / Access / Trunk',`📌 Что делает
+CLI-шаблон для D-Link.
+
+🛠 Когда использовать
+Если доступ через консоль/SSH.
+
+⌨ Команды
+create vlan CLIENT_3573 tag 3573
+config vlan CLIENT_3573 add untagged 2
+config vlan CLIENT_3573 add tagged 25
+config pvid 2 3573
+save
+
+✅ Как проверить
+show vlan
+show fdb
+show ports
+
+⚠ Возможные ошибки
+Синтаксис зависит от модели DGS-3620/3630.`],
+['SNMP / Monitoring',`📌 Что делает
+Подключает D-Link к мониторингу.
+
+🛠 Когда использовать
+Для NMS и аварий.
+
+⌨ Команды
+create snmp community public view CommunityView read_only
+config snmp system_contact admin
+save
+
+✅ Как проверить
+show snmp
+ping NMS
+
+⚠ Возможные ошибки
+SNMP отключен или ACL блокирует доступ.`],
+['Loopback / Storm Control',`📌 Что делает
+Защита от петель и шторма.
+
+🛠 Когда использовать
+Если сеть падает от петли или broadcast.
+
+⌨ Где искать
+L2 Features → Loopback Detection
+Traffic Control / Storm Control
+
+✅ Как проверить
+Logs
+Port Status
+
+⚠ Возможные ошибки
+Можно заблокировать рабочий порт.`]
+]},
+mikrotik:{name:'MikroTik PRO',desc:'Bridge • VLAN • Wireless • PTP • DHCP • PPPoE • Firewall',tasks:[
+['Bridge hub',`📌 Что делает
+Объединяет порты в мост.
+
+🛠 Когда использовать
+Когда MikroTik работает как прозрачный мост/хаб.
+
+⌨ Команды
+/interface bridge add name=bridge1
+/interface bridge port add bridge=bridge1 interface=ether1
+/interface bridge port add bridge=bridge1 interface=ether2
+
+✅ Как проверить
+/interface bridge print
+/interface bridge port print
+
+⚠ Возможные ошибки
+Не добавили нужный порт в bridge.`],
+['VLAN через Bridge',`📌 Что делает
+Создаёт VLAN-интерфейс.
+
+🛠 Когда использовать
+Для управления или сервиса через VLAN.
+
+⌨ Команды
+/interface vlan add name=vlan3573 vlan-id=3573 interface=bridge1
+/ip address add address=178.22.174.29/30 interface=vlan3573
+
+✅ Как проверить
+/interface vlan print
+/ip address print
+/ping 178.22.174.30
+
+⚠ Возможные ошибки
+VLAN создан на неверном interface.`],
+['IP Route',`📌 Что делает
+Добавляет маршрут по умолчанию.
+
+🛠 Когда использовать
+Для выхода управления наружу.
+
+⌨ Команды
+/ip route add gateway=10.151.200.49
+/ip route print
+
+✅ Как проверить
+/ping 8.8.8.8
+
+⚠ Возможные ошибки
+Gateway недоступен в этом VLAN.`],
+['Wireless PTP AP',`📌 Что делает
+Настраивает сторону AP радиомоста.
+
+🛠 Когда использовать
+Для точка-точка линка.
+
+⌨ Команды
+/interface wireless set wlan1 mode=bridge ssid=LINK_3573 frequency=5680 band=5ghz-a/n/ac disabled=no
+/interface bridge port add bridge=bridge1 interface=wlan1
+
+✅ Как проверить
+/interface wireless registration-table print
+
+⚠ Возможные ошибки
+Частота занята.
+SSID/security не совпадает.`],
+['Wireless Station Bridge',`📌 Что делает
+Настраивает клиентскую сторону радиомоста.
+
+🛠 Когда использовать
+Вторая сторона PTP.
+
+⌨ Команды
+/interface wireless set wlan1 mode=station-bridge ssid=LINK_3573 frequency=5680 band=5ghz-a/n/ac disabled=no
+/interface bridge port add bridge=bridge1 interface=wlan1
+
+✅ Как проверить
+/interface wireless registration-table print
+/interface wireless monitor wlan1
+
+⚠ Возможные ошибки
+Station не подключается из-за security/frequency.`],
+['DHCP Server',`📌 Что делает
+Раздаёт IP адреса клиентам.
+
+🛠 Когда использовать
+Для локальной сети.
+
+⌨ Команды
+/ip pool add name=pool1 ranges=192.168.88.10-192.168.88.254
+/ip dhcp-server add name=dhcp1 interface=bridge1 address-pool=pool1 disabled=no
+/ip dhcp-server network add address=192.168.88.0/24 gateway=192.168.88.1
+
+✅ Как проверить
+/ip dhcp-server lease print
+
+⚠ Возможные ошибки
+DHCP включен не на том интерфейсе.`],
+['NAT / Internet',`📌 Что делает
+Включает NAT для доступа в интернет.
+
+🛠 Когда использовать
+Когда MikroTik работает как роутер.
+
+⌨ Команды
+/ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
+
+✅ Как проверить
+/ip firewall nat print
+/ping 8.8.8.8
+
+⚠ Возможные ошибки
+Out-interface выбран неверно.`],
+['Signal / CCQ / Throughput',`📌 Что делает
+Проверяет качество радиомоста.
+
+🛠 Когда использовать
+Скорость падает, пинг нестабилен.
+
+⌨ Команды
+/interface wireless registration-table print
+/interface wireless monitor wlan1
+/tool bandwidth-test
+
+✅ Как проверить
+Signal около -45…-65 dBm.
+CCQ ближе к 90-100%.
+SNR высокий.
+
+⚠ Возможные ошибки
+Шумная частота.
+Нет прямой видимости.
+Плохая юстировка.`]
+]},
+iskratel:{name:'Iskratel DSLAM PRO',desc:'Boards • Ports • PVC • Profiles • VLAN • Line diagnostics',tasks:[
+['Проверка плат',`📌 Что делает
+Показывает установленные платы DSLAM.
+
+🛠 Когда использовать
+Перед настройкой или диагностикой.
+
+⌨ Команды
+show board
+show slot
+show card
+show version
+
+✅ Как проверить
+Плата видна и в рабочем состоянии.
+
+⚠ Возможные ошибки
+Команды зависят от версии ПО.`],
+['Проверка DSL порта',`📌 Что делает
+Показывает состояние абонентского порта.
+
+🛠 Когда использовать
+Нет синхронизации или низкая скорость.
+
+⌨ Команды
+show dsl port
+show dsl port status
+show interface
+
+✅ Как проверить
+Порт up, линия синхронизирована.
+
+⚠ Возможные ошибки
+Неверный slot/port.
+Пара повреждена.`],
+['Профиль скорости',`📌 Что делает
+Назначает профиль линии.
+
+🛠 Когда использовать
+Для ограничения/увеличения скорости ADSL/VDSL.
+
+⌨ Команды
+show profile
+show line-profile
+configure terminal
+interface dsl 1/1/1
+line-profile PROFILE_NAME
+exit
+
+✅ Как проверить
+show dsl line
+show dsl port status
+
+⚠ Возможные ошибки
+Профиль не поддерживается платой или линией.`],
+['PVC / Service',`📌 Что делает
+Настраивает PVC/сервис абонента.
+
+🛠 Когда использовать
+Для ADSL сервиса с VPI/VCI и VLAN.
+
+⌨ Команды
+show pvc
+show service
+configure terminal
+interface dsl 1/1/1
+pvc 0/35 vlan 3573
+service vlan 3573
+exit
+
+✅ Как проверить
+show service
+show pvc
+
+⚠ Возможные ошибки
+Неверный VPI/VCI.
+Неверный VLAN сервиса.`],
+['VLAN / Uplink',`📌 Что делает
+Открывает VLAN на DSLAM/uplink.
+
+🛠 Когда использовать
+Чтобы сервис дошёл до агрегации.
+
+⌨ Команды
+show vlan
+configure terminal
+vlan 3573
+name CLIENT_3573
+exit
+interface uplink 1
+switchport mode trunk
+switchport trunk allowed vlan add 3573
+exit
+
+✅ Как проверить
+show vlan
+show mac-address-table
+
+⚠ Возможные ошибки
+VLAN открыт на порту, но не на uplink.`],
+['Диагностика линии SNR/Attenuation',`📌 Что делает
+Проверяет качество медной линии.
+
+🛠 Когда использовать
+Низкая скорость, обрывы, ошибки.
+
+⌨ Команды
+show dsl line
+show dsl statistics
+show dsl port status
+
+✅ Как проверить
+SNR Margin нормальный.
+Attenuation не высокий.
+Ошибки не растут.
+
+⚠ Возможные ошибки
+Плохая пара.
+Длинная линия.
+Наводки.`],
+['CRC / FEC ошибки',`📌 Что делает
+Проверяет ошибки линии.
+
+🛠 Когда использовать
+Интернет есть, но потери/обрывы.
+
+⌨ Команды
+show counters
+show dsl statistics
+show dsl errors
+
+✅ Как проверить
+CRC не растёт быстро.
+FEC допустим, но не должен быть огромным.
+
+⚠ Возможные ошибки
+Плохой кабель.
+Проблема на кроссе.
+Плохой модем.`],
+['Перезапуск порта',`📌 Что делает
+Перезапускает абонентский DSL порт.
+
+🛠 Когда использовать
+После изменения профиля или зависания линии.
+
+⌨ Команды
+configure terminal
+interface dsl 1/1/1
+shutdown
+no shutdown
+exit
+
+✅ Как проверить
+show dsl port status
+
+⚠ Возможные ошибки
+Абонент временно потеряет связь.`],
+['Активные аварии',`📌 Что делает
+Показывает аварии DSLAM.
+
+🛠 Когда использовать
+Перед работами и при массовой проблеме.
+
+⌨ Команды
+show alarm active
+show log
+show events
+
+✅ Как проверить
+Нет критических active alarm.
+
+⚠ Возможные ошибки
+Не отличили старые события от активных.`]
+]},
+bdcom:{name:'BDCOM OLT PRO',desc:'ONU • PON • Signal • VLAN • MAC • Service',tasks:[
+['Проверка ONU',`📌 Что делает
+Показывает список ONU.
+
+🛠 Когда использовать
+ONU offline или не работает клиент.
+
+⌨ Команды
+show onu list
+show pon onu-information
+show interface epon 0/1
+
+✅ Как проверить
+ONU online, статус normal.
+
+⚠ Возможные ошибки
+Смотреть не тот PON порт.`],
+['Поиск ONU по MAC/Serial',`📌 Что делает
+Ищет ONU по серийному номеру или MAC.
+
+🛠 Когда использовать
+Нужно понять где подключена ONU.
+
+⌨ Команды
+show onu list
+show mac address-table
+show running-config
+
+✅ Как проверить
+Найден PON и ONU ID.
+
+⚠ Возможные ошибки
+ONU не зарегистрирована.`],
+['Уровень сигнала',`📌 Что делает
+Проверяет RX/TX ONU.
+
+🛠 Когда использовать
+ONU offline, потери, низкая скорость.
+
+⌨ Команды
+show pon optical-transceiver
+show onu optical-info
+
+✅ Как проверить
+Уровень в допустимых пределах.
+
+⚠ Возможные ошибки
+Грязный коннектор.
+Плохой сплиттер.
+Перегиб оптики.`],
+['VLAN сервис',`📌 Что делает
+Проверяет VLAN сервиса ONU.
+
+🛠 Когда использовать
+ONU online, но интернета нет.
+
+⌨ Команды
+show vlan
+show running-config
+show mac address-table
+
+✅ Как проверить
+VLAN есть на uplink и service.
+
+⚠ Возможные ошибки
+VLAN есть на ONU, но нет на uplink.`],
+['MAC / Traffic',`📌 Что делает
+Проверяет MAC клиента и трафик.
+
+🛠 Когда использовать
+Нет ARP или клиент не выходит.
+
+⌨ Команды
+show mac address-table
+show interface counters
+show interface epon 0/1
+
+✅ Как проверить
+MAC клиента виден за ONU.
+
+⚠ Возможные ошибки
+MAC виден только на uplink.
+Клиентский VLAN не совпадает.`]
+]}
+};
+const alarms=[
+['Нет ARP',`1. Есть MAC клиента?
+- Нет: проверить порт, линк, access VLAN, PVID.
+- Да: проверить gateway и VLAN путь.
+
+2. VLAN создан на всех коммутаторах?
+3. Uplink tagged?
+4. Client untagged/access?
+5. PVID совпадает?
+6. ARP виден на шлюзе?
+7. Проверить /30 или /29 адресацию.`],
+['VLAN не проходит',`1. VLAN создан на каждом коммутаторе.
+2. Uplink tagged.
+3. Client access/untagged.
+4. PVID = VLAN.
+5. Проверить MAC на каждом участке.
+6. Не удалить другие VLAN с trunk.
+7. Save config.`],
+['Нет MAC',`1. Проверить link up/down.
+2. Проверить кабель/патч-панель.
+3. Проверить access VLAN и PVID.
+4. Проверить port isolation/protection.
+5. Проверить STP/loop.
+6. Проверить промежуточный switch/radio.`],
+['Нет управления',`1. Проверить management VLAN.
+2. Проверить IP управления и маску.
+3. Проверить default gateway/route.
+4. Проверить VLAN управления на uplink.
+5. Проверить ACL/RADIUS.
+6. Подключиться из той же подсети.`],
+['ONU Offline',`1. Проверить PON порт.
+2. Проверить оптический уровень.
+3. Проверить серийный номер ONU.
+4. Проверить профиль ONU.
+5. Проверить VLAN сервиса.
+6. Проверить uplink и MAC выше по сети.`],
+['Нет линка',`1. Кабель/патчкорд.
+2. SFP и TX/RX.
+3. shutdown/no shutdown.
+4. Speed/duplex.
+5. Питание второго устройства.
+6. Ошибки CRC/FCS.`]
+];
+const refs=[['SFP / BiDi','BiDi работает парой: один TX1310/RX1550, второй TX1550/RX1310.'],['Оптика','Проверить чистоту коннектора, патчкорд, TX/RX, уровень сигнала, тип SFP.'],['GPON','ONU offline: проверить PON порт, уровень, серийник, профиль, VLAN сервиса.'],['DSL','DSL down: проверить пару, порт DSLAM, профиль скорости, SNR, CRC/FEC.'],['Консоль','9600, 19200, 38400, 57600, 115200. Параметры: 8N1, Flow None.'],['Маски',`/30 = 255.255.255.252
+/29 = 255.255.255.248
+/28 = 255.255.255.240
+/24 = 255.255.255.0`]];
+function setNav(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0);updateStats()}
+function goHome(){show('home');setNav(navHome)}
+function showWorkCenter(){show('workCenter');setNav(null)}
+function showSwitches(){show('switches');renderSwitches();setNav(null)}
+function showAlarms(){show('alarms');renderCards(alarmGrid,alarms,'⚡','showAlarms()');setNav(null)}
+function showTools(){show('tools');renderTools();setNav(null)}
+function showReference(){show('reference');renderCards(refGrid,refs,'📚','showReference()');setNav(null)}
+function showObjects(){show('objects');renderObjects()}
+function showReport(){show('report');loadWorkerName();fillObjectSelect()}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function getObjs(){try{return JSON.parse(localStorage.getItem('nh_objs_v38')||'[]')}catch(e){return[]}}
+function getReports(){try{return JSON.parse(localStorage.getItem('nh_reports_v38')||'[]')}catch(e){return[]}}
+function getFavs(){try{return JSON.parse(localStorage.getItem('nh_favs_v38')||'[]')}catch(e){return[]}}
+function getInv(){try{return JSON.parse(localStorage.getItem('nh_inv_v38')||'[]')}catch(e){return[]}}
+function updateStats(){let o=getObjs(),r=getReports(),i=getInv();if(document.getElementById('stObj')){stObj.textContent=o.length;stRep.textContent=r.length;stInv.textContent=i.length}}
+function renderSwitches(){switchGrid.innerHTML='';Object.keys(vendors).forEach(k=>{let v=vendors[k],b=document.createElement('button');b.className='card';b.onclick=()=>openVendor(k);b.innerHTML=`<h3>${v.name}</h3><p>${v.desc}</p><span class="badge">Открыть</span>`;switchGrid.appendChild(b)})}
+function openVendor(k){let v=vendors[k];show('vendor');let h=`<div class="titlebox"><h2>${v.name}</h2><p>${v.desc}</p></div>`;v.tasks.forEach((t,i)=>{h+=`<div class="item"><h3>${t[0]}</h3><pre id="cmd_${i}">${escapeHtml(t[1])}</pre><button class="copy" onclick="copyBlock('cmd_${i}')">Копировать</button></div>`});vendorBody.innerHTML=h}
+function renderCards(container,data,icon,back){container.innerHTML='';data.forEach((a,i)=>{let b=document.createElement('button');b.className='card full';b.onclick=()=>openArticle(`${icon} ${a[0]}`,a[1],back);b.innerHTML=`<h3>${a[0]}</h3><p>Открыть</p>`;container.appendChild(b)})}
+function openArticle(title,body,back){show('article');articleBack.setAttribute('onclick',back);articleBody.innerHTML=`<div class="titlebox"><h2>${title}</h2></div><div class="item"><pre>${escapeHtml(body)}</pre></div>`}
+function saveObj(){let arr=getObjs();arr.unshift({n:objName.value||'Объект',a:objAddr.value||'',e:objEquip.value||'',v:objVlan.value||'',m:objMap.value||'',d:objNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_objs_v38',JSON.stringify(arr));objName.value='';objAddr.value='';objEquip.value='';objVlan.value='';objMap.value='';objNote.value='';renderObjects()}
+function delObj(i){let arr=getObjs();arr.splice(i,1);localStorage.setItem('nh_objs_v38',JSON.stringify(arr));renderObjects()}
+function renderObjects(){let arr=getObjs(), reps=getReports();objList.innerHTML=arr.map((o,i)=>{let count=reps.filter(r=>(r.obj||'').toLowerCase()===(o.n||'').toLowerCase()).length;return `<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.a)} • ${escapeHtml(o.e)}</p><pre>${escapeHtml(o.v+'\nСхема: '+o.m+'\n'+o.d)}</pre><p class="note">Отчётов по объекту: ${count} • ${escapeHtml(o.t)}</p><button class="btn red" onclick="delObj(${i})">Удалить</button></div>`}).join('')||'<div class="item"><p>Пока нет объектов</p></div>';updateStats()}
+function fillObjectSelect(){let arr=getObjs();repObjSelect.innerHTML='<option value="">Выбрать объект из базы</option>'+arr.map(o=>`<option value="${escapeHtml(o.n)}">${escapeHtml(o.n)}</option>`).join('')}
+function fillReportObject(){let n=repObjSelect.value;if(!n)return;let o=getObjs().find(x=>x.n===n);repObj.value=n;if(o){repEquip.value=o.e||''}}
+function loadWorkerName(){let w=localStorage.getItem('nh_worker_v38')||'';if(document.getElementById('repWorker'))repWorker.value=w}
+function saveWorkerName(){localStorage.setItem('nh_worker_v38',repWorker.value||'')}
+function makeReport(){let dt=new Date().toLocaleString(),worker=(repWorker.value||'').trim();if(worker)localStorage.setItem('nh_worker_v38',worker);let text=`Отчёт по выезду
+Дата: ${dt}
+Сотрудник: ${worker||'Не указано'}
+Объект: ${repObj.value||''}
+Оборудование: ${repEquip.value||''}
+Выполнено: ${repWork.value||''}
+Результат: ${repResult.value||''}`;reportOut.textContent=text;let arr=getReports();arr.unshift({time:dt,obj:repObj.value||'Объект',equip:repEquip.value||'',text});localStorage.setItem('nh_reports_v38',JSON.stringify(arr));updateStats()}
+function showHistory(){show('history');renderHistory()}
+function renderHistory(){let arr=getReports();historyList.innerHTML=arr.map((r,i)=>`<div class="item"><h3>${escapeHtml(r.obj||'Отчёт')}</h3><pre id="hist_${i}">${escapeHtml(r.text)}</pre><p class="note">${escapeHtml(r.time)}</p><button class="copy" onclick="copyBlock('hist_${i}')">Копировать</button><button class="btn red" onclick="delHistory(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет отчётов</p></div>'}
+function delHistory(i){let arr=getReports();arr.splice(i,1);localStorage.setItem('nh_reports_v38',JSON.stringify(arr));renderHistory();updateStats()}
+function showStats(){show('stats');let objs=getObjs(),reps=getReports(),inv=getInv(),favs=getFavs();statsBox.innerHTML=`<div class="grid"><div class="card"><h3>${objs.length}</h3><p>Объектов</p></div><div class="card"><h3>${reps.length}</h3><p>Отчётов</p></div><div class="card"><h3>${inv.length}</h3><p>На складе</p></div><div class="card"><h3>${favs.length}</h3><p>Команд</p></div></div><div class="item"><h3>Последние объекты</h3><pre>${escapeHtml(objs.slice(0,5).map(o=>o.n+' — '+o.v).join('\n')||'Нет данных')}</pre></div>`}
+function showFav(){show('fav');renderFav()}
+function saveFav(){let arr=getFavs();arr.unshift({n:favName.value||'Команда',c:favCmd.value||''});localStorage.setItem('nh_favs_v38',JSON.stringify(arr));favName.value='';favCmd.value='';renderFav()}
+function delFav(i){let arr=getFavs();arr.splice(i,1);localStorage.setItem('nh_favs_v38',JSON.stringify(arr));renderFav()}
+function renderFav(){let arr=getFavs();if(!arr.length)arr=[{n:'SNR базовые',c:'show vlan\nshow interface status\nshow mac address-table\nshow arp'},{n:'Huawei базовые',c:'display vlan\ndisplay interface brief\ndisplay mac-address\ndisplay arp'}];favList.innerHTML=arr.map((f,i)=>`<div class="item"><h3>${escapeHtml(f.n)}</h3><pre id="fav_${i}">${escapeHtml(f.c)}</pre><button class="copy" onclick="copyBlock('fav_${i}')">Копировать</button><button class="btn red" onclick="delFav(${i})">Удалить</button></div>`).join('')}
+function showBackup(){show('backup')}
+function makeBackup(){let data={objects:getObjs(),reports:getReports(),favs:getFavs(),inventory:getInv(),worker:localStorage.getItem('nh_worker_v38')||''};backupText.value=JSON.stringify(data,null,2)}
+function restoreBackup(){try{let d=JSON.parse(backupText.value);if(d.objects)localStorage.setItem('nh_objs_v38',JSON.stringify(d.objects));if(d.reports)localStorage.setItem('nh_reports_v38',JSON.stringify(d.reports));if(d.favs)localStorage.setItem('nh_favs_v38',JSON.stringify(d.favs));if(d.inventory)localStorage.setItem('nh_inv_v38',JSON.stringify(d.inventory));if(d.worker)localStorage.setItem('nh_worker_v38',d.worker);alert('Backup восстановлен');updateStats()}catch(e){alert('Ошибка backup')}}
+function renderTools(){toolGrid.innerHTML=`<button class="card full" onclick="showConfigBuilder()"><h3>Конструктор конфигов MAX</h3><p>VLAN + порт + uplink + IP управления</p></button><button class="card full" onclick="openIP()"><h3>IP калькулятор</h3><p>/30, /29, network, broadcast</p></button><button class="card full" onclick="openVlanPro()"><h3>Генератор VLAN PRO</h3><p>SNR / Huawei / Eltex</p></button><button class="card full" onclick="showVlanPath()"><h3>Карта VLAN</h3><p>Client → Switch → Uplink → Gateway</p></button><button class="card full" onclick="showOpticalCalc()"><h3>Оптический калькулятор</h3><p>RX/TX уровень и рекомендации</p></button><button class="card full" onclick="showPortDoctor()"><h3>Диагностика порта</h3><p>Нет link/MAC/ARP/VLAN/Speed</p></button><button class="card full" onclick="openMikroTikSignal()"><h3>MikroTik Signal</h3><p>Signal/Noise → SNR</p></button><button class="card" onclick="openArticle('Консоль','9600\n19200\n38400\n57600\n115200\n\n8N1, Flow None','showTools()')"><h3>Консоль</h3><p>Скорости</p></button><button class="card" onclick="openArticle('Маски','/30 = 255.255.255.252\n/29 = 255.255.255.248\n/28 = 255.255.255.240\n/24 = 255.255.255.0','showTools()')"><h3>Маски</h3><p>CIDR</p></button>`}
+function ipNum(ip){return ip.split('.').reduce((a,o)=>(a<<8)+(+o),0)>>>0}
+function numIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
+function openIP(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>IP калькулятор</h2><p>Введи 178.22.174.28/30 или 178.22.174.29/30.</p></div><div class="item"><input id="ipcalcIn" value="178.22.174.28/30" oninput="calcIP()"><button class="copy" onclick="calcIP()">Посчитать</button><div id="ipcalcOut" class="out"></div></div>`;calcIP()}
+function calcIP(){let el=document.getElementById('ipcalcIn'),out=document.getElementById('ipcalcOut');if(!el||!out)return;let m=el.value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m){out.innerHTML='Формат: 178.22.174.28/30';return}let parts=m[1].split('.').map(Number),c=+m[2];if(parts.some(x=>x<0||x>255)||c<1||c>32){out.innerHTML='Ошибка IP';return}let ip=ipNum(m[1]),mask=(0xffffffff<<(32-c))>>>0,net=ip&mask,b=(net|(~mask))>>>0,first=c>=31?net:net+1,last=c>=31?b:b-1,device=ip===net?first:ip,gateway=(c===30?(device===first?last:first):last);out.innerHTML=`<div class="kv"><div>IP устройства<br><b>${numIp(device)}/${c}</b></div><div>Маска<br><b>${numIp(mask)}</b></div><div>Шлюз<br><b>${numIp(gateway)}</b></div><div>Сеть<br><b>${numIp(net)}</b></div><div>Broadcast<br><b>${numIp(b)}</b></div><div>Рабочие IP<br><b>${numIp(first)} - ${numIp(last)}</b></div></div><pre>IP address: ${numIp(device)}
+Mask: ${numIp(mask)}
+Gateway: ${numIp(gateway)}</pre>`}
+function openVlanPro(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>Генератор VLAN PRO</h2><p>Введи VLAN, порт клиента и uplink.</p></div><div class="item"><div class="row"><input id="vpVlan" value="3573" oninput="vlanPro()"><input id="vpPort" value="1/0/2" oninput="vlanPro()"><input id="vpUp" value="1/0/25" oninput="vlanPro()"></div><button class="copy" onclick="vlanPro()">Сгенерировать</button><pre id="vlanProOut"></pre><button class="copy" onclick="copyBlock('vlanProOut')">Копировать</button></div>`;vlanPro()}
+function vlanPro(){let v=vpVlan.value||'3573',p=vpPort.value||'1/0/2',u=vpUp.value||'1/0/25';vlanProOut.textContent=`SNR:
+configure terminal
+vlan ${v}
+exit
+interface ethernet ${p}
+switchport mode access
+switchport access vlan ${v}
+exit
+interface ethernet ${u}
+switchport mode trunk
+switchport trunk allowed vlan add ${v}
+exit
+write
+
+Huawei:
+system-view
+vlan batch ${v}
+interface GigabitEthernet0/0/${p.split('/').pop()}
+port link-type access
+port default vlan ${v}
+quit
+interface GigabitEthernet0/0/${u.split('/').pop()}
+port link-type trunk
+port trunk allow-pass vlan ${v}
+quit
+save
+
+Eltex:
+configure
+vlan ${v}
+exit
+interface gigabitethernet ${p}
+switchport mode access
+switchport access vlan ${v}
+exit
+interface gigabitethernet ${u}
+switchport mode trunk
+switchport trunk allowed vlan add ${v}
+exit
+copy running-config startup-config`}
+function openMikroTikSignal(){show('article');articleBack.setAttribute('onclick','showTools()');articleBody.innerHTML=`<div class="titlebox"><h2>MikroTik Signal</h2><p>Signal - Noise = SNR</p></div><div class="item"><div class="row"><input id="mtSig" value="-50" oninput="mtSignalCalc()"><input id="mtNoise" value="-117" oninput="mtSignalCalc()"></div><button class="copy" onclick="mtSignalCalc()">Посчитать</button><div id="mtSignalOut" class="out"></div></div>`;mtSignalCalc()}
+function mtSignalCalc(){let s=Number(mtSig.value),n=Number(mtNoise.value),snr=s-n,grade=snr>=40?'Отлично':snr>=25?'Нормально':snr>=15?'Слабо':'Плохо';mtSignalOut.innerHTML=`SNR: <b>${snr} dB</b><br>Качество: <b>${grade}</b>`}
+function showInventory(){show('inventory');renderInv()}
+function saveInv(){let arr=getInv();arr.unshift({n:invName.value||'Оборудование',c:invCount.value||'',d:invNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_inv_v38',JSON.stringify(arr));invName.value='';invCount.value='';invNote.value='';renderInv()}
+function delInv(i){let arr=getInv();arr.splice(i,1);localStorage.setItem('nh_inv_v38',JSON.stringify(arr));renderInv();updateStats()}
+function renderInv(){let arr=getInv();invList.innerHTML=arr.map((o,i)=>`<div class="item"><h3>${escapeHtml(o.n)}</h3><p>Количество: <b>${escapeHtml(o.c)}</b></p><pre>${escapeHtml(o.d)}</pre><p class="note">${escapeHtml(o.t)}</p><button class="btn red" onclick="delInv(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока склад пуст</p></div>';updateStats()}
+function showDiagHelper(){show('diagHelper');diagAnswer()}
+function diagAnswer(){let q=(document.getElementById('diagInput')?diagInput.value:'').toLowerCase(),ans='Введите проблему: нет arp, нет mac, onu offline, нет линка, нет интернет.';if(q.includes('arp'))ans='1. Проверить MAC клиента.\\n2. Проверить VLAN и PVID.\\n3. Проверить trunk/tagged.\\n4. Проверить gateway.\\n5. Проверить /30 адресацию.';else if(q.includes('mac'))ans='1. Проверить link.\\n2. Проверить кабель.\\n3. Проверить access VLAN/PVID.\\n4. Проверить isolation/protection.\\n5. Проверить radio/bridge.';else if(q.includes('onu')||q.includes('pon'))ans='1. Проверить PON порт.\\n2. Проверить RX/TX.\\n3. Проверить серийник ONU.\\n4. Проверить профиль/VLAN.\\n5. Проверить uplink.';else if(q.includes('линк')||q.includes('link'))ans='1. Проверить кабель/SFP.\\n2. Проверить TX/RX.\\n3. Проверить shutdown.\\n4. Проверить speed/duplex.';else if(q.includes('интернет'))ans='1. Ping gateway.\\n2. Ping 8.8.8.8.\\n3. DNS.\\n4. VLAN/ARP.\\n5. Route/gateway.';diagOut.innerHTML='<pre>'+escapeHtml(ans)+'</pre>'}
+
+function showWeatherTrip(){show('weatherTrip')}
+async function loadWeather(){
+let city=(weatherCity.value||'Aktobe').trim();
+weatherOut.innerHTML='Загрузка погоды...';
+try{
+ let geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(city)+'&count=1&language=ru&format=json');
+ let gj=await geo.json();
+ if(!gj.results||!gj.results.length){weatherOut.innerHTML='Город не найден. Офлайн чек‑лист: ноутбук, консольный кабель, SFP, тестер.';return}
+ let g=gj.results[0];
+ let res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${g.latitude}&longitude=${g.longitude}&current=temperature_2m,wind_speed_10m,precipitation`);
+ let data=await res.json(), c=data.current||{};
+ weatherOut.innerHTML=`<b>${escapeHtml(g.name)}</b><br>Температура: <b>${c.temperature_2m}°C</b><br>Ветер: <b>${c.wind_speed_10m} км/ч</b><br>Осадки: <b>${c.precipitation} мм</b><br><br><b>Рекомендация:</b> если ветер сильный — проверь радиомост и крепления антенны.`;
+}catch(e){
+ weatherOut.innerHTML='Погода недоступна без интернета.<br><br>Офлайн чек‑лист: ноутбук, зарядка, консольный кабель, SFP, патчкорды, тестер, отвёртка, powerbank.';
+}
+}
+function showAbout(){show('about')}
+
+
+const quickTasks=[
+['Открыть VLAN через цепочку',`📌 Что делает
+Проводит VLAN от клиента до gateway.
+
+🧭 Схема
+Client port = Access/Untagged/PVID
+Uplink = Trunk/Tagged
+На каждом коммутаторе VLAN должен быть создан.
+
+⌨ Проверка
+show vlan
+show mac address-table
+display vlan
+display mac-address
+
+✅ Результат
+MAC клиента виден выше по сети, ARP приходит на gateway.
+
+⚠ Ошибки
+VLAN не добавлен tagged на uplink.
+PVID не совпадает.
+VLAN открыт только на одном коммутаторе.`],
+['Нет ARP',`📌 Что означает
+IP не может найти MAC шлюза или клиента.
+
+🧭 Проверить
+1. Link
+2. MAC клиента
+3. VLAN/PVID
+4. Trunk/tagged
+5. Gateway
+6. Маска /30 или /29
+
+⌨ Команды
+show arp
+show mac address-table
+display arp
+display mac-address
+
+✅ Результат
+ARP появляется на шлюзе.
+
+⚠ Ошибки
+Клиент в другом VLAN.
+Шлюз не из этой подсети.`],
+['Нет MAC клиента',`📌 Что означает
+Коммутатор не видит устройство на L2.
+
+🧭 Проверить
+Кабель, порт, PVID, port security, radio/bridge.
+
+⌨ Команды
+show interface status
+show mac address-table
+display interface brief
+display mac-address
+
+✅ Результат
+MAC появился на клиентском порту.
+
+⚠ Ошибки
+Порт shutdown.
+Плохой патчкорд.
+MAC заблокирован protection/security.`],
+['Проверить оптику',`📌 Что делает
+Проверяет RX/TX и SFP.
+
+🛠 Когда использовать
+Нет линка, потери, скорость падает.
+
+⌨ Команды
+display transceiver
+show transceiver
+show pon optical-transceiver
+
+✅ Норма
+-8…-20 dBm хорошо
+-20…-27 слабовато
+ниже -27 часто проблема
+
+⚠ Ошибки
+BiDi не пара.
+Грязный коннектор.
+Перепутаны TX/RX.`],
+['Проверить DSLAM Iskratel',`📌 Что делает
+Проверка платы, порта, линии, PVC/VLAN.
+
+⌨ Команды
+show board
+show slot
+show dsl port status
+show dsl statistics
+show pvc
+show service
+show alarm active
+
+✅ Результат
+Порт синхронизирован, ошибок мало.
+
+⚠ Ошибки
+Неверный slot/port.
+Плохая пара.
+PVC/VLAN не совпадает.`],
+['Проверить BDCOM ONU',`📌 Что делает
+Проверка ONU, PON, сигнала и VLAN.
+
+⌨ Команды
+show onu list
+show pon onu-information
+show pon optical-transceiver
+show mac address-table
+
+✅ Результат
+ONU online, уровень нормальный, MAC виден.
+
+⚠ Ошибки
+Смотреть не тот PON.
+VLAN есть на ONU, но нет на uplink.`]
+];
+const glossaryData=[
+['VLAN','Логическая сеть внутри коммутатора. Разделяет клиентов и сервисы.'],
+['PVID','VLAN по умолчанию для untagged трафика. На access-порту должен совпадать с VLAN клиента.'],
+['Tagged','Кадр с VLAN-меткой. Обычно uplink/trunk.'],
+['Untagged','Кадр без VLAN-метки. Обычно клиентский порт.'],
+['Access','Порт для одного VLAN.'],
+['Trunk','Порт для нескольких VLAN.'],
+['Hybrid','Порт со смешанными tagged и untagged VLAN.'],
+['ARP','Таблица IP ↔ MAC. Если ARP нет — проверь VLAN/PVID/gateway.'],
+['MAC Table','Показывает на каком порту коммутатор видит устройство.'],
+['SFP','Оптический модуль. Проверяй скорость, wavelength, RX/TX.'],
+['BiDi','SFP пара с разными TX/RX длинами волн.'],
+['CRC/FCS','Ошибки на порту. Часто кабель/SFP/duplex/speed.']
+];
+function showQuickTasks(){show('quickTasks');quickTaskGrid.innerHTML=quickTasks.map((t,i)=>`<button class="card full" onclick="openQuickTask(${i})"><h3>${escapeHtml(t[0])}</h3><p>Открыть алгоритм</p></button>`).join('')}
+function openQuickTask(i){show('taskArticle');let t=quickTasks[i];taskArticleBody.innerHTML=`<div class="titlebox"><h2>⚡ ${escapeHtml(t[0])}</h2><p>Готовый алгоритм.</p></div><div class="item"><pre id="qt_${i}">${escapeHtml(t[1])}</pre><button class="copy" onclick="copyBlock('qt_${i}')">Копировать</button></div>`}
+function showVlanPath(){show('vlanPath');makeVlanPath()}
+function makeVlanPath(){let v=vpName.value||'3573',c=vpClient.value||'Client port',u=vpUplink.value||'Uplink';vlanPathOut.textContent=`VLAN ${v}\n\n[Клиент]\n ↓ untagged/access\n[${c}]\n PVID=${v}\n VLAN ${v}=untagged\n ↓\n[Коммутатор]\n VLAN ${v} создан\n ↓ tagged/trunk\n[${u}]\n allowed/tagged VLAN ${v}\n ↓\n[Следующий коммутатор / OLT / Gateway]\n VLAN ${v} тоже открыт\n\nПроверка:\n1. MAC клиента виден на access порту.\n2. MAC проходит выше по uplink.\n3. ARP появляется на gateway.`}
+function showOpticalCalc(){show('opticalCalc');calcOptics()}
+function calcOptics(){let rx=Number(rxVal.value),tx=Number(txVal.value),grade=rx>=-20?'Норма':rx>=-27?'Слабовато':'Критично';let rec=rx>=-20?'Уровень хороший. При проблемах проверить CRC/FCS.':rx>=-27?'Почистить коннектор, проверить патчкорд, сплиттер, сварки.':'Срочно проверить оптику: грязь, перегиб, сплиттер, дальность, SFP.';opticsOut.innerHTML=`RX: <b>${rx} dBm</b> — <b>${grade}</b><br>TX: <b>${tx} dBm</b><br><br>${rec}<br><br>-8…-20 хорошо<br>-20…-27 слабовато<br>ниже -27 часто проблема`}
+function showPortDoctor(){show('portDoctor');portDoctor()}
+function portDoctor(){let p=portProblem.value,txt={link:'1. Кабель/патчкорд\\n2. SFP TX/RX\\n3. shutdown/no shutdown\\n4. speed/duplex\\n5. порт на второй стороне',mac:'1. Link up\\n2. PVID/access VLAN\\n3. Port security/protection\\n4. Radio/bridge\\n5. MAC на uplink',arp:'1. Есть MAC?\\n2. VLAN создан?\\n3. PVID правильный?\\n4. Uplink tagged?\\n5. Gateway правильный?',speed:'1. Negotiated speed\\n2. Кабель 8 жил\\n3. CRC/FCS\\n4. SFP RX/TX\\n5. Radio CCQ/SNR',vlan:'1. VLAN создан\\n2. Client untagged/access\\n3. PVID = VLAN\\n4. Uplink tagged/trunk\\n5. VLAN открыт на каждом устройстве'}[p];portDoctorOut.textContent=txt}
+function showGlossary(){show('glossary');glossaryList.innerHTML=glossaryData.map(g=>`<div class="item"><h3>${escapeHtml(g[0])}</h3><p>${escapeHtml(g[1])}</p></div>`).join('')}
+
+
+function getObjPro(){try{return JSON.parse(localStorage.getItem('nh_obj_pro_v43')||'[]')}catch(e){return[]}}
+function getIncidents(){try{return JSON.parse(localStorage.getItem('nh_incidents_v43')||'[]')}catch(e){return[]}}
+function showObjectPro(){show('objectPro');renderObjectPro()}
+function saveObjectPro(){let arr=getObjPro();arr.unshift({n:opName.value||'Объект',a:opAddress.value||'',coords:opCoords.value||'',contact:opContact.value||'',mgmt:opMgmt.value||'',vlan:opVlan.value||'',gw:opGateway.value||'',eq:opEquip.value||'',ser:opSerials.value||'',map:opMap.value||'',note:opNote.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_obj_pro_v43',JSON.stringify(arr));opName.value='';opAddress.value='';opCoords.value='';opContact.value='';opMgmt.value='';opVlan.value='';opGateway.value='';opEquip.value='';opSerials.value='';opMap.value='';opNote.value='';renderObjectPro()}
+function delObjectPro(i){let arr=getObjPro();arr.splice(i,1);localStorage.setItem('nh_obj_pro_v43',JSON.stringify(arr));renderObjectPro()}
+function renderObjectPro(){let arr=getObjPro(),inc=getIncidents();objectProList.innerHTML=arr.map((o,i)=>{let count=inc.filter(x=>(x.obj||'').toLowerCase()===(o.n||'').toLowerCase()).length;return `<div class="item"><h3>${escapeHtml(o.n)}</h3><p>${escapeHtml(o.a)} • ${escapeHtml(o.contact)}</p><pre>${escapeHtml('IP управления: '+o.mgmt+'\nVLAN: '+o.vlan+'\nGateway: '+o.gw+'\nКоординаты: '+o.coords+'\n\nОборудование:\n'+o.eq+'\n\nСерийники/SFP/ONU:\n'+o.ser+'\n\nСхема:\n'+o.map+'\n\nЗаметки:\n'+o.note)}</pre><p class="note">Аварий по объекту: ${count} • ${escapeHtml(o.t)}</p><button class="btn red" onclick="delObjectPro(${i})">Удалить</button></div>`}).join('')||'<div class="item"><p>Пока нет паспортов объектов</p></div>'}
+function showIncidentBase(){show('incidentBase');renderIncidents()}
+function saveIncident(){let arr=getIncidents();arr.unshift({obj:incObject.value||'Объект',worker:incWorker.value||'',problem:incProblem.value||'',reason:incReason.value||'',solution:incSolution.value||'',check:incCheck.value||'',t:new Date().toLocaleString()});localStorage.setItem('nh_incidents_v43',JSON.stringify(arr));incObject.value='';incWorker.value='';incProblem.value='';incReason.value='';incSolution.value='';incCheck.value='';renderIncidents()}
+function delIncident(i){let arr=getIncidents();arr.splice(i,1);localStorage.setItem('nh_incidents_v43',JSON.stringify(arr));renderIncidents()}
+function renderIncidents(){let arr=getIncidents();incidentList.innerHTML=arr.map((x,i)=>`<div class="item"><h3>${escapeHtml(x.problem||'Авария')}</h3><p>Объект: <b>${escapeHtml(x.obj)}</b> • Инженер: ${escapeHtml(x.worker)}</p><pre>${escapeHtml('Причина:\n'+x.reason+'\n\nРешение:\n'+x.solution+'\n\nПроверка:\n'+x.check)}</pre><p class="note">${escapeHtml(x.t)}</p><button class="btn red" onclick="delIncident(${i})">Удалить</button></div>`).join('')||'<div class="item"><p>Пока нет аварий</p></div>'}
+function showDiagMaster(){show('diagMaster');runDiagMaster()}
+function runDiagMaster(){let link=dmLink.value,mac=dmMac.value,arp=dmArp.value,ip=dmIp.value,out='';if(link==='no')out='Вероятность:\n70% кабель/SFP/порт shutdown\n20% скорость/duplex\n10% питание второго устройства\n\nЧто делать:\n1. Кабель/патчкорд.\n2. SFP TX/RX.\n3. no shutdown.\n4. Порт на второй стороне.';else if(mac==='no')out='Вероятность:\n60% access/PVID/port security\n25% клиент/кабель\n15% bridge/radio\n\nЧто делать:\n1. MAC table.\n2. PVID/access VLAN.\n3. Port security/protection.\n4. Радио/мост.';else if(arp==='no')out='Вероятность:\n80% VLAN/trunk/gateway\n15% маска/IP\n5% ACL/firewall\n\nЧто делать:\n1. VLAN на всех коммутаторах.\n2. Tagged на uplink.\n3. Gateway.\n4. /30 или /29.';else if(ip==='no')out='Вероятность:\n75% IP/маска/gateway\n25% DHCP/DNS\n\nЧто делать:\n1. IP калькулятор.\n2. Gateway.\n3. Route/default gateway.';else out='L2/L3 базово работает.\nЕсли проблема остаётся:\n1. DNS.\n2. Route.\n3. NAT/firewall.\n4. CRC/SFP/скорость.';diagMasterOut.textContent=out}
+function showConfigBuilder(){show('configBuilder');buildConfigMax()}
+function maskFromPrefix(p){let c=Number(p||30),m=(0xffffffff<<(32-c))>>>0;return [(m>>>24)&255,(m>>>16)&255,(m>>>8)&255,m&255].join('.')}
+function ipNoPrefix(s){return String(s).split('/')[0]}
+function buildConfigMax(){let v=cbVlan.value||'3573',p=cbClient.value||'1/0/2',u=cbUplink.value||'1/0/25',mg=cbMgmt.value||'10.151.200.50/30';let pref=(mg.split('/')[1]||'30'),mask=maskFromPrefix(pref),ip=ipNoPrefix(mg);configBuilderOut.textContent=`SNR\nconfigure terminal\nvlan ${v}\nexit\ninterface ethernet ${p}\nswitchport mode access\nswitchport access vlan ${v}\nno shutdown\nexit\ninterface ethernet ${u}\nswitchport mode trunk\nswitchport trunk allowed vlan add ${v}\nexit\ninterface vlan ${v}\nip address ${ip} ${mask}\nexit\nwrite\n\nHuawei\nsystem-view\nvlan batch ${v}\ninterface GigabitEthernet0/0/${p.split('/').pop()}\nport link-type access\nport default vlan ${v}\nquit\ninterface GigabitEthernet0/0/${u.split('/').pop()}\nport link-type trunk\nport trunk allow-pass vlan ${v}\nquit\ninterface Vlanif${v}\nip address ${ip} ${mask}\nquit\nsave\n\nEltex\nconfigure\nvlan ${v}\nexit\ninterface gigabitethernet ${p}\nswitchport mode access\nswitchport access vlan ${v}\nexit\ninterface gigabitethernet ${u}\nswitchport mode trunk\nswitchport trunk allowed vlan add ${v}\nexit\ninterface vlan ${v}\nip address ${ip} ${mask}\nexit\ncopy running-config startup-config\n\nD-Link WEB\n1. Create VLAN ${v}\n2. Client port ${p} = Untagged\n3. Uplink ${u} = Tagged\n4. PVID client = ${v}\n5. IP Interface: ${ip} / ${mask}\n6. Save Configuration`}
+
+function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
+search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({type:'vendor',id:k,title:v.name})});quickTasks.forEach((t,i)=>{if((t[0]+' '+t[1]).toLowerCase().includes(q))hits.push({type:'quick',id:i,title:'Задача: '+t[0]})});glossaryData.forEach((g,i)=>{if((g[0]+' '+g[1]).toLowerCase().includes(q))hits.push({type:'glossary',id:i,title:'Словарь: '+g[0]})});getObjs().forEach((o,i)=>{if((o.n+' '+o.v+' '+o.e).toLowerCase().includes(q))hits.push({type:'object',id:i,title:'Объект: '+o.n})});getReports().forEach((r,i)=>{if((r.text||'').toLowerCase().includes(q))hits.push({type:'report',id:i,title:'Отчёт: '+r.obj})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="${h.type==='vendor'?`openVendor('${h.id}')`:h.type==='quick'?`openQuickTask(${h.id})`:h.type==='glossary'?`showGlossary()`:h.type==='object'?`showObjects()`:`showHistory()`}">→ ${escapeHtml(h.title)}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
+updateStats();
+</script>
+</body>
+</html>
