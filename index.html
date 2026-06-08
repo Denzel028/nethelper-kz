@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v4.5</title>
+<title>NetHelper KZ v4.6</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -48,29 +48,42 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 .compactGroup{border:1px solid var(--line);border-radius:26px;background:rgba(15,32,57,.78);padding:13px;margin:12px 0}
 .compactGroup h2{margin:0 0 10px;color:var(--blue);font-size:22px}
 
+
+body.theme-green{background:radial-gradient(circle at top left,rgba(112,227,154,.28),transparent 36%),linear-gradient(180deg,#061a12,#03100a)!important}
+body.theme-green header,body.theme-green nav{background:rgba(3,18,12,.95)!important}
+body.theme-green .logo,body.theme-green .sLogo{background:linear-gradient(135deg,#70e39a,#c6ff7a)!important}
+body.theme-green h1,body.theme-green .titlebox h2,body.theme-green .compactGroup h2{color:#70e39a!important}
+body.theme-light{--bg:#eef6ff;--card:#ffffff;--card2:#e8f1ff;--line:#b8c8dd;--text:#10223a;--muted:#52657d;--blue:#006fc9;--green:#168f4d;background:linear-gradient(180deg,#f7fbff,#eaf2fb)!important;color:#10223a!important}
+body.theme-light header,body.theme-light nav{background:rgba(255,255,255,.94)!important}
+body.theme-light .big,body.theme-light .card,body.theme-light .item,body.theme-light .titlebox,body.theme-light .compactGroup{background:#fff!important;color:#10223a!important}
+body.theme-light pre,body.theme-light input,body.theme-light textarea,body.theme-light select,.theme-light .out{background:#f3f7fc!important;color:#10223a!important}
+.hubGrid{display:grid;grid-template-columns:1fr;gap:12px}
+.hubCard{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#10233e,#08172a);padding:16px;color:var(--text);box-shadow:var(--shadow);text-align:left}
+.hubCard h3{margin:0 0 6px;font-size:22px}
+.hubCard p{margin:0;color:var(--muted);font-size:13px}
+.settingsRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.settingsRow button{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:15px;padding:12px;font-weight:1000}
+
 </style>
 </head>
 <body>
 <div id="splash"><div class="sLogo">NH</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.5 — Compact System • Unified Tasks</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.6 — Compact UI • RU/KZ • Themes</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
 </header>
 <main>
 <section id="home" class="screen active">
 <div class="hero"><h2>Главное меню</h2><p>Интерфейс собран по рабочим блокам: работа, оборудование, аварии, инструменты, база и система.</p><div class="status"><div class="stat"><b id="stObj">0</b><span>объектов</span></div><div class="stat"><b id="stRep">0</b><span>отчётов</span></div><div class="stat"><b id="stInv">0</b><span>склад</span></div><div class="stat"><b>OFF</b><span>offline</span></div></div></div>
 <div class="compactGroup"><h2>🧩 Единые рабочие блоки</h2><div class="grid"><button class="card" onclick="showWorkCenter()"><h3>🧭 Работа</h3><p>Объекты, отчёты, выезды</p></button><button class="card" onclick="showSwitches()"><h3>📡 Оборудование</h3><p>Команды и настройки</p></button><button class="card" onclick="showQuickTasks()"><h3>⚡ Задачи</h3><p>Алгоритмы действий</p></button><button class="card" onclick="showTools()"><h3>🧮 Инструменты</h3><p>Калькуляторы</p></button><button class="card" onclick="showEquipBase()"><h3>📦 База</h3><p>Оборудование и топология</p></button><button class="card" onclick="showEngineerStats()"><h3>⚙️ Система</h3><p>Статистика и контроль</p></button></div></div>
-<div class="mainGrid">
-<button class="big" onclick="showWorkCenter()"><div class="ico">🧭</div><div><h3>Рабочий центр</h3><p>Объекты, отчёты, история и статистика в одном месте</p></div></button><button class="big" onclick="showObjectPro()"><div class="ico">📍</div><div><h3>Паспорт объекта PRO</h3><p>IP, VLAN, оборудование, схема, аварии и история</p></div></button>
-<button class="big" onclick="showEquipBase()"><div class="ico">📡</div><div><h3>База оборудования</h3><p>Модели, характеристики, команды и неисправности</p></div></button>
-<button class="big" onclick="showTopology()"><div class="ico">🌐</div><div><h3>Топология объекта</h3><p>Схема подключения: OLT → Switch → Radio → Клиент</p></div></button>
-<button class="big" onclick="showSwitches()"><div class="ico">🔧</div><div><h3>Настройка оборудования</h3><p>SNR, Huawei, D-Link, Zyxel, Eltex, MikroTik, Iskratel, BDCOM</p></div></button><button class="big" onclick="showQuickTasks()"><div class="ico">⚡</div><div><h3>Быстрые задачи PRO</h3><p>VLAN, ARP, MAC, оптика, DSLAM, ONU</p></div></button><button class="big" onclick="showUnifiedTasks()"><div class="ico">🧩</div><div><h3>Единая ячейка задач</h3><p>Все задачи в одном формате без путаницы</p></div></button>
-<button class="big" onclick="showAlarms()"><div class="ico">⚡</div><div><h3>Аварии и диагностика</h3><p>Нет ARP, VLAN не проходит, ONU Offline, помощник</p></div></button>
-<button class="big" onclick="showTools()"><div class="ico">🧮</div><div><h3>Инструменты</h3><p>IP калькулятор, VLAN PRO, MikroTik Signal, консоль</p></div></button>
-<button class="big" onclick="showInventory()"><div class="ico">📦</div><div><h3>Склад и оборудование</h3><p>SFP, ONU, кабели, патчкорды и учёт остатков</p></div></button>
-<button class="big" onclick="showReference()"><div class="ico">📚</div><div><h3>Справочник</h3><p>Оптика, SFP, GPON, DSL, маски и /30</p></div></button><button class="big" onclick="showGlossary()"><div class="ico">📘</div><div><h3>Словарь инженера</h3><p>VLAN, PVID, Tagged, ARP, MAC, SFP</p></div></button>
-<button class="big" onclick="showWeatherTrip()"><div class="ico">🌦️</div><div><h3>Погода для выезда</h3><p>Ветер, температура, осадки и чек‑лист</p></div></button>
-</div><div id="searchResult" class="result"></div>
+<div class="hubGrid">
+<button class="hubCard" onclick="showSwitches()"><div class="ico">📡</div><div><h3 data-i18n="equipment">Оборудование</h3><p data-i18n="equipmentDesc">Команды, настройки, диагностика коммутаторов</p></div></button>
+<button class="hubCard" onclick="showWorkHub()"><div class="ico">🛠</div><div><h3 data-i18n="work">Работа</h3><p data-i18n="workDesc">Объекты, паспорта, отчёты, топология, акты</p></div></button>
+<button class="hubCard" onclick="showAlarmHub()"><div class="ico">🚨</div><div><h3 data-i18n="alarms">Аварии</h3><p data-i18n="alarmsDesc">База аварий, мастера диагностики, быстрые задачи</p></div></button>
+<button class="hubCard" onclick="showTools()"><div class="ico">🧮</div><div><h3 data-i18n="tools">Инструменты</h3><p data-i18n="toolsDesc">IP, VLAN, оптика, конфиги, MikroTik Signal</p></div></button>
+<button class="hubCard" onclick="showDataHub()"><div class="ico">📦</div><div><h3 data-i18n="base">База</h3><p data-i18n="baseDesc">Оборудование, склад, справочник, словарь</p></div></button>
+<button class="hubCard" onclick="showSettings()"><div class="ico">⚙️</div><div><h3 data-i18n="settings">Настройки</h3><p data-i18n="settingsDesc">Язык, тема, backup, о программе</p></div></button>
+</div></div><div id="searchResult" class="result"></div>
 </section>
 
 <section id="workCenter" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧭 Рабочий центр</h2><p>Всё, что связано с объектами и выездами.</p></div><div class="grid"><button class="card full" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Карточки объектов, IP, VLAN, схема сети</p></button><button class="card full" onclick="showObjectPro()"><h3>📍 Паспорт объекта PRO</h3><p>Расширенная карточка объекта</p></button><button class="card" onclick="showIncidentBase()"><h3>⚠️ База аварий</h3><p>Проблема → причина → решение</p></button><button class="card" onclick="showDiagMaster()"><h3>🤖 Мастер диагностики</h3><p>Link → MAC → ARP → IP</p></button>
@@ -112,7 +125,7 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 ☐ Сохранить конфигурацию
 ☐ Создать отчёт</pre></div></section>
 
-<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.5</h3><pre>Автор: Orynbekov
+<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.6</h3><pre>Автор: Orynbekov
 Продукт: Orynbekov Product
 Назначение: Network Engineer Toolkit
 Режим: Offline-first
@@ -149,10 +162,19 @@ nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(6,17,31,.9
 
 <section id="unifiedTasks" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🧩 Единая ячейка задач</h2><p>Все задачи собраны одинаково: назначение, когда применять, команды, проверка и ошибки.</p></div><div class="tabs"><button onclick="renderUnifiedTasks('work')" class="active">Работа</button><button onclick="renderUnifiedTasks('equipment')">Оборудование</button><button onclick="renderUnifiedTasks('alarm')">Аварии</button><button onclick="renderUnifiedTasks('tools')">Инструменты</button></div><div id="unifiedTaskList"></div></section>
 
+
+<section id="workHub" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🛠 Работа</h2><p>Все рабочие функции собраны здесь.</p></div><div class="grid"><button class="card full" onclick="showObjectPro()"><h3>📍 Паспорт объекта PRO</h3><p>IP, VLAN, оборудование, схема</p></button><button class="card" onclick="showObjects()"><h3>🗂 Объекты</h3><p>Обычные карточки</p></button><button class="card" onclick="showTopology()"><h3>🌐 Топология</h3><p>Схема объекта</p></button><button class="card" onclick="showReport()"><h3>📄 Отчёт</h3><p>Отчёт после выезда</p></button><button class="card" onclick="showActGenerator()"><h3>📋 Акт</h3><p>Акт выезда</p></button><button class="card" onclick="showHistory()"><h3>📚 История</h3><p>История отчётов</p></button></div></section>
+
+<section id="alarmHub" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>🚨 Аварии</h2><p>Диагностика и база аварий в одном месте.</p></div><div class="grid"><button class="card full" onclick="showIncidentBase()"><h3>⚠️ База аварий</h3><p>Проблема → причина → решение</p></button><button class="card" onclick="showDiagMaster()"><h3>🤖 Мастер диагностики</h3><p>Link/MAC/ARP/IP</p></button><button class="card" onclick="showEmergencyPro()"><h3>🚨 Аварийный мастер PRO</h3><p>Дерево диагностики</p></button><button class="card" onclick="showQuickTasks()"><h3>⚡ Быстрые задачи</h3><p>Нет ARP, MAC, ONU</p></button><button class="card full" onclick="showAlarms()"><h3>📋 Сценарии аварий</h3><p>Готовые чек-листы</p></button></div></section>
+
+<section id="dataHub" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>📦 База</h2><p>Справочники и данные инженера.</p></div><div class="grid"><button class="card" onclick="showEquipBase()"><h3>📡 База оборудования</h3><p>Модели и команды</p></button><button class="card" onclick="showInventory()"><h3>📦 Склад</h3><p>Учёт оборудования</p></button><button class="card" onclick="showReference()"><h3>📚 Справочник</h3><p>Оптика, GPON, DSL</p></button><button class="card" onclick="showGlossary()"><h3>📘 Словарь</h3><p>Термины инженера</p></button><button class="card" onclick="showFav()"><h3>⭐ Избранное</h3><p>Команды</p></button><button class="card" onclick="showEngineerStats()"><h3>📊 Статистика</h3><p>Сводка</p></button></div></section>
+
+<section id="settings" class="screen"><button class="back" onclick="goHome()">← Назад</button><div class="titlebox"><h2>⚙️ Настройки</h2><p>Язык интерфейса, тема и системные функции.</p></div><div class="item"><h3>🌍 Язык</h3><div class="settingsRow"><button onclick="setLang('ru')">Русский</button><button onclick="setLang('kz')">Қазақша</button><button onclick="setLang('ru')">Reset</button></div></div><div class="item"><h3>🎨 Тема</h3><div class="settingsRow"><button onclick="setTheme('dark')">🌙 Тёмная</button><button onclick="setTheme('green')">💚 Зелёная</button><button onclick="setTheme('light')">☀️ Светлая</button></div></div><div class="grid"><button class="card" onclick="showBackup()"><h3>💾 Backup</h3><p>Сохранить/восстановить</p></button><button class="card" onclick="showAbout()"><h3>ℹ️ О программе</h3><p>Orynbekov Product</p></button></div></section>
+
 <section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
 </main>
 <div class="bottomName">© 2026 Orynbekov Product • Network Engineer Toolkit</div>
-<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showWorkCenter()">Работа</button><button onclick="showSwitches()">Оборуд.</button><button onclick="showAlarms()">Аварии</button><button onclick="showTools()">Инструм.</button></nav>
+<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showSwitches()">Оборуд.</button><button onclick="showWorkHub()">Работа</button><button onclick="showAlarmHub()">Аварии</button><button onclick="showTools()">Инструм.</button><button onclick="showSettings()">⚙️</button></nav>
 
 <script>
 const vendors={
@@ -1815,6 +1837,21 @@ function renderUnifiedTasks(cat){
 let list=unifiedTasksData[cat]||[];
 unifiedTaskList.innerHTML=list.map((x,i)=>`<div class="taskCell"><h3>${escapeHtml(x.t)}</h3><div class="taskMeta"><span>${escapeHtml(x.tag)}</span><span>Единая ячейка</span></div><div class="taskSection"><b>📌 Что делает</b><p>${escapeHtml(x.why)}</p></div><div class="taskSection"><b>🛠 Когда использовать</b><p>${escapeHtml(x.when)}</p></div><div class="taskSection"><b>⌨ Что делать / команды</b><pre id="ut_${cat}_${i}">${escapeHtml(x.cmd)}</pre></div><div class="taskSection"><b>✅ Как проверить</b><p>${escapeHtml(x.check)}</p></div><div class="taskSection"><b>⚠ Ошибки</b><p>${escapeHtml(x.err)}</p></div><button class="copy" onclick="copyBlock('ut_${cat}_${i}')">Копировать действия</button></div>`).join('');
 }
+
+
+const i18n={
+ru:{equipment:'Оборудование',equipmentDesc:'Команды, настройки, диагностика коммутаторов',work:'Работа',workDesc:'Объекты, паспорта, отчёты, топология, акты',alarms:'Аварии',alarmsDesc:'База аварий, мастера диагностики, быстрые задачи',tools:'Инструменты',toolsDesc:'IP, VLAN, оптика, конфиги, MikroTik Signal',base:'База',baseDesc:'Оборудование, склад, справочник, словарь',settings:'Настройки',settingsDesc:'Язык, тема, backup, о программе'},
+kz:{equipment:'Жабдық',equipmentDesc:'Командалар, баптау және диагностика',work:'Жұмыс',workDesc:'Нысандар, есептер, топология, актілер',alarms:'Апаттар',alarmsDesc:'Апат базасы, диагностика, жылдам тапсырмалар',tools:'Құралдар',toolsDesc:'IP, VLAN, оптика, конфигтер, MikroTik Signal',base:'База',baseDesc:'Жабдық, қойма, анықтама, сөздік',settings:'Баптаулар',settingsDesc:'Тіл, тақырып, backup, бағдарлама туралы'}
+};
+function applyLang(){let l=localStorage.getItem('nh_lang')||'ru';document.querySelectorAll('[data-i18n]').forEach(el=>{let k=el.getAttribute('data-i18n');if(i18n[l]&&i18n[l][k])el.innerText=i18n[l][k]})}
+function setLang(l){localStorage.setItem('nh_lang',l);applyLang()}
+function setTheme(t){document.body.classList.remove('theme-green','theme-light');if(t==='green')document.body.classList.add('theme-green');if(t==='light')document.body.classList.add('theme-light');localStorage.setItem('nh_theme',t)}
+function applyTheme(){setTheme(localStorage.getItem('nh_theme')||'dark')}
+function showWorkHub(){show('workHub')}
+function showAlarmHub(){show('alarmHub')}
+function showDataHub(){show('dataHub')}
+function showSettings(){show('settings')}
+setTimeout(()=>{applyTheme();applyLang()},50);
 
 function copyBlock(id){let t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t)}
 search.addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim();if(q.length<2){searchResult.classList.remove('active');searchResult.innerHTML='';return}let hits=[];Object.keys(vendors).forEach(k=>{let v=vendors[k],txt=(v.name+' '+v.desc+' '+v.tasks.map(x=>x.join(' ')).join(' ')).toLowerCase();if(txt.includes(q))hits.push({type:'vendor',id:k,title:v.name})});Object.keys(unifiedTasksData).forEach(cat=>unifiedTasksData[cat].forEach((x,i)=>{if((x.t+' '+x.why+' '+x.when+' '+x.cmd+' '+x.check+' '+x.err).toLowerCase().includes(q))hits.push({type:'unified',id:cat,title:'Ячейка: '+x.t})}));getEquipBase().forEach((e,i)=>{if((e.m+' '+e.r+' '+e.s+' '+e.c+' '+e.f).toLowerCase().includes(q))hits.push({type:'equipbase',id:i,title:'Оборудование: '+e.m})});getTopologies().forEach((t,i)=>{if((t.o+' '+t.s+' '+t.n).toLowerCase().includes(q))hits.push({type:'topology',id:i,title:'Топология: '+t.o})});quickTasks.forEach((t,i)=>{if((t[0]+' '+t[1]).toLowerCase().includes(q))hits.push({type:'quick',id:i,title:'Задача: '+t[0]})});glossaryData.forEach((g,i)=>{if((g[0]+' '+g[1]).toLowerCase().includes(q))hits.push({type:'glossary',id:i,title:'Словарь: '+g[0]})});getObjs().forEach((o,i)=>{if((o.n+' '+o.v+' '+o.e).toLowerCase().includes(q))hits.push({type:'object',id:i,title:'Объект: '+o.n})});getReports().forEach((r,i)=>{if((r.text||'').toLowerCase().includes(q))hits.push({type:'report',id:i,title:'Отчёт: '+r.obj})});searchResult.classList.add('active');searchResult.innerHTML=`<div class="item"><h3>Результаты поиска</h3>${hits.length?hits.map(h=>`<p onclick="${h.type==='vendor'?`openVendor('${h.id}')`:h.type==='quick'?`openQuickTask(${h.id})`:h.type==='glossary'?`showGlossary()`:h.type==='unified'?`showUnifiedTasks()`:h.type==='equipbase'?`showEquipBase()`:h.type==='topology'?`showTopology()`:h.type==='object'?`showObjects()`:`showHistory()`}">→ ${escapeHtml(h.title)}</p>`).join(''):'<p>Ничего не найдено</p>'}</div>`})
