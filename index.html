@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06111f">
-<title>NetHelper KZ v4.6</title>
+<title>NetHelper KZ v4.6.1</title>
 <style>
 :root{--bg:#06111f;--card:#10233e;--card2:#132845;--line:#2f496f;--text:#f1f7ff;--muted:#9fb2cf;--blue:#66d6ff;--green:#70e39a;--orange:#ffc66d;--red:#ff7b86;--shadow:0 22px 55px rgba(0,0,0,.30)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -69,7 +69,7 @@ body.theme-light pre,body.theme-light input,body.theme-light textarea,body.theme
 <body>
 <div id="splash"><div class="sLogo">NH</div></div>
 <header>
-<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.6 — Compact UI • RU/KZ • Themes</div></div></div><div class="lang"><button class="active">RU</button><button>KZ</button></div></div>
+<div class="top"><div class="brand"><div class="logo">NH</div><div><h1>NetHelper KZ</h1><div class="sub">v4.6 — Compact UI • RU/KZ • Themes</div></div></div><div class="lang"><button id="btnLangRu" class="active" onclick="setLang('ru')">RU</button><button id="btnLangKz" onclick="setLang('kz')">KZ</button></div></div>
 <div class="search"><input id="search" placeholder="Поиск: объект, SNR, VLAN, ARP, отчёт, SFP"></div>
 </header>
 <main>
@@ -125,7 +125,7 @@ body.theme-light pre,body.theme-light input,body.theme-light textarea,body.theme
 ☐ Сохранить конфигурацию
 ☐ Создать отчёт</pre></div></section>
 
-<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.6</h3><pre>Автор: Orynbekov
+<section id="about" class="screen"><button class="back" onclick="showWorkCenter()">← Рабочий центр</button><div class="titlebox"><h2>ℹ️ О программе</h2><p>NetHelper KZ — офлайн помощник инженера сети.</p></div><div class="item"><h3>NetHelper KZ v4.6.1</h3><pre>Автор: Orynbekov
 Продукт: Orynbekov Product
 Назначение: Network Engineer Toolkit
 Режим: Offline-first
@@ -174,7 +174,7 @@ body.theme-light pre,body.theme-light input,body.theme-light textarea,body.theme
 <section id="article" class="screen"><button class="back" id="articleBack" onclick="goHome()">← Назад</button><div id="articleBody"></div></section>
 </main>
 <div class="bottomName">© 2026 Orynbekov Product • Network Engineer Toolkit</div>
-<nav><button id="navHome" class="active" onclick="goHome()">Главная</button><button onclick="showSwitches()">Оборуд.</button><button onclick="showWorkHub()">Работа</button><button onclick="showAlarmHub()">Аварии</button><button onclick="showTools()">Инструм.</button><button onclick="showSettings()">⚙️</button></nav>
+<nav><button id="navHome" class="active" onclick="goHome()" data-i18n="home">Главная</button><button onclick="showSwitches()" data-i18n="equipment">Оборудование</button><button onclick="showWorkHub()" data-i18n="work">Работа</button><button onclick="showAlarmHub()" data-i18n="alarms">Аварии</button><button onclick="showTools()" data-i18n="tools">Инструменты</button><button onclick="showSettings()">⚙️</button></nav>
 
 <script>
 const vendors={
@@ -1840,13 +1840,46 @@ unifiedTaskList.innerHTML=list.map((x,i)=>`<div class="taskCell"><h3>${escapeHtm
 
 
 const i18n={
-ru:{equipment:'Оборудование',equipmentDesc:'Команды, настройки, диагностика коммутаторов',work:'Работа',workDesc:'Объекты, паспорта, отчёты, топология, акты',alarms:'Аварии',alarmsDesc:'База аварий, мастера диагностики, быстрые задачи',tools:'Инструменты',toolsDesc:'IP, VLAN, оптика, конфиги, MikroTik Signal',base:'База',baseDesc:'Оборудование, склад, справочник, словарь',settings:'Настройки',settingsDesc:'Язык, тема, backup, о программе'},
-kz:{equipment:'Жабдық',equipmentDesc:'Командалар, баптау және диагностика',work:'Жұмыс',workDesc:'Нысандар, есептер, топология, актілер',alarms:'Апаттар',alarmsDesc:'Апат базасы, диагностика, жылдам тапсырмалар',tools:'Құралдар',toolsDesc:'IP, VLAN, оптика, конфигтер, MikroTik Signal',base:'База',baseDesc:'Жабдық, қойма, анықтама, сөздік',settings:'Баптаулар',settingsDesc:'Тіл, тақырып, backup, бағдарлама туралы'}
+ru:{
+home:'Главная',equipment:'Оборудование',equipmentDesc:'Команды, настройки, диагностика коммутаторов',
+work:'Работа',workDesc:'Объекты, паспорта, отчёты, топология, акты',
+alarms:'Аварии',alarmsDesc:'База аварий, мастера диагностики, быстрые задачи',
+tools:'Инструменты',toolsDesc:'IP, VLAN, оптика, конфиги, MikroTik Signal',
+base:'База',baseDesc:'Оборудование, склад, справочник, словарь',
+settings:'Настройки',settingsDesc:'Язык, тема, backup, о программе'
+},
+kz:{
+home:'Басты бет',equipment:'Жабдық',equipmentDesc:'Командалар, баптау және диагностика',
+work:'Жұмыс',workDesc:'Нысандар, паспорттар, есептер, топология, актілер',
+alarms:'Апаттар',alarmsDesc:'Апат базасы, диагностика шеберлері, жылдам тапсырмалар',
+tools:'Құралдар',toolsDesc:'IP, VLAN, оптика, конфигтер, MikroTik Signal',
+base:'База',baseDesc:'Жабдық, қойма, анықтама, сөздік',
+settings:'Баптаулар',settingsDesc:'Тіл, тақырып, backup, бағдарлама туралы'
+}
 };
-function applyLang(){let l=localStorage.getItem('nh_lang')||'ru';document.querySelectorAll('[data-i18n]').forEach(el=>{let k=el.getAttribute('data-i18n');if(i18n[l]&&i18n[l][k])el.innerText=i18n[l][k]})}
-function setLang(l){localStorage.setItem('nh_lang',l);applyLang()}
-function setTheme(t){document.body.classList.remove('theme-green','theme-light');if(t==='green')document.body.classList.add('theme-green');if(t==='light')document.body.classList.add('theme-light');localStorage.setItem('nh_theme',t)}
-function applyTheme(){setTheme(localStorage.getItem('nh_theme')||'dark')}
+function applyLang(){
+let l=localStorage.getItem('nh_lang')||'ru';
+document.documentElement.lang=(l==='kz'?'kk':'ru');
+document.querySelectorAll('[data-i18n]').forEach(el=>{
+ let k=el.getAttribute('data-i18n');
+ if(i18n[l]&&i18n[l][k]) el.innerText=i18n[l][k];
+});
+let ru=document.getElementById('btnLangRu'), kz=document.getElementById('btnLangKz');
+if(ru&&kz){ru.classList.toggle('active',l==='ru');kz.classList.toggle('active',l==='kz');}
+}
+function setLang(l){localStorage.setItem('nh_lang',l);applyLang();}
+function setTheme(t){
+document.body.classList.remove('theme-green','theme-light');
+if(t==='green')document.body.classList.add('theme-green');
+if(t==='light')document.body.classList.add('theme-light');
+localStorage.setItem('nh_theme',t);
+}
+function applyTheme(){
+let t=localStorage.getItem('nh_theme')||'dark';
+document.body.classList.remove('theme-green','theme-light');
+if(t==='green')document.body.classList.add('theme-green');
+if(t==='light')document.body.classList.add('theme-light');
+}
 function showWorkHub(){show('workHub')}
 function showAlarmHub(){show('alarmHub')}
 function showDataHub(){show('dataHub')}
